@@ -1,0 +1,625 @@
+<title>abishek repo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Latin:wdth,wght@75..125,300..800&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap">
+<style>
+/* v0.5 · "the portfolio is a repository" · Threshold dark (single deliberate look) */
+:root{
+  --bg:#10130F; --bg2:#0C0F0B; --panel:#171B16; --raised:#1F241E; --line:#2C332B; --line2:#232922;
+  --ink:#ECE9DF; --muted:#A4A697; --faint:#72766B;
+  --accent:#F2A93B; --teal:#4CC3AE; --red:#EC6A52; --violet:#B39DFF; --blue:#7FB8FF; --on-accent:#10130F;
+  --display:'Anek Latin','Arial Narrow',Impact,sans-serif; --body:'Geist',ui-sans-serif,system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,Menlo,monospace;
+  --title:44px; --tabs:38px; --side:0px; --term:64px; --status:26px;
+  --gut:clamp(16px,3.4vw,44px);
+  --chrome-top:calc(env(safe-area-inset-top,0px) + var(--title) + var(--tabs));
+  --chrome-bot:calc(var(--term) + var(--status) + env(safe-area-inset-bottom,0px));
+  color-scheme:dark;
+}
+@media (min-width:1024px){ :root{ --side:252px; --term:96px; } }
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:clamp(1rem,.98rem + .09vw,1.0625rem);line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:var(--on-accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+button{font:inherit;color:inherit}
+
+/* ---------- window chrome ---------- */
+.titlebar{position:fixed;left:0;right:0;top:0;z-index:60;height:calc(var(--title) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) 14px 0;display:flex;align-items:center;gap:14px;background:var(--bg2);border-bottom:1px solid var(--line2)}
+.lights{display:flex;gap:7px}
+.lights i{width:11px;height:11px;border-radius:50%;background:#EC6A52}
+.lights i:nth-child(2){background:#F2A93B}.lights i:nth-child(3){background:#4CC3AE}
+.crumb{flex:1;min-width:0;font:500 .78rem var(--mono);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
+.crumb b{color:var(--ink);font-weight:500}
+.goto{display:flex;align-items:center;gap:8px;height:30px;padding:0 10px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font:500 .75rem var(--mono);cursor:pointer}
+.goto kbd{font:inherit;color:var(--ink)}
+@media (max-width:600px){ .lights{display:none} .crumb{text-align:left} }
+
+.explorer{position:fixed;left:0;top:calc(var(--title) + env(safe-area-inset-top,0px));bottom:calc(var(--status) + env(safe-area-inset-bottom,0px));width:var(--side);z-index:50;background:var(--bg2);border-right:1px solid var(--line2);padding:12px 8px;overflow:auto;display:none}
+@media (min-width:1024px){ .explorer{display:block} }
+.explorer .hd{font:600 .68rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding:6px 10px 10px}
+.tree{list-style:none;margin:0;padding:0}
+.tree li{margin:0}
+.tree .dir{font:500 .8rem var(--mono);color:var(--muted);padding:5px 10px;display:flex;gap:6px}
+.tree a{display:flex;align-items:center;gap:8px;font:500 .8rem var(--mono);color:var(--muted);padding:6px 10px;border-radius:7px;position:relative}
+.tree a.in{padding-left:28px}
+.tree a:hover{background:var(--panel);color:var(--ink)}
+.tree a.on{background:var(--raised);color:var(--ink)}
+.tree a.on::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:2px;background:var(--accent);border-radius:2px}
+.tree a .star{margin-left:auto;color:var(--accent);font-size:.7rem}
+.tree a.done .st{color:var(--teal)}
+.ic{width:16px;height:16px;border-radius:4px;display:inline-grid;place-items:center;font:700 8.5px/1 var(--mono);color:#0C0F0B;flex:none}
+.ic.md{background:#7FB8FF}.ic.dart{background:#54C5F8}.ic.js{background:#F2D14B}.ic.sh{background:#8CC84B}.ic.jsx{background:#61DAFB}.ic.log{background:#A4A697}.ic.json{background:#F2A93B}.ic.yml{background:#EC6A52}
+.explorer .foot{margin-top:18px;padding:12px 10px;border-top:1px solid var(--line2);font:500 .72rem/1.6 var(--mono);color:var(--faint)}
+.explorer .foot b{color:var(--teal);font-weight:500}
+
+.tabs{position:fixed;left:var(--side);right:0;top:calc(var(--title) + env(safe-area-inset-top,0px));z-index:55;height:var(--tabs);display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none;background:var(--bg2);border-bottom:1px solid var(--line2)}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;display:flex;align-items:center;gap:8px;padding:0 14px;border-right:1px solid var(--line2);font:500 .78rem var(--mono);color:var(--muted);background:transparent;border-top:0;border-bottom:0;border-left:0;cursor:pointer;white-space:nowrap}
+.tab.on{background:var(--bg);color:var(--ink);box-shadow:inset 0 2px 0 var(--accent)}
+.tab.new{animation:tabIn .35s cubic-bezier(.16,1,.3,1)}
+@keyframes tabIn{from{transform:translateY(-100%);opacity:0}to{transform:none;opacity:1}}
+
+.term{position:fixed;left:var(--side);right:0;bottom:calc(var(--status) + env(safe-area-inset-bottom,0px));z-index:55;height:var(--term);background:var(--bg2);border-top:1px solid var(--line2);padding:8px 16px;font:500 .78rem/1.55 var(--mono);color:var(--muted);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.term .ln{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.term .p{color:var(--accent)} .term .ok{color:var(--teal)} .term .c{color:var(--ink)}
+.status{position:fixed;left:0;right:0;bottom:0;z-index:60;height:calc(var(--status) + env(safe-area-inset-bottom,0px));padding:0 12px env(safe-area-inset-bottom,0px);display:flex;align-items:center;gap:16px;background:#0A0C09;border-top:1px solid var(--line2);font:500 .72rem/1 var(--mono);color:var(--muted);white-space:nowrap;overflow:hidden}
+.status .br{color:var(--ink)} .status .ok{color:var(--teal)} .status .sp{flex:1}
+@media (max-width:640px){ .status .hide-s{display:none} }
+
+/* ---------- main editor ---------- */
+main{margin-left:var(--side);padding-top:var(--chrome-top);padding-bottom:var(--chrome-bot)}
+.file{position:relative;min-height:calc(100vh - var(--title) - var(--tabs) - var(--term) - var(--status));padding:clamp(28px,5vh,56px) var(--gut) clamp(64px,10vh,110px);border-bottom:1px solid var(--line2);scroll-margin-top:var(--chrome-top)}
+.fhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:clamp(18px,3vh,30px);font:500 .78rem var(--mono);color:var(--muted)}
+.fhead .path b{color:var(--ink);font-weight:500}
+.fhead .lang{padding:3px 8px;border-radius:6px;border:1px solid var(--line)}
+.fhead .state{margin-left:auto;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.file.live .fhead .state{border-color:var(--teal);color:var(--teal)}
+.seg{display:none;gap:2px;padding:2px;border:1px solid var(--line);border-radius:9px}
+.seg button{border:0;background:transparent;padding:5px 10px;border-radius:7px;font:500 .72rem var(--mono);color:var(--muted);cursor:pointer;min-height:30px}
+.seg button[aria-pressed="true"]{background:var(--raised);color:var(--ink)}
+.pane{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:clamp(18px,3vw,40px);align-items:start}
+@media (max-width:900px){ .pane{grid-template-columns:1fr} .seg{display:flex} .file .src,.file .view{display:none} .file[data-show="src"] .src,.file[data-show="view"] .view{display:block} }
+
+/* source panel */
+.src{position:sticky;top:calc(var(--chrome-top) + 20px);background:var(--bg2);border:1px solid var(--line2);border-radius:16px;overflow:hidden;transition:opacity .5s}
+.file.live .src{opacity:.62}
+.file.live .src:hover{opacity:1}
+@media (max-width:900px){ .src{position:relative;top:0} .file.live .src{opacity:1} }
+.src .bar{display:flex;justify-content:space-between;padding:9px 14px;border-bottom:1px solid var(--line2);font:500 .72rem var(--mono);color:var(--faint)}
+.code{margin:0;padding:14px 0;overflow-x:auto;font:500 clamp(.74rem,.7rem + .15vw,.84rem)/1.75 var(--mono);color:#D5D2C8;counter-reset:ln;tab-size:2}
+.code .l{display:block;padding:0 16px 0 0;white-space:pre;min-height:1.75em}
+.code .l::before{counter-increment:ln;content:counter(ln);display:inline-block;width:40px;padding-right:14px;text-align:right;color:#4A5248}
+.code .l.hide{visibility:hidden}
+.tk-c{color:#6F7A6C;font-style:italic} .tk-s{color:#B7D98B} .tk-k{color:#B39DFF} .tk-n{color:#F2A93B} .tk-f{color:#7FB8FF} .tk-p{color:#4CC3AE} .tk-h{color:#F2A93B;font-weight:600}
+.cursorc{display:inline-block;width:.55em;height:1.1em;vertical-align:-.18em;background:var(--accent);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* preview panel + hot reload flash */
+.view{position:relative;min-height:40vh}
+.view::before{content:"";position:absolute;inset:-8px;border-radius:18px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(242,169,59,.22),transparent);transform:translateX(-110%);opacity:0}
+.file.flash .view::before{animation:sweep .7s cubic-bezier(.16,1,.3,1)}
+@keyframes sweep{0%{transform:translateX(-110%);opacity:1}100%{transform:translateX(110%);opacity:0}}
+.bolt{position:absolute;right:0;top:-6px;font:600 .72rem var(--mono);color:var(--on-accent);background:var(--accent);padding:4px 9px;border-radius:999px;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s;pointer-events:none;z-index:2}
+.file.flash .bolt{opacity:1;transform:none}
+.rv{will-change:transform,opacity}
+
+/* README */
+.readme .hello{font:500 .85rem var(--mono);color:var(--teal)}
+.readme h1{font:800 clamp(3.6rem,1.4rem + 8vw,10rem)/.82 var(--display);font-stretch:75%;letter-spacing:-.02em;text-transform:uppercase;margin:10px 0 18px}
+.readme h1 em{font-style:normal;color:transparent;-webkit-text-stroke:2px var(--ink)}
+.readme .tag{font:600 clamp(1.3rem,1rem + 1.2vw,2rem)/1.15 var(--display);font-stretch:88%;max-width:26ch}
+.readme .tag b{color:var(--accent);font-weight:800}
+.readme .who{color:var(--muted);max-width:56ch;margin-top:14px}
+.shields{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.shield{display:inline-flex;font:600 .74rem/1 var(--mono);border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.shield span{padding:6px 8px;background:var(--raised);color:var(--muted)}
+.shield b{padding:6px 8px;background:var(--c,var(--teal));color:#0C0F0B}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.cta{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 18px;border-radius:12px;font:600 .9rem var(--body);border:1px solid var(--line);background:transparent;cursor:pointer;transition:border-color .2s,transform .15s}
+.cta:hover{border-color:var(--muted)} .cta:active{transform:scale(.97)}
+.cta.pri{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.avail{display:inline-flex;align-items:center;gap:8px;font:500 .78rem var(--mono);color:var(--muted);margin-top:22px}
+.avail i{width:8px;height:8px;border-radius:50%;background:#6BE39B;box-shadow:0 0 10px #6BE39B}
+
+/* project files */
+.proj .meta{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font:500 .78rem var(--mono);color:var(--muted)}
+.proj .badge{font:600 .72rem var(--mono);color:var(--on-accent);background:var(--accent);padding:4px 10px;border-radius:999px}
+.proj h2{font:800 clamp(2.6rem,1.4rem + 5vw,6.4rem)/.86 var(--display);font-stretch:76%;letter-spacing:-.02em;text-transform:uppercase;margin:14px 0 16px}
+.proj .sum{color:#CFCCC2;font-size:clamp(1.02rem,.98rem + .3vw,1.2rem);max-width:54ch}
+.proj .metric{display:grid;gap:4px;margin-top:26px;padding:20px 22px;border:1px solid var(--line);border-radius:16px;background:var(--panel);max-width:520px}
+.proj .metric b{font:800 clamp(2.4rem,1.4rem + 3.4vw,4.4rem)/.9 var(--display);font-stretch:78%;font-variant-numeric:tabular-nums;color:var(--ink)}
+.proj .metric span{color:var(--muted);font-size:.9rem}
+.proj.feat .metric{border-color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.chip{font:500 .74rem/1 var(--mono);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:7px 10px}
+.points{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:8px;max-width:58ch}
+.points li{display:flex;gap:10px;color:var(--muted)}
+.points li::before{content:"→";color:var(--teal);font-family:var(--mono)}
+
+/* experience.log */
+.log{position:relative;display:grid}
+.log::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--line)}
+.entry{position:relative;padding:0 0 clamp(26px,4vh,40px) 34px}
+.entry::before{content:"";position:absolute;left:0;top:7px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:2px solid var(--faint)}
+.entry.head::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 5px rgba(242,169,59,.18)}
+.entry.fl::before{border-color:var(--teal)}
+.entry .ref{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font:500 .76rem var(--mono);color:var(--muted)}
+.entry .br{font-weight:600;padding:3px 9px;border-radius:999px;border:1px solid var(--line)}
+.entry.head .br{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.entry.fl .br{border-color:var(--teal);color:var(--teal)}
+.entry h3{font:800 clamp(1.7rem,1.2rem + 1.6vw,2.6rem)/.92 var(--display);font-stretch:80%;text-transform:uppercase;margin-top:10px}
+.entry .role{font:500 .85rem var(--mono);color:var(--accent);margin-top:6px}
+.entry p{color:var(--muted);margin-top:8px;max-width:60ch}
+.entry .ship{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.entry .ship span{font:500 .78rem var(--mono);padding:6px 10px;border-radius:10px;background:var(--panel);border:1px solid var(--line)}
+.entry .ship b{color:var(--ink);font-weight:600}
+
+/* stack.json */
+.groups{display:grid;gap:22px}
+.group h3{font:600 .75rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.tools{display:flex;flex-wrap:wrap;gap:10px}
+.tool{display:flex;align-items:center;gap:12px;border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:12px 16px}
+.tool .lg{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font:700 .85rem var(--mono)}
+.tool b{font:600 .98rem var(--body)}
+.tool small{display:block;font:400 .75rem var(--body);color:var(--muted)}
+
+/* ship.yml */
+.run{border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden}
+.run .rhd{display:flex;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);font:500 .8rem var(--mono);color:var(--muted)}
+.run .rhd b{color:var(--ink);font-weight:500}
+.run .rhd .res{color:var(--teal)}
+.jobs{display:grid}
+.job{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:14px;align-items:center;padding:16px 18px;border-bottom:1px solid var(--line2)}
+.job:last-child{border-bottom:0}
+.job .dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--faint);display:grid;place-items:center;font:700 .7rem var(--mono);color:var(--on-accent);transition:background .3s,border-color .3s}
+.job.run .dot{border-color:var(--accent);border-top-color:transparent;animation:spin .8s linear infinite}
+.job.ok .dot{background:var(--teal);border-color:var(--teal)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.job h3{font:800 1.45rem/1 var(--display);font-stretch:80%;text-transform:uppercase}
+.job p{color:var(--muted);font-size:.9rem;margin-top:2px}
+.job .t{font:500 .75rem var(--mono);color:var(--faint);font-variant-numeric:tabular-nums}
+.job.ok .t{color:var(--teal)}
+
+/* contact.sh */
+.contact h2{font:800 clamp(2.6rem,1.4rem + 5vw,6rem)/.86 var(--display);font-stretch:76%;text-transform:uppercase;margin-bottom:14px}
+.contact h2 em{font-style:normal;color:var(--accent)}
+.contact .lead{color:var(--muted);max-width:50ch;margin-bottom:22px}
+form.brief{display:grid;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:clamp(18px,2.4vw,28px);max-width:640px}
+.brief .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){ .brief .row{grid-template-columns:1fr} }
+.brief label{display:grid;gap:6px;font:500 .75rem var(--mono);color:var(--muted)}
+.brief input,.brief textarea{font:500 1rem var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;outline:none;width:100%}
+.brief textarea{min-height:110px;resize:vertical}
+.brief input:focus,.brief textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(242,169,59,.14)}
+.radios{display:flex;flex-wrap:wrap;gap:8px}
+.radios label{display:inline-flex;cursor:pointer;position:relative}
+.radios input{position:absolute;opacity:0;pointer-events:none}
+.radios span{font:500 .85rem var(--body);color:#CFCCC2;border:1px solid var(--line);padding:9px 13px;border-radius:99px}
+.radios input:checked+span{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.radios input:focus-visible+span{outline:2px solid var(--ink);outline-offset:2px}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.eof{font:500 .75rem var(--mono);color:var(--faint);margin-top:40px}
+
+/* palette */
+.palette{position:fixed;inset:0;z-index:150;display:grid;place-items:start center;padding:12vh 16px 16px;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .2s}
+.palette.open{opacity:1;pointer-events:auto}
+.pal{width:min(620px,100%);background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;transform:translateY(-8px) scale(.98);transition:transform .3s cubic-bezier(.16,1,.3,1);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.palette.open .pal{transform:none}
+.pal .box{display:flex;align-items:center;gap:10px;padding:0 14px;border-bottom:1px solid var(--line)}
+.pal .box span{font:500 .8rem var(--mono);color:var(--accent)}
+#q{flex:1;min-width:0;height:54px;background:none;border:0;outline:0;color:var(--ink);font:500 1rem var(--mono)}
+#q::placeholder{color:var(--muted)}
+#results{list-style:none;margin:0;padding:6px;max-height:56vh;overflow:auto}
+.opt{display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:2px 12px;align-items:center;padding:10px 12px;border-radius:10px;cursor:pointer}
+.opt[aria-selected="true"]{background:var(--raised)}
+.opt .nm{font:500 .88rem var(--mono);color:var(--ink)}
+.opt .nm mark{background:none;color:var(--accent)}
+.opt .ds{grid-column:2;font-size:.8rem;color:var(--muted)}
+.opt .dir{grid-row:1 / 3;grid-column:3;font:500 .72rem var(--mono);color:var(--faint)}
+.pal .foot{display:flex;gap:14px;padding:9px 14px;border-top:1px solid var(--line);font:500 .7rem var(--mono);color:var(--muted)}
+.pal kbd{font:inherit;border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:var(--ink)}
+
+@media (prefers-reduced-motion: reduce){ .cursorc,.job.run .dot{animation:none} .file.flash .view::before{animation:none} }
+</style>
+
+<header class="titlebar">
+  <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+  <span class="crumb" id="crumb"><b>abishek</b> / README.md</span>
+  <button class="goto" id="openPal" type="button" aria-label="Go to file">Go to file <kbd>⌘K</kbd></button>
+</header>
+
+<aside class="explorer" aria-label="Files">
+  <div class="hd">Explorer · abishek</div>
+  <ul class="tree" id="tree"></ul>
+  <div class="foot">⎇ main · 1,557 commits<br><b>● open to work</b><br>Tiruchirappalli · IST</div>
+</aside>
+
+<nav class="tabs" id="tabs" aria-label="Open files"></nav>
+
+<main id="main"></main>
+
+<div class="term" id="term" aria-live="polite" aria-label="Terminal"></div>
+<div class="status" aria-hidden="true"><span class="br">⎇ main</span><span class="ok">● prod healthy</span><span id="sReload">⚡ 0 reloads</span><span class="sp"></span><span id="sLn">Ln 1, Col 1</span><span id="sLang">Markdown</span><span class="hide-s">UTF-8</span><span class="hide-s">LF</span></div>
+
+<div class="palette" id="palette" role="dialog" aria-modal="true" aria-label="Go to file">
+  <div class="pal">
+    <div class="box"><span>›</span><input id="q" type="search" autocomplete="off" spellcheck="false" placeholder='Go to file: try "flutter" or "vandizone"' role="combobox" aria-expanded="true" aria-controls="results" aria-autocomplete="list"></div>
+    <ul id="results" role="listbox" aria-label="Files"></ul>
+    <div class="foot"><span><kbd>↑</kbd><kbd>↓</kbd> move</span><span><kbd>↵</kbd> open</span><span><kbd>esc</kbd> close</span></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const motion = !!window.gsap && !!window.ScrollTrigger && !reduce;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const clamp = (v,a=0,b=1) => Math.min(b, Math.max(a, v));
+
+/* ================= the repository (content: docs/02-content-inventory.md) ================= */
+const LANG = {md:'Markdown', dart:'Dart', js:'JavaScript', jsx:'JavaScript React', sh:'Shell Script', log:'Log', json:'JSON', yml:'YAML'};
+const FILES = [
+  {id:'readme', path:'README.md', ext:'md', cmd:'cat README.md', tags:['about','hello','abishek','readme','hire'], ds:'Who I am, in one screen',
+   src:`# M.K. Abishek
+> Software Engineer · Massclick · Tiruchirappalli
+
+I build the **app**, the **API**, and the **server** it runs on.
+
+![commits](1,557) ![s3](33,096/33,096) ![cutover](~90s)
+
+- Flutter · Node.js · MongoDB · React · AWS
+- Syuap → Digihope → Massclick, plus VandiZone
+- open to work: full-time or freelance`,
+   view: () => `<div class="readme"><p class="hello rv">// hello, world</p><h1 class="rv">M.K. <em>Abishek</em></h1><p class="tag rv">I build the <b>app</b>, the <b>API</b>, and the <b>server</b> it runs on.</p><p class="who rv">Software engineer in Tiruchirappalli. I interned at Syuap, led mobile at Digihope for a year, build VandiZone for my own client, and since April 2026 work on every layer of Massclick.</p><div class="shields rv"><span class="shield"><span>commits</span><b>1,557</b></span><span class="shield" style="--c:#F2A93B"><span>s3 re-key</span><b>33,096 / 33,096</b></span><span class="shield" style="--c:#7FB8FF"><span>db cutover</span><b>~90 s</b></span><span class="shield" style="--c:#B39DFF"><span>app</span><b>v2.1.1</b></span><span class="shield"><span>geo coverage</span><b>89.3%</b></span></div><div class="ctas rv"><a class="cta pri" href="#f-vandizone" data-go="vandizone">See the work ↓</a><button class="cta" type="button" data-pal>Go to file ⌘K</button><a class="cta" href="#f-contact" data-go="contact">Contact</a></div><p class="avail rv"><i></i>Open to work · full-time or freelance</p></div>`},
+
+  {id:'vandizone', path:'work/vandizone.dart', ext:'dart', dir:'work', star:1, cmd:'flutter run work/vandizone.dart', tags:['vandizone','freelance','client','flutter','firebase','maps','mobile','realtime'], ds:'My own client project · Flutter + Firebase',
+   src:`// VandiZone · my own client · Flutter + Firebase
+// (a sketch of the idea, not production code)
+
+final trip = FirebaseFirestore.instance
+    .collection('bookings').doc(bookingId);
+
+// the customer app and the captain app share one live doc
+trip.snapshots().listen((t) {
+  map.animateCamera(t.captainLocation); // live tracking
+  notify(t.status);                     // FCM on every change
+});`,
+   view: () => proj({feat:1, meta:'Freelance · Flutter + Firebase', badge:'My own client project', title:'VandiZone', sum:'Two apps I build directly with my client: a Customer Booking app and a Captain/Owner app, kept in sync in real time.', points:['Real-time bookings with Firebase Realtime Database and Firestore','Google Maps live vehicle tracking, route navigation and trip history','Phone/email login, and push notifications for every trip update'], mv:'2 apps', ml:'one live booking system', chips:['Flutter','Firebase','Firestore','Google Maps','FCM']})},
+
+  {id:'mobile', path:'work/massclick_app.dart', ext:'dart', dir:'work', cmd:'flutter run work/massclick_app.dart', tags:['massclick','mobile','flutter','riverpod','android','ios','app'], ds:'Massclick app · built from the first commit',
+   src:`// Massclick app · v2.1.1 · Android + iOS · EN + த
+
+final leads = ref.watch(leadsProvider);        // Riverpod
+
+socket.on('lead:analytics:update', (_) {
+  ref.invalidate(leadsProvider);               // live lead alerts
+});
+
+// OTP auto-fill · App Links · FCM lead channel`,
+   view: () => proj({meta:'Massclick · Mobile', title:'Massclick App', sum:'I built the Massclick Flutter app from its very first commit to v2.1.1 on Android and iOS, in English and Tamil.', points:['Riverpod state, go_router navigation, cached feeds that refresh in the background','A map with a draggable results sheet, a leads dashboard and the Spotlight feed','Web-to-mobile parity audit: ~25 fixes and features shipped from 20 features checked'], mv:'263 / 264', ml:'commits in the app repo are mine', chips:['Flutter','Riverpod','go_router','Socket.IO','FCM']})},
+
+  {id:'search', path:'work/search.js', ext:'js', dir:'work', cmd:'node work/search.js --city trichy', tags:['search','geo','backend','node','mongodb','location','engine'], ds:'Search engine over ~18,000 places',
+   src:`// Search & Geo · Massclick API
+
+const category = resolveCategoryIntent(term); // intent first
+
+const results = await Business.aggregate([
+  { $match: { $text: { $search: term }, ...near(city) } },
+  { $sort: { distance: 1, score: -1 } },
+]);
+
+// too few results? widen to nearby pincodes, then the district`,
+   view: () => proj({meta:'Massclick · Backend', title:'Search & Geo', sum:'The search engine behind every Massclick query: category intent, text score and distance ranking over a location graph of about 18,000 places.', points:['Category-intent resolution before full-text search','Distance ranking from the searched place, with nearby-pincode and district fallbacks','Coordinates recovered and matched across the Trichy location graph'], mv:'7.8 → 89.3%', ml:'Trichy localities with coordinates', chips:['Node.js','MongoDB','Redis']})},
+
+  {id:'db', path:'work/mongo-move.sh', ext:'sh', dir:'work', cmd:'sh work/mongo-move.sh', tags:['database','mongodb','infra','migration','devops','backup'], ds:'MongoDB moved to its own server',
+   src:`# The Database Move · production cutover
+
+node db-backups/backup.js --label pre-cutover --prod
+
+# stop both app replicas together, final sync, repoint the URL
+docker compose up -d --no-deps
+
+# nightly dumps on the new box, pulled off-box at 03:30
+# verified byte-for-byte with sha256sum`,
+   view: () => proj({meta:'Massclick · Infra', title:'The Database Move', sum:'I moved every Massclick database onto a dedicated MongoDB server, then set up backups and monitoring that followed it there.', points:['Snapshots with checksums before every change, and a tested restore path','Nightly backups, plus an off-box copy pulled by the app server','Monitoring and exporters repointed so the dashboards measure the real database'], mv:'~90 s', ml:'of production downtime at cutover', chips:['MongoDB','Linux','Docker','Prometheus','Grafana']})},
+
+  {id:'s3', path:'work/s3-rekey.js', ext:'js', dir:'work', cmd:'node work/s3-rekey.js copy --commit', tags:['s3','aws','cloud','migration','storage','backend'], ds:'36,187 files re-keyed, zero lost',
+   src:`// 36,187 files, zero lost · AWS S3
+
+await plan();                  // every object mapped to an owner
+await copy({ commit: true });  // 33,096 / 33,096 · failed = 0
+await verifyS3();              // sizes match, old keys still there
+
+// lintS3Paths.js: 51 call sites migrated, 0 hardcoded URLs left`,
+   view: () => proj({meta:'Massclick · Cloud', title:'36,187 Files, Zero Lost', sum:'I re-keyed every object in the Massclick S3 bucket to a clean, owner-based structure, with the database updated to match.', points:['Plan, copy, verify, resume and rollback commands, all dry-run first','A lint gate so no code can write to the old paths again','Nothing deleted: old keys kept until the new ones were verified'], mv:'33,096 / 33,096', ml:'objects copied, 0 failed', chips:['AWS S3','Node.js','MongoDB']})},
+
+  {id:'perf', path:'work/mobile-lcp.jsx', ext:'jsx', dir:'work', cmd:'npx lighthouse /business --mobile', tags:['performance','web','react','seo','lcp','frontend','speed'], ds:'Business pages fast on budget phones',
+   src:`// Fast on a budget phone · React + Express SSR
+
+const AddBusinessModal = lazy(() => import('./AddBusinessModal'));
+const ShareSheet       = lazy(() => import('./ShareSheet'));
+
+// the server paints the hero before React boots
+res.send(businessRouteShell(business));  // LCP before JS`,
+   view: () => proj({meta:'Massclick · Web', title:'Fast on a Budget Phone', sum:'Search Console flagged mobile business pages as slow. I measured why, then made the hero appear before any JavaScript runs.', points:['Server-rendered business hero with a preloaded photo','Login popup and share sheet load only when someone needs them','Nearly halved the business-page JavaScript bundle'], mv:'173 → 92 KB', ml:'business-page bundle, brotli', chips:['React','Express SSR','Core Web Vitals']})},
+
+  {id:'crawl', path:'work/crawl-trap.js', ext:'js', dir:'work', cmd:'curl -sI massclick.in/20trichy20…', tags:['seo','crawl','incident','infra','monitoring','googlebot'], ds:'Googlebot junk URLs stopped',
+   src:`// The crawl trap · Express SSR middleware
+
+if (isJunkPath(req.path)) {
+  return res.status(410).end();   // Gone, for good
+}
+
+// emitted links now pass through slugify, every $regex is escaped
+// alert rule rewritten so 410s no longer page anyone`,
+   view: () => proj({meta:'Massclick · Ops', title:'The Crawl Trap', sum:'Googlebot was generating ever-longer junk URLs from one bad link, and the database CPU alert kept firing. I found the generator and closed it.', points:['Fixed the URL generator and escaped every regex built from a path','Junk and unknown-category URLs now return 410 Gone','Rewrote the Grafana error-rate rule, which had a logic bug hiding real errors'], mv:'6–7% → ~0.1%', ml:'non-410 client error rate', chips:['Express','Grafana','Search Console']})},
+
+  {id:'experience', path:'experience.log', ext:'log', cmd:'git log --oneline --decorate', tags:['experience','career','job','digihope','syuap','massclick','education','veezzo','vmark','cosod','lead','intern'], ds:'Career, newest first',
+   src:`* (HEAD -> massclick) Software Engineer · Apr 2026 – now
+* (freelance/vandizone) my own client · ongoing
+* (digihope) Head of Mobile · Apr 2025 – Mar 2026
+|   shipped: Veezzo
+* (syuap) Intern, Flutter then React · Jan – Jun 2024
+|   shipped: Vmark
+* (msc) M.Sc, Bishop Heber College · 2023 – 2025
+* (bsc) B.Sc, National College · 2020 – 2023
+    shipped: COS OD`,
+   view: () => logView()},
+
+  {id:'stack', path:'stack.json', ext:'json', cmd:'cat stack.json | jq', tags:['stack','skills','tools','flutter','node','react','aws','firebase','docker'], ds:'What I reach for',
+   src:`{
+  "mobile":  ["Flutter", "Dart", "Riverpod"],
+  "web":     ["React", "Next.js"],
+  "backend": ["Node.js", "Express", "MongoDB", "Redis", "Socket.IO"],
+  "cloud":   ["Firebase", "AWS", "Docker", "nginx", "GitHub Actions"],
+  "watch":   ["Grafana", "Prometheus"],
+  "also":    ["Laravel", "Python"]
+}`,
+   view: () => stackView()},
+
+  {id:'ship', path:'ship.yml', ext:'yml', cmd:'gh workflow run ship.yml', tags:['process','pipeline','ship','ci','how','work'], ds:'How I work with you',
+   src:`name: how-i-ship
+on: [your-idea]
+
+jobs:
+  brief:  { run: "what it does, who uses it, what done means" }
+  build:  { needs: brief, run: "small commits you can see daily" }
+  test:   { needs: build, run: "real devices, real data" }
+  ship:   { needs: test,  run: "stores or servers, rollback ready" }
+  watch:  { needs: ship,  run: "alerts, crash reports, fixes" }`,
+   view: () => shipView()},
+
+  {id:'contact', path:'contact.sh', ext:'sh', cmd:'./contact.sh', tags:['contact','email','hire','linkedin','github','freelance'], ds:'Send me a brief',
+   src:`#!/usr/bin/env bash
+# say hello · I reply within a day
+
+./contact.sh \\
+  --to    "abishek.mk.01@gmail.com" \\
+  --type  "mobile app" \\
+  --about "what you're building"`,
+   view: () => `<div class="contact"><h2 class="rv">Got an idea? <em>Let's ship it.</em></h2><p class="lead rv">An app, an API, a platform that has to stay up, or a full-time role. Tell me what you're building.</p><form class="brief rv" id="brief" novalidate><div class="row"><label for="fName">--name<input id="fName" name="name" required placeholder="Priya R" autocomplete="name"></label><label for="fContact">--reply-to<input id="fContact" name="contact" required placeholder="you@company.com"></label></div><label>--type<span class="radios" role="group" aria-label="Project type"><label><input type="radio" name="type" value="Mobile app" checked><span>Mobile app</span></label><label><input type="radio" name="type" value="Web app"><span>Web app</span></label><label><input type="radio" name="type" value="Backend / API"><span>Backend / API</span></label><label><input type="radio" name="type" value="Full product"><span>Full product</span></label><label><input type="radio" name="type" value="Full-time role"><span>Full-time role</span></label></span></label><label for="fMsg">--about<textarea id="fMsg" name="msg" placeholder="What it does, who uses it, and when you need it"></textarea></label><div><button class="cta pri" type="submit">Run ./contact.sh ↵</button></div></form><div class="links rv"><a class="cta" href="mailto:abishek.mk.01@gmail.com">Email</a><a class="cta" href="https://www.linkedin.com/in/its-abishek-mk" target="_blank" rel="noopener">LinkedIn ↗</a><a class="cta" href="https://github.com/Its-Abishek-01" target="_blank" rel="noopener">GitHub ↗</a></div><p class="eof">-- EOF · prototype v0.5 · the real site will be Next.js on Firebase App Hosting</p></div>`}
+];
+
+function proj(o){
+  return '<div class="proj'+(o.feat?' feat':'')+'"><div class="meta rv"><span>'+esc(o.meta)+'</span>'+(o.badge?'<span class="badge">'+esc(o.badge)+'</span>':'')+'</div><h2 class="rv">'+esc(o.title)+'</h2><p class="sum rv">'+esc(o.sum)+'</p><ul class="points">'+o.points.map(p => '<li class="rv">'+esc(p)+'</li>').join('')+'</ul><div class="chips rv">'+o.chips.map(c => '<span class="chip">'+esc(c)+'</span>').join('')+'</div><div class="metric rv"><b>'+esc(o.mv)+'</b><span>'+esc(o.ml)+'</span></div></div>';
+}
+function logView(){
+  const L = [
+    {c:'head', br:'HEAD → massclick', w:'Apr 2026 – now', t:'Massclick', r:'Software Engineer', p:'A local-search platform for Tamil Nadu. The Flutter app, the Node and MongoDB API, the React web and its SEO, and the servers underneath.', s:[]},
+    {c:'fl', br:'freelance/vandizone', w:'ongoing', t:'VandiZone', r:'Freelance · my own client', p:'Customer and captain apps in Flutter and Firebase, built directly with the client.', s:[]},
+    {c:'', br:'digihope', w:'Apr 2025 – Mar 2026', t:'Digihope Technologies', r:'Head of Mobile App Development · 1 year', p:'Led the Flutter apps for Android and iOS: architecture, state management, every Play Console, App Store and TestFlight release. Cut crash rates and mentored junior developers.', s:[['Veezzo','food delivery on AWS Lambda + S3']]},
+    {c:'', br:'syuap', w:'Jan – Jun 2024', t:'Syuap Tech Solution', r:'Intern · 6 months, during my M.Sc', p:'Three months building Flutter mobile apps, then three months on React, in Agile sprints on live apps.', s:[['Vmark','multi-seller e-commerce, React + Express']]},
+    {c:'', br:'msc', w:'2023 – 2025', t:'M.Sc, Bishop Heber College', r:'Tiruchirappalli · GPA 8.6', p:'Second prize in an aptitude test competition.', s:[]},
+    {c:'', br:'bsc', w:'2020 – 2023', t:'B.Sc, National College', r:'Tiruchirappalli · GPA 8.4', p:'Organised Naco Tech 2022 and coordinated its Python quiz.', s:[['COS OD','my own attendance app, Flutter + Laravel']]}
+  ];
+  return '<div class="log">' + L.map(e => '<article class="entry '+e.c+' rv"><div class="ref"><span class="br">'+esc(e.br)+'</span><span>'+esc(e.w)+'</span></div><h3>'+esc(e.t)+'</h3><div class="role">'+esc(e.r)+'</div><p>'+esc(e.p)+'</p>'+(e.s.length ? '<div class="ship">'+e.s.map(x => '<span><b>'+esc(x[0])+'</b> · '+esc(x[1])+'</span>').join('')+'</div>' : '')+'</article>').join('') + '</div>';
+}
+function stackView(){
+  const G = [
+    ['mobile', [['Flutter','Android · iOS','#54C5F8','#0B2A3A','Fl'],['Dart','language','#54C5F8','#0F2230','Dt'],['Riverpod','state','#9FE7F5','#10262C','Rp']]],
+    ['web', [['React','Massclick web · Vmark','#61DAFB','#0B2330','Re'],['Next.js','Daybook','#fff','#111','Nx']]],
+    ['backend', [['Node.js','Massclick API','#8CC84B','#15260E','No'],['Express','REST + SSR','#ddd','#1b1b1b','Ex'],['MongoDB','search, geo','#6CC24A','#10240F','Mg'],['Redis','cache','#FF6B5B','#2B0F0C','Rd'],['Socket.IO','live leads, chat','#fff','#1d1d1d','Io']]],
+    ['cloud', [['Firebase','VandiZone, Daybook','#FFCA28','#2D2206','Fb'],['AWS','S3 · Lambda','#FF9900','#2A1B05','Aw'],['Docker','API replicas','#4BA3F2','#0B1E30','Dk'],['nginx','edge','#3CC47C','#0C2217','Ng'],['GitHub Actions','CI/CD','#8BB6FF','#0E1728','GA']]],
+    ['watch', [['Grafana','alerts','#F68A3B','#2B1606','Gf'],['Prometheus','metrics','#E6522C','#2B0F08','Pr']]],
+    ['also', [['Laravel','COS OD','#FF5A4E','#2B0E0C','Lv'],['Python','deck generators','#FFD43B','#1B2433','Py']]]
+  ];
+  return '<div class="groups">' + G.map(([g,l]) => '<div class="group rv"><h3>"'+g+'"</h3><div class="tools">'+l.map(t => '<div class="tool"><span class="lg" style="background:'+t[3]+';color:'+t[2]+'">'+t[4]+'</span><div><b>'+esc(t[0])+'</b><small>'+esc(t[1])+'</small></div></div>').join('')+'</div></div>').join('') + '</div>';
+}
+function shipView(){
+  const J = [['brief','What it does, who uses it, what "done" means.'],['build','Small commits you can see every day.'],['test','On real devices and real data.'],['ship','Play Store, App Store or a server, with a rollback ready.'],['watch','Alerts, crash reports and fixes after launch.']];
+  return '<div class="run rv"><div class="rhd"><span><b>how-i-ship</b> · on: your-idea</span><span class="res" id="runRes">queued</span></div><div class="jobs">' + J.map((j,i) => '<div class="job" data-i="'+i+'"><span class="dot"></span><div><h3>'+j[0]+'</h3><p>'+esc(j[1])+'</p></div><span class="t">—</span></div>').join('') + '</div></div>';
+}
+
+/* ================= syntax highlighter (tiny, per language) ================= */
+const KW = {
+  dart:'final|var|const|await|async|return|if|else|new|void|class',
+  js:'const|let|await|async|return|if|else|new|import|export|from|function',
+  jsx:'const|let|await|async|return|if|else|new|import|export|from|function|lazy',
+  sh:'node|docker|compose|up|sh|curl|export',
+  json:'', yml:'name|on|jobs|needs|run', md:'', log:''
+};
+function hlLine(line, ext){
+  let h = esc(line);
+  if (ext === 'md'){
+    if (/^#/.test(line)) return '<span class="tk-h">'+h+'</span>';
+    if (/^&gt;/.test(h)) return '<span class="tk-c">'+h+'</span>';
+    return h.replace(/\*\*(.+?)\*\*/g,'<span class="tk-n">**$1**</span>').replace(/!\[(.+?)\]\((.+?)\)/g,'<span class="tk-p">![$1]</span><span class="tk-s">($2)</span>').replace(/^- /,'<span class="tk-k">- </span>');
+  }
+  if (ext === 'log') return h.replace(/\((.+?)\)/,'<span class="tk-n">($1)</span>').replace(/^([*|])/,'<span class="tk-p">$1</span>');
+  const cm = (ext === 'sh' || ext === 'yml') ? /(#.*)$/ : /(\/\/.*)$/;
+  let comment = '';
+  const m = h.match(cm);
+  if (m && !(ext === 'sh' && /^#!/.test(line))){ comment = '<span class="tk-c">'+m[1]+'</span>'; h = h.slice(0, m.index); }
+  if (ext === 'sh' && /^#!/.test(line)) return '<span class="tk-c">'+h+'</span>';
+  h = h.replace(/(&quot;.*?&quot;|'[^']*'|`[^`]*`)/g,'\u0000$1\u0001');
+  const parts = h.split(/(\u0000.*?\u0001)/);
+  h = parts.map(p => {
+    if (p.startsWith('\u0000')) return '<span class="tk-s">'+p.slice(1,-1)+'</span>';
+    let q = p.replace(/\b(\d[\d,.]*)\b/g,'<span class="tk-n">$1</span>');
+    if (KW[ext]) q = q.replace(new RegExp('\\b('+KW[ext]+')\\b','g'),'<span class="tk-k">$1</span>');
+    q = q.replace(/\b([a-zA-Z_]\w*)(?=\()/g,'<span class="tk-f">$1</span>');
+    q = q.replace(/(\$\w+)/g,'<span class="tk-p">$1</span>');
+    return q;
+  }).join('');
+  return h + comment;
+}
+
+/* ================= build the editor ================= */
+const main = $('#main'), tree = $('#tree');
+main.innerHTML = FILES.map(f => {
+  const lines = f.src.split('\n');
+  return '<section class="file" id="f-'+f.id+'" data-id="'+f.id+'" data-show="src" aria-label="'+esc(f.path)+'">' +
+    '<div class="fhead"><span class="ic '+f.ext+'">'+f.ext.slice(0,2).toUpperCase()+'</span><span class="path">'+esc(f.path.includes('/') ? f.path.split('/')[0]+' / ' : '')+'<b>'+esc(f.path.split('/').pop())+'</b></span><span class="lang">'+LANG[f.ext]+'</span>' +
+    '<span class="seg" role="group" aria-label="View"><button type="button" data-v="view" aria-pressed="false">Preview</button><button type="button" data-v="src" aria-pressed="true">Source</button></span><span class="state">● source</span></div>' +
+    '<div class="pane"><div class="src"><div class="bar"><span>'+esc(f.path)+'</span><span>'+lines.length+' lines</span></div><pre class="code" aria-label="Source of '+esc(f.path)+'">'+lines.map(l => '<span class="l">'+hlLine(l,f.ext)+'</span>').join('')+'</pre></div>' +
+    '<div class="view"><span class="bolt">⚡ hot reload</span>'+f.view()+'</div></div></section>';
+}).join('');
+let lastDir = '';
+tree.innerHTML = '<li class="dir">▾ abishek</li>' + FILES.map(f => {
+  let pre = '';
+  if (f.dir && f.dir !== lastDir){ pre = '<li class="dir" style="padding-left:18px">▾ '+f.dir+'</li>'; lastDir = f.dir; }
+  return pre + '<li><a href="#f-'+f.id+'" data-go="'+f.id+'" class="'+(f.dir?'in':'')+'"><span class="ic '+f.ext+'">'+f.ext.slice(0,2).toUpperCase()+'</span><span>'+esc(f.path.split('/').pop())+'</span>'+(f.star?'<span class="star">★</span>':'')+'</a></li>';
+}).join('');
+const fileEls = $$('.file'), byId = Object.fromEntries(FILES.map(f => [f.id, f]));
+
+/* ================= terminal + status ================= */
+const term = $('#term'), crumb = $('#crumb'), sLang = $('#sLang'), sLn = $('#sLn'), sReload = $('#sReload');
+let reloads = 0;
+function termPush(html){ term.insertAdjacentHTML('beforeend', '<div class="ln">'+html+'</div>'); while (term.children.length > 6) term.firstChild.remove(); }
+function termCmd(cmd, done){
+  const el = document.createElement('div'); el.className = 'ln'; term.appendChild(el); while (term.children.length > 6) term.firstChild.remove();
+  if (!motion){ el.innerHTML = '<span class="p">$</span> <span class="c">'+esc(cmd)+'</span>'; done && done(); return; }
+  let i = 0; const t = setInterval(() => { i += 2; el.innerHTML = '<span class="p">$</span> <span class="c">'+esc(cmd.slice(0,i))+'</span>'; if (i >= cmd.length){ clearInterval(t); done && done(); } }, 16);
+}
+termPush('<span class="ok">abishek</span> · 12 files · ⎇ main · type <span class="c">⌘K</span> to jump to a file');
+function status(){ sLn.textContent = 'Ln ' + (Math.floor(scrollY/24)+1).toLocaleString('en-IN') + ', Col 1'; }
+addEventListener('scroll', status, {passive:true}); status();
+
+/* ================= tabs + explorer follow the file you're in ================= */
+const tabsEl = $('#tabs'), opened = [];
+function openTab(id){
+  const f = byId[id];
+  if (!opened.includes(id)){ opened.push(id); tabsEl.insertAdjacentHTML('beforeend', '<button type="button" class="tab new" data-go="'+id+'"><span class="ic '+f.ext+'">'+f.ext.slice(0,2).toUpperCase()+'</span>'+esc(f.path.split('/').pop())+'</button>'); }
+  $$('.tab', tabsEl).forEach(t => t.classList.toggle('on', t.dataset.go === id));
+  const on = $('.tab.on', tabsEl); on && on.scrollIntoView({inline:'nearest', block:'nearest'});
+  $$('a', tree).forEach(a => a.classList.toggle('on', a.dataset.go === id));
+  crumb.innerHTML = '<b>abishek</b> / ' + esc(f.path).replace(/\//g,' / ');
+  sLang.textContent = LANG[f.ext];
+}
+let currentId = null;
+const followIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && e.target.dataset.id !== currentId){ currentId = e.target.dataset.id; openTab(currentId); } }), {rootMargin:'-40% 0px -55% 0px'});
+fileEls.forEach(el => followIO.observe(el));
+
+/* ================= hot reload: type the source, flash, build the preview ================= */
+function setShow(el, v){ el.dataset.show = v; $$('.seg button', el).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === v))); }
+$$('.seg').forEach(seg => seg.addEventListener('click', e => { const b = e.target.closest('button'); if (b) setShow(seg.closest('.file'), b.dataset.v); }));
+function reload(el){
+  if (el.dataset.done) return; el.dataset.done = '1';
+  const f = byId[el.dataset.id], lines = $$('.code .l', el), rv = $$('.rv', el.querySelector('.view')), t0 = performance.now();
+  const finish = () => {
+    el.classList.add('live', 'flash'); setShow(el, 'view'); $('.state', el).textContent = '⚡ live';
+    if (motion) gsap.fromTo(rv, {y:34, opacity:0}, {y:0, opacity:1, duration:.9, ease:'expo.out', stagger:.06});
+    setTimeout(() => el.classList.remove('flash'), 900);
+    const ms = Math.round(performance.now() - t0);
+    reloads++; sReload.textContent = '⚡ ' + reloads + ' reload' + (reloads > 1 ? 's' : '');
+    termPush('<span class="ok">✓</span> hot reload · '+ms+' ms · '+esc(f.path));
+    const a = $('a[data-go="'+f.id+'"]', tree); a && a.classList.add('done');
+    if (f.id === 'ship') runPipeline();
+  };
+  termCmd(f.cmd, () => {
+    if (!motion){ finish(); return; }
+    lines.forEach(l => l.classList.add('hide'));
+    let i = 0; const step = () => { if (i < lines.length){ lines[i++].classList.remove('hide'); setTimeout(step, 38); } else setTimeout(finish, 140); };
+    step();
+  });
+}
+if (motion){
+  fileEls.forEach(el => { if (el.dataset.id !== 'readme') gsap.set($$('.rv', el), {opacity:0}); });
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ io.unobserve(e.target); reload(e.target); } }), {threshold:.22});
+  fileEls.forEach(el => io.observe(el));
+} else fileEls.forEach(reload);
+
+/* ship.yml runs like a CI job */
+function runPipeline(){
+  const jobs = $$('#f-ship .job'), res = $('#runRes'), durs = [2.1, 4.8, 3.2, 1.9, 0.6];
+  res.textContent = 'in progress';
+  const go = i => {
+    if (i >= jobs.length){ res.textContent = '✓ success'; termPush('<span class="ok">✓</span> how-i-ship · 5 jobs passed'); return; }
+    const j = jobs[i]; j.classList.add('run');
+    setTimeout(() => { j.classList.remove('run'); j.classList.add('ok'); $('.dot', j).textContent = '✓'; $('.t', j).textContent = durs[i].toFixed(1)+'s'; go(i+1); }, motion ? 520 : 0);
+  };
+  go(0);
+}
+
+/* ================= navigation: tabs, tree, buttons ================= */
+let lenis = null;
+function goTo(id){
+  const el = document.getElementById('f-'+id); if (!el) return;
+  const top = el.getBoundingClientRect().top + scrollY - parseFloat(getComputedStyle(el).scrollMarginTop || 0);
+  if (lenis) lenis.scrollTo(top, {duration:1.4}); else scrollTo({top, behavior: reduce ? 'auto' : 'smooth'});
+}
+document.addEventListener('click', e => {
+  const g = e.target.closest('[data-go]'); if (g){ e.preventDefault(); goTo(g.dataset.go); return; }
+  if (e.target.closest('[data-pal]')) openPal();
+});
+
+/* ================= go to file (⌘K) ================= */
+const pal = $('#palette'), qEl = $('#q'), resEl = $('#results'); let cur = [], act = 0, lastFocus = null;
+function score(f, q){
+  const t = q.toLowerCase().trim(); if (!t) return 1;
+  let s = 0; const name = f.path.toLowerCase();
+  if (name.includes(t)) s += 10;
+  t.split(/\s+/).forEach(w => { if (!w) return; if (name.includes(w)) s += 4; f.tags.forEach(tag => { if (tag === w) s += 6; else if (tag.startsWith(w)) s += 3; }); if (f.ds.toLowerCase().includes(w)) s += 2; });
+  let fi = 0; for (const ch of t.replace(/\s/g,'')) { fi = name.indexOf(ch, fi); if (fi < 0){ fi = -1; break; } fi++; } if (fi > 0) s += 1;
+  return s;
+}
+function mark(path, q){ const t = q.toLowerCase().trim(); if (!t) return esc(path); const i = path.toLowerCase().indexOf(t); return i < 0 ? esc(path) : esc(path.slice(0,i)) + '<mark>' + esc(path.slice(i, i+t.length)) + '</mark>' + esc(path.slice(i+t.length)); }
+function renderPal(){
+  const q = qEl.value; cur = FILES.map(f => ({f, s:score(f,q)})).filter(x => x.s > 0).sort((a,b) => b.s - a.s); act = 0;
+  resEl.innerHTML = cur.length ? cur.map((x,i) => '<li class="opt" role="option" id="o-'+x.f.id+'" data-id="'+x.f.id+'" aria-selected="'+(i===0)+'"><span class="ic '+x.f.ext+'">'+x.f.ext.slice(0,2).toUpperCase()+'</span><span class="nm">'+mark(x.f.path.split('/').pop(), q)+'</span><span class="dir">'+esc(x.f.dir || '/')+'</span><span class="ds">'+esc(x.f.ds)+'</span></li>').join('') : '<li class="opt" aria-disabled="true"><span></span><span class="ds">No file matches “'+esc(q)+'”. Try flutter, infra or contact.</span></li>';
+  qEl.setAttribute('aria-activedescendant', cur[0] ? 'o-'+cur[0].f.id : '');
+}
+function setAct(i){ const o = $$('.opt[data-id]', resEl); if (!o.length) return; act = (i+o.length)%o.length; o.forEach((x,j) => x.setAttribute('aria-selected', String(j===act))); o[act].scrollIntoView({block:'nearest'}); qEl.setAttribute('aria-activedescendant', o[act].id); }
+function openPal(){ lastFocus = document.activeElement; pal.classList.add('open'); qEl.value = ''; renderPal(); setTimeout(() => qEl.focus(), 30); lenis && lenis.stop(); }
+function closePal(){ pal.classList.remove('open'); lenis && lenis.start(); lastFocus && lastFocus.focus && lastFocus.focus(); }
+function pick(id){ closePal(); goTo(id); }
+qEl.addEventListener('input', renderPal);
+qEl.addEventListener('keydown', e => { if (e.key==='ArrowDown'){ e.preventDefault(); setAct(act+1); } else if (e.key==='ArrowUp'){ e.preventDefault(); setAct(act-1); } else if (e.key==='Enter' && cur[act]){ e.preventDefault(); pick(cur[act].f.id); } });
+resEl.addEventListener('click', e => { const o = e.target.closest('.opt[data-id]'); if (o) pick(o.dataset.id); });
+pal.addEventListener('click', e => { if (e.target === pal) closePal(); });
+$('#openPal').addEventListener('click', openPal);
+addEventListener('keydown', e => {
+  const typing = /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+  if ((e.key.toLowerCase() === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !typing)){ e.preventDefault(); pal.classList.contains('open') ? closePal() : openPal(); }
+  else if (e.key === 'Escape' && pal.classList.contains('open')) closePal();
+});
+
+/* ================= contact.sh ================= */
+document.addEventListener('submit', e => {
+  if (e.target.id !== 'brief') return; e.preventDefault();
+  const form = e.target, f = new FormData(form), name = String(f.get('name')).trim(), who = String(f.get('contact')).trim();
+  if (!name || !who){ termPush('<span style="color:var(--red)">✗</span> contact.sh: --name and --reply-to are required'); (name ? form.contact : form.name).focus(); return; }
+  const body = 'Hi Abishek,\n\nName: '+name+'\nReply to: '+who+'\nProject: '+f.get('type')+'\n\n'+(f.get('msg')||'');
+  location.href = 'mailto:abishek.mk.01@gmail.com?subject=' + encodeURIComponent('Project: ' + f.get('type')) + '&body=' + encodeURIComponent(body);
+  termPush('<span class="ok">✓</span> brief ready · your mail app opened · exit 0');
+});
+
+/* ================= smooth scroll + scroll depth ================= */
+if (motion){
+  gsap.registerPlugin(ScrollTrigger);
+  if (window.Lenis){ lenis = new Lenis({lerp:.1, smoothWheel:true}); lenis.on('scroll', ScrollTrigger.update); lenis.on('scroll', status); gsap.ticker.add(t => lenis.raf(t*1000)); gsap.ticker.lagSmoothing(0); }
+  // the source panel drifts a little slower than the preview: depth without decoration
+  fileEls.forEach(el => gsap.fromTo($('.src', el), {y:30}, {y:-30, ease:'none', scrollTrigger:{trigger:el, start:'top bottom', end:'bottom top', scrub:true}}));
+  // big headings lean in as they arrive
+  $$('.proj h2, .readme h1, .contact h2').forEach(h => gsap.fromTo(h, {letterSpacing:'.02em'}, {letterSpacing:'-.02em', ease:'none', scrollTrigger:{trigger:h, start:'top 95%', end:'top 45%', scrub:true}}));
+}
+})();
+</script>

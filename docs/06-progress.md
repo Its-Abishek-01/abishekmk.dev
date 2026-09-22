@@ -27,7 +27,8 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 - [x] Concept round reviewed (D-011)
 - [x] v0.2 combined prototype · https://claude.ai/artifact/RgafAPhexXDiuHBdwnPQXn (git tag v0.2-prototype)
 - [x] v0.3 developer edition · https://claude.ai/artifact/CyqsnZmoNFDeY2vdJWMzKN (look liked; structure too busy)
-- [~] v0.4 clean redesign · https://claude.ai/artifact/SJ1TzEEhUKgxoQvhN4ov21 (prototype/v04-dev.html) → review → sign off
+- [x] v0.4 clean redesign · https://claude.ai/artifact/SJ1TzEEhUKgxoQvhN4ov21 (too close to Kamal's flow)
+- [~] v0.5 repo + hot reload · https://claude.ai/artifact/HMPJkuYxGdeJu3R7C16TCb (prototype/v05-repo.html) → review → sign off
   - 01 Teardown · https://claude.ai/artifact/2dVCMpLHm3qcTkCLs6By8G
   - 02 Powers of Ten · https://claude.ai/artifact/ALUb5gs3rJyNAUZ7F6h3Rf
   - 03 Cinematic chapters · https://claude.ai/artifact/NPHxd4yztNzmE2gbrSBzav
@@ -68,6 +69,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Session log
 | Date | What happened |
 |---|---|
+| 2026-09-22 | v0.5: new developer-native flow, portfolio as a repository with hot reload (D-014). |
 | 2026-09-22 | v0.4 clean redesign (D-013): old section requests dropped, one coherent developer structure. |
 | 2026-09-22 | v0.2 tagged. Reviewed kamal-portfolio (reference he likes). Built v0.3 developer edition with GSAP + Lenis (D-012). |
 | 2026-09-22 | Concept review → v0.2 built from the liked parts (D-011) and published at the v0.1 link. VandiZone and COS OD confirmed as his own; VandiZone featured. |
