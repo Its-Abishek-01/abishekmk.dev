@@ -67,7 +67,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 - [x] Abishek: set secret `telegram-webhook-secret` (value given in chat), THEN push dev + main
 - [x] Abishek: open `/api/telegram/setup?key=<secret>` once after deploy (registers the webhook). Done 2026-09-22: `{"ok":true}`, webhook = `https://abishekmk--abishekmk-dev.asia-southeast1.hosted.app/api/telegram/webhook`
 - [ ] Abishek: open the site once with `?me=1` on his own phone/PC so his visits are ignored
-- [ ] Test: visit from another phone → Telegram buzz → reply → card appears → chat
+- [x] Test: visit from another phone → Telegram buzz → reply → card appears → chat (Abishek confirmed working 2026-09-22)
 
 ## Phase 4: Home page
 - [ ] Hero + search (index builder + scorer + combobox a11y)
