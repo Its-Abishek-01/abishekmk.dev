@@ -1,6 +1,6 @@
 # 06 — Progress (live tracker)
 
-**Last updated:** 2026-09-22 · **Current phase:** 2, design prototype (Phase 1 leftovers: one-liner, personal gh login, content answers)
+**Last updated:** 2026-09-22 · **Current phase:** 2b, freelance landing page (portfolio design locked)
 Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 
 ## Phase 0: Workspace ✅
@@ -28,7 +28,12 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 - [x] v0.2 combined prototype · https://claude.ai/artifact/RgafAPhexXDiuHBdwnPQXn (git tag v0.2-prototype)
 - [x] v0.3 developer edition · https://claude.ai/artifact/CyqsnZmoNFDeY2vdJWMzKN (look liked; structure too busy)
 - [x] v0.4 clean redesign · https://claude.ai/artifact/SJ1TzEEhUKgxoQvhN4ov21 (too close to Kamal's flow)
-- [~] v0.5 repo + hot reload · https://claude.ai/artifact/HMPJkuYxGdeJu3R7C16TCb (prototype/v05-repo.html) → review → sign off
+- [x] **v0.5 repo + hot reload: LOCKED as the portfolio** · https://claude.ai/artifact/HMPJkuYxGdeJu3R7C16TCb (tag v0.5-portfolio-locked)
+
+## Phase 2b: Freelance landing page (D-016)
+- [ ] Answer landing questions (name/brand, audience, services, contact)
+- [ ] Landing concept + prototype, with a Portfolio button to the locked portfolio
+- [ ] SEO plan: keywords, metadata, JSON-LD, sitemap, Google Business Profile
   - 01 Teardown · https://claude.ai/artifact/2dVCMpLHm3qcTkCLs6By8G
   - 02 Powers of Ten · https://claude.ai/artifact/ALUb5gs3rJyNAUZ7F6h3Rf
   - 03 Cinematic chapters · https://claude.ai/artifact/NPHxd4yztNzmE2gbrSBzav
@@ -69,6 +74,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Session log
 | Date | What happened |
 |---|---|
+| 2026-09-22 | Portfolio LOCKED at v0.5 (D-015). Next: freelance landing page with SEO (D-016). |
 | 2026-09-22 | v0.5: new developer-native flow, portfolio as a repository with hot reload (D-014). |
 | 2026-09-22 | v0.4 clean redesign (D-013): old section requests dropped, one coherent developer structure. |
 | 2026-09-22 | v0.2 tagged. Reviewed kamal-portfolio (reference he likes). Built v0.3 developer edition with GSAP + Lenis (D-012). |
