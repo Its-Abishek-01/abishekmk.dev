@@ -1,6 +1,6 @@
 # 06 — Progress (live tracker)
 
-**Last updated:** 2026-09-22 · **Current phase:** 1, content & concept sign-off
+**Last updated:** 2026-09-22 · **Current phase:** 2, design prototype (Phase 1 leftovers: one-liner, personal gh login, content answers)
 Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 
 ## Phase 0: Workspace ✅
@@ -60,5 +60,6 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Session log
 | Date | What happened |
 |---|---|
+| 2026-09-22 | Public GitHub repos reviewed; gh still only has Massclick-App (personal login pending). Phase 2 prototype started. |
 | 2026-09-22 | Concept, stack, Firebase owner (personal) and GitHub owner (Its-Abishek-01) accepted. |
 | 2026-09-22 | Workspace set up (Phase 0). Concept, stack and design system drafted, all `[assumed]` pending review. |

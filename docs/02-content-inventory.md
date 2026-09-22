@@ -15,6 +15,7 @@ Sources: `MC` = `D:\dev_abishek\massclick` (git + tracker docs) · `APP` = `mass
 | GitHub | github.com/Its-Abishek-01 | verified (resume) |
 | Location | Tiruchirappalli, Tamil Nadu | verified |
 | Current role | Software Engineer, Massclick | confirmed (chat 2026-09-22) — exact title/start month: ask |
+| Languages | Profile README: "I know Japanese". Level? JLPT? | ask |
 | Education | M.Sc — Bishop Heber College (2025, 8.6) · B.Sc — National College (2023, 8.4) | verified (resume) |
 
 ## Massclick — scale & ownership
@@ -52,7 +53,9 @@ Sources: `MC` = `D:\dev_abishek\massclick` (git + tracker docs) · `APP` = `mass
 |---|---|---|
 | Sound Detective | Flutter Android app + native background collectors; explains mystery phone sounds with confidence score | verified (repo) — published? ask |
 | Watch teardown 3D | Scroll-scrubbed Three.js exploded view of a watch movement | verified (repo) |
-| COS OD, Vmark, VandiZone, Veezzo | Older projects from resume | keep/trim: ask |
+| COS OD, Vmark, VandiZone, Veezzo | Older projects from resume. Not in public repos, so probably private or in company accounts | keep/trim: ask |
+| yoo-music (node + php) | Personal music app, Jan 2025, small | verified (public repo) — low value, lab at most |
+| Public repo audit 2026-09-22 | Public repos: Its-Abishek-01 (profile README), sound_detective, yoo-music-node/php, sample-site, web-lab-bhc, a DVRA clone, 2 forks (niloy-bhowmick, will-you-be-my-valentine) | verified via gh API |
 
 ## Do NOT use
 - `portfolio/` (Hamish Williams' open-source repo), `skills/` (Emil Kowalski) — not Abishek's work.
