@@ -88,6 +88,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Session log
 | Date | What happened |
 |---|---|
+| 2026-09-22 | Domain search: Abishek wants a catchy new brand name (~₹200). Shortlist in docs/10-handoff.md §7. Added docs/10-handoff.md so any agent can continue without local memory. |
 | 2026-09-22 | Telegram enquiry alerts live and verified (saved + alerted). Two TEST enquiries in Firestore are safe to delete. |
 | 2026-09-22 | SITE LIVE on App Hosting (asia-southeast1). Enquiry → Firestore verified. Domain not bought yet. |
 | 2026-09-22 | Firebase project abishekmk-dev created; Firestore creation waits on the API being enabled in the console. Config files committed. |

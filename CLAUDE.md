@@ -1,6 +1,6 @@
 # Working rules for this repo (Claude / Codex / any AI session)
 
-1. **Read `docs/06-progress.md` first**, every session. It is the live state. Then read only the docs the task touches.
+1. **Read `docs/10-handoff.md` then `docs/06-progress.md` first**, every session. The handoff has live infra, access quirks and working rules; progress is the live state. Then read only the docs the task touches. Update the handoff when those facts change.
 2. **Docs are the source of truth**, not chat history. When a decision is made, record it in `docs/07-decisions.md`; when something is finished, tick it in `docs/06-progress.md` — before moving to the next step.
 3. **Status tags** in docs: `[confirmed]` (Abishek said so), `[assumed]` (reasonable default, not yet confirmed), `[open]` (needs an answer — also listed in `08-open-questions.md`).
 4. **No fabrication.** Every number or claim on the site must exist in `docs/02-content-inventory.md` with a source. If it isn't there, it doesn't ship. Recruiters check.

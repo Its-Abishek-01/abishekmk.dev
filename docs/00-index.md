@@ -13,6 +13,7 @@ Read in this order when starting fresh. Live state is always `06-progress.md`.
 | 07 | [Decisions](07-decisions.md) | What was decided, when, why |
 | 08 | [Open questions](08-open-questions.md) | What's blocking or undecided |
 | 09 | [Conventions](09-conventions.md) | Git, commits, code style, folder rules |
+| 10 | [Handoff](10-handoff.md) | **Start here in any new session or agent**: live infra, access quirks, working rules, design history, open threads |
 
 Also: [`../design/tokens.json`](../design/tokens.json) — the design tokens every component reads.
 
