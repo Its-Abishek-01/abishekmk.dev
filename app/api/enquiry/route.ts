@@ -4,6 +4,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createHash } from 'node:crypto';
+import { sendEnquiryAlert } from '@/lib/server/telegram';
 
 const Enquiry = z.object({
   name: z.string().trim().min(1).max(120),
@@ -43,10 +44,19 @@ export async function POST(req: Request) {
   const parsed = Enquiry.safeParse(body);
   if (!parsed.success) return NextResponse.json({ ok: false, reason: 'invalid' }, { status: 400 });
 
+  // 1. Save it (the record of truth). 2. Ping Abishek's phone. Either one alone still counts as received.
+  let saved = false;
   const firestore = await db().catch(() => null);
-  if (!firestore) return NextResponse.json({ ok: false, reason: 'not-configured' }, { status: 503 });
-
-  const { FieldValue } = await import('firebase-admin/firestore');
-  await firestore.collection('enquiries').add({ ...parsed.data, ipHash, createdAt: FieldValue.serverTimestamp(), status: 'new' });
-  return NextResponse.json({ ok: true });
+  if (firestore) {
+    try {
+      const { FieldValue } = await import('firebase-admin/firestore');
+      await firestore.collection('enquiries').add({ ...parsed.data, ipHash, createdAt: FieldValue.serverTimestamp(), status: 'new' });
+      saved = true;
+    } catch (err) {
+      console.error('enquiry: firestore write failed', err);
+    }
+  }
+  const alerted = await sendEnquiryAlert(parsed.data);
+  if (!saved && !alerted) return NextResponse.json({ ok: false, reason: 'not-configured' }, { status: 503 });
+  return NextResponse.json({ ok: true, saved, alerted });
 }

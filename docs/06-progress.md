@@ -57,7 +57,9 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 - [x] Live checks 2026-09-22: `/`, `/portfolio`, sitemap, robots = 200; `/api/enquiry` saves to Firestore (one labelled TEST doc, safe to delete)
 - [ ] Deploy Firestore rules (`firebase deploy --only firestore:rules`), needs OK
 - [ ] Buy abishekmk.dev (Abishek; RDAP 404 on 2026-09-22 = looked unregistered) → add custom domain in App Hosting → DNS records → HTTPS
-- [ ] Enquiry notifications to Abishek (email or push)
+- [x] Enquiry alerts to Abishek's phone via Telegram bot (`lib/server/telegram.ts`, secrets `telegram-bot-token` / `telegram-chat-id` in apphosting.yaml)
+- [ ] Abishek: create the bot, set both secrets, THEN push (a rollout fails if a referenced secret is missing)
+- [ ] Send one test enquiry and confirm the phone gets it
 
 ## Phase 4: Home page
 - [ ] Hero + search (index builder + scorer + combobox a11y)

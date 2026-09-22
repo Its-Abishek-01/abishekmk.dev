@@ -6,3 +6,17 @@ runConfig:
   concurrency: 80
   cpu: 1
   memoryMiB: 512
+
+env:
+  # New-enquiry alerts to Abishek's phone (lib/server/telegram.ts).
+  # Values live in Cloud Secret Manager, set by Abishek with:
+  #   firebase apphosting:secrets:set telegram-bot-token --project abishekmk-dev
+  #   firebase apphosting:secrets:set telegram-chat-id  --project abishekmk-dev
+  - variable: TELEGRAM_BOT_TOKEN
+    secret: telegram-bot-token
+    availability:
+      - RUNTIME
+  - variable: TELEGRAM_CHAT_ID
+    secret: telegram-chat-id
+    availability:
+      - RUNTIME
