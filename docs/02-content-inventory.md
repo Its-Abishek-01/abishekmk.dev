@@ -28,12 +28,12 @@ Sources: `MC` = `D:\dev_abishek\massclick` (git + tracker docs) · `APP` = `mass
 | Apr 2025 – Mar 2026 | **Head of Mobile App Development, Digihope Technologies** (1 year). Led Flutter Android + iOS apps, architecture + state management, Play Console / App Store / TestFlight releases and compliance, crash-rate + performance work, worked with PHP/Express backend teams, mentored junior developers | confirmed (chat) + resume; months assumed |
 | Apr 2026 – now | **Software Engineer, Massclick** | confirmed |
 
-## Other projects (from résumé; which employer, if any: ask)
+## Other projects (ownership confirmed 2026-09-22)
 | Project | Stack | What | Status |
 |---|---|---|---|
 | VandiZone | Flutter, Firebase | **His own freelance project with a direct client (confirmed 2026-09-22), featured.** Two apps, Customer Booking + Captain/Owner. Real-time bookings (Realtime DB + Firestore), Google Maps live tracking and trip history, phone/email auth, FCM trip alerts | verified (resume) |
-| Veezzo | Flutter, AWS | Food delivery: browse restaurants, order, live tracking. API Gateway + Lambda + S3, geolocation, payment gateway | verified (resume) |
-| Vmark | React, Express, Node | Multi-user e-commerce: sellers register and manage products, auth, CRUD, REST | verified (resume) |
+| Veezzo | Flutter, AWS | **Built at Digihope.** Food delivery: browse restaurants, order, live tracking. API Gateway + Lambda + S3, geolocation, payment gateway | verified (resume) |
+| Vmark | React, Express, Node | **Built at Syuap** (the React half of the internship). Multi-user e-commerce: sellers register and manage products, auth, CRUD, REST | verified (resume) |
 | COS OD | Flutter, Laravel | His own project (confirmed 2026-09-22). Class-wise attendance app, REST APIs | verified |
 
 ## Massclick — scale & ownership
