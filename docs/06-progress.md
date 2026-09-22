@@ -13,8 +13,8 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Phase 1: Content & concept sign-off
 - [ ] Abishek answers `08-open-questions.md` (at least the 🔴 ones)
 - [ ] Pick the one-liner
-- [ ] Approve concept: "Search my work" + kolam grid (D-001)
-- [ ] Approve stack & Firebase setup (D-002)
+- [x] Approve concept: "Search my work" + kolam grid (D-001)
+- [x] Approve stack & Firebase setup (D-002, D-007: personal Firebase account)
 - [ ] Connect GitHub (Its-Abishek-01) → review other projects → update inventory
 - [ ] Confirm the case-study list + order
 
@@ -60,4 +60,5 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Session log
 | Date | What happened |
 |---|---|
+| 2026-09-22 | Concept, stack, Firebase owner (personal) and GitHub owner (Its-Abishek-01) accepted. |
 | 2026-09-22 | Workspace set up (Phase 0). Concept, stack and design system drafted, all `[assumed]` pending review. |

@@ -3,11 +3,11 @@
 🔴 blocks the next phase · 🟡 needed before build · 🟢 nice to know. When answered, move the answer into the right doc, mark it here as ✅ with the date, and log a decision if it is one.
 
 ## 🔴 Phase 1 blockers
-1. **Concept:** OK with "Search my work" + the kolam grid? (see `01-brief.md`)
-2. **Stack:** OK with Next.js on Firebase App Hosting? (see `03-architecture.md`)
+1. ✅ 2026-09-22 accepted (D-001). **Concept:** OK with "Search my work" + the kolam grid? (see `01-brief.md`)
+2. ✅ 2026-09-22 accepted (D-002). **Stack:** OK with Next.js on Firebase App Hosting? (see `03-architecture.md`)
 3. **One-liner:** pick one from the brief, or write your own.
-4. **Firebase account:** create the project under personal `abishek.mk.01@gmail.com` (recommended) or `admin@massclick.in`? Is billing already on that account?
-5. **GitHub:** should the repo live at `github.com/Its-Abishek-01/<name>`? Repo name? `gh` is currently signed in as `Massclick-App`, so you'll need to sign in with the personal account for this repo and for reviewing your other projects.
+4. ✅ 2026-09-22 personal account (D-007); billing status still to confirm. **Firebase account:** create the project under personal `abishek.mk.01@gmail.com` (recommended) or `admin@massclick.in`? Is billing already on that account?
+5. ✅ 2026-09-22 Its-Abishek-01 (D-008); repo name + gh sign-in still to do. **GitHub:** should the repo live at `github.com/Its-Abishek-01/<name>`? Repo name? `gh` is currently signed in as `Massclick-App`, so you'll need to sign in with the personal account for this repo and for reviewing your other projects.
 
 ## 🟡 Content
 6. Exact job title + start month at Massclick (April 2026?)

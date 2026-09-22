@@ -1,6 +1,6 @@
 # 03 — Architecture
 
-All of this is `[assumed]` until Abishek signs off (see D-002 in `07-decisions.md`).
+Stack and hosting `[confirmed 2026-09-22, D-002]`; details marked `[assumed]`/`[open]` below are still adjustable.
 
 ## Stack
 
@@ -27,7 +27,7 @@ All of this is `[assumed]` until Abishek signs off (see D-002 in `07-decisions.m
 | **Cloud Functions** (optional) | Firestore trigger on a new `messages` doc sends an email or push notification to Abishek `[open: email vs FCM to phone]` |
 | **Firebase Analytics / GA4** | `[open]`: first-party events in Firestore vs GA4. First-party matches his Massclick work and keeps the site free of third-party cookies |
 
-Firebase project: **new, dedicated** (e.g. `abishek-portfolio`), separate from Massclick's projects. Owner account `[open]`: personal `abishek.mk.01@gmail.com` is recommended, since this is a personal site.
+Firebase project: **new, dedicated** (e.g. `abishek-portfolio`), separate from Massclick's projects. Owner account `[confirmed]`: personal `abishek.mk.01@gmail.com` (D-007).
 
 ## Data flow
 

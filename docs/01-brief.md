@@ -16,7 +16,7 @@ One-liner candidates `[open — pick one]`:
 - "Full-stack engineer. Mobile to metal."
 - "I ship systems people search, tap and pay through."
 
-## The big idea `[assumed — needs sign-off]`
+## The big idea `[confirmed 2026-09-22, D-001]`
 
 ### "Search my work"
 Abishek's core craft is a **search engine** (category intent, geo ranking, typo fallback). So the portfolio's hero *is* a search box. Type `mobile`, `seo`, `infra`, `search` or anything — results rank his real work, with a relevance reason, exactly like the engine he built. It's a demo, a navigation system and a résumé in one gesture. Suggested queries sit under the box so no one faces a blank field.
