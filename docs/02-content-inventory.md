@@ -18,6 +18,24 @@ Sources: `MC` = `D:\dev_abishek\massclick` (git + tracker docs) · `APP` = `mass
 | Languages | Profile README: "I know Japanese". Level? JLPT? | ask |
 | Education | M.Sc — Bishop Heber College (2025, 8.6) · B.Sc — National College (2023, 8.4) | verified (resume) |
 
+## Career timeline (corrected by Abishek 2026-09-22; months set by us, order confirmed)
+| When | What | Status |
+|---|---|---|
+| 2018 / 2020 | SSLC (8.2) / HSC (7.6), Lakshmi Matric HSS, Manapparai; Student of the Year 2020 | verified (resume) |
+| 2020 – 2023 | B.Sc, National College of Arts and Science, Tiruchirappalli (8.4); organised Naco Tech 2022 | verified (resume) |
+| 2023 – 2025 | M.Sc, Bishop Heber College, Tiruchirappalli (8.6); 2nd prize, aptitude test | verified (resume) |
+| Jan – Jun 2024 | **Intern, Syuap Tech Solution** (during the M.Sc), ~6 months: 3 months Flutter mobile, 3 months React. Agile sprints, shipped enhancements to deployed apps | confirmed (chat); months assumed |
+| Apr 2025 – Mar 2026 | **Head of Mobile App Development, Digihope Technologies** (1 year). Led Flutter Android + iOS apps, architecture + state management, Play Console / App Store / TestFlight releases and compliance, crash-rate + performance work, worked with PHP/Express backend teams, mentored junior developers | confirmed (chat) + resume; months assumed |
+| Apr 2026 – now | **Software Engineer, Massclick** | confirmed |
+
+## Other projects (from résumé; which employer, if any: ask)
+| Project | Stack | What | Status |
+|---|---|---|---|
+| VandiZone | Flutter, Firebase | Two apps, Customer Booking + Captain/Owner. Real-time bookings (Realtime DB + Firestore), Google Maps live tracking and trip history, phone/email auth, FCM trip alerts | verified (resume) |
+| Veezzo | Flutter, AWS | Food delivery: browse restaurants, order, live tracking. API Gateway + Lambda + S3, geolocation, payment gateway | verified (resume) |
+| Vmark | React, Express, Node | Multi-user e-commerce: sellers register and manage products, auth, CRUD, REST | verified (resume) |
+| COS OD | Flutter, Laravel | Class-wise attendance app, REST APIs | verified (resume) |
+
 ## Massclick — scale & ownership
 | Claim | Number | Source | Status |
 |---|---|---|---|

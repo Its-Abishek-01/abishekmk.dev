@@ -65,6 +65,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Session log
 | Date | What happened |
 |---|---|
+| 2026-09-22 | Career corrected by Abishek (Syuap intern 6 mo during M.Sc → Digihope 1 yr → Massclick Apr 2026). All 4 concepts now show Digihope, Syuap, VandiZone, Veezzo, Vmark, COS OD, not only Massclick. Republished (v2). |
 | 2026-09-22 | Kolam idea dropped (D-010). Four concept sketches built in prototype/concepts/, each with its own palette and type. |
 | 2026-09-22 | Prototype v0.1 published (scroll-first per D-009). Palette/type revised to "Threshold" + Anek (D-003r). Awaiting review. |
 | 2026-09-22 | Public GitHub repos reviewed; gh still only has Massclick-App (personal login pending). Phase 2 prototype started. |

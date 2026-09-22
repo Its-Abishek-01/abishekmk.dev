@@ -81,6 +81,7 @@ section.sec{margin-block:clamp(80px,12vw,150px)}
 .fact:nth-child(3n+1){padding-left:0;border-left:0}
 .fact b{font:600 clamp(1.5rem,1rem + 1.8vw,2.4rem)/1.05 var(--f-mono);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .fact span{color:var(--grey);font-size:.95rem}
+.facts.earlier b{font-size:clamp(1.4rem,1rem + 1.2vw,2rem)}
 @media (max-width:820px){ .facts{grid-template-columns:1fr} .fact,.fact+.fact{padding-left:0;border-left:0} }
 .end{padding-block:40px 140px;display:grid;gap:18px}
 .end h2{font:800 clamp(2.6rem,1.3rem + 5vw,6rem)/.9 var(--f-sans);letter-spacing:-.055em;max-width:14ch}
@@ -98,7 +99,7 @@ section.sec{margin-block:clamp(80px,12vw,150px)}
       <p class="label">Software Engineer · Massclick · Tiruchirappalli</p>
       <h1 style="margin-top:18px">One tap, zoomed out <span>five</span> times.</h1>
     </div>
-    <p>I'm <strong>M.K. Abishek</strong>. Every tap on the Massclick app runs through systems I built. Scroll to zoom out, one power of ten at a time.</p>
+    <p>I'm <strong>M.K. Abishek</strong>, a mobile and full-stack engineer: Syuap, then Digihope, now Massclick. Every tap on the Massclick app runs through systems I built. Scroll to zoom out, one power of ten at a time.</p>
   </section>
 
   <div class="zoom-wrap" id="zoomWrap">
@@ -111,6 +112,19 @@ section.sec{margin-block:clamp(80px,12vw,150px)}
     </div>
   </div>
   <div class="static-list" id="staticList"></div>
+
+  <section class="sec">
+    <p class="label">Before the zoom</p>
+    <h2 class="big">Earlier work, same habit</h2>
+    <div class="facts earlier">
+      <div class="fact"><span class="label" style="color:var(--red)">Apr 2025 – Mar 2026</span><b style="font-family:var(--f-sans);letter-spacing:-.04em">Digihope Technologies</b><span>Head of Mobile App Development for a year. Led the Flutter apps for Android and iOS, owned architecture and every Play Store, App Store and TestFlight release, cut crash rates, and mentored juniors.</span></div>
+      <div class="fact"><span class="label" style="color:var(--red)">Jan – Jun 2024</span><b style="font-family:var(--f-sans);letter-spacing:-.04em">Syuap Tech Solution</b><span>Intern for six months during my M.Sc: three months of Flutter mobile work, then three months of React, in Agile sprints on live apps.</span></div>
+      <div class="fact"><span class="label" style="color:var(--red)">Flutter · Firebase</span><b style="font-family:var(--f-sans);letter-spacing:-.04em">VandiZone</b><span>Two synced apps for customers and captains: real-time bookings, Google Maps live tracking, trip history and push alerts.</span></div>
+      <div class="fact"><span class="label" style="color:var(--red)">Flutter · AWS</span><b style="font-family:var(--f-sans);letter-spacing:-.04em">Veezzo</b><span>Food delivery with live order tracking, on API Gateway, Lambda and S3, with a secure payment gateway.</span></div>
+      <div class="fact"><span class="label" style="color:var(--red)">React · Express</span><b style="font-family:var(--f-sans);letter-spacing:-.04em">Vmark</b><span>Multi-seller e-commerce where sellers register and manage their own products.</span></div>
+      <div class="fact"><span class="label" style="color:var(--red)">Flutter · Laravel</span><b style="font-family:var(--f-sans);letter-spacing:-.04em">COS OD</b><span>A class-wise attendance app on a Laravel REST API.</span></div>
+    </div>
+  </section>
 
   <section class="sec">
     <p class="label">At every scale</p>
@@ -175,7 +189,7 @@ const S3 = '<rect class="bg" width="1000" height="1000"/>' +
   NODES.map(([n,x,y]) => '<circle cx="'+x+'" cy="'+y+'" r="16" fill="#fff" stroke="'+INK+'" stroke-width="4"/>' + T(x, y+48, 26, n, 700, 'middle')).join('') +
   '<rect x="430" y="430" width="140" height="140" fill="#fff"/>' + hole + M(40,70,22,'the platform the city runs on','start',INK);
 
-const YEARS = [['2018','SSLC · Manapparai'],['2020','HSC · Student of the Year'],['2023','B.Sc · Trichy'],['2024','Intern · Syuap'],['2025','M.Sc · Digihope'],['2026','Massclick']];
+const YEARS = [['2020','HSC · Manapparai'],['2023','B.Sc · National College'],['2024','Intern · Syuap · 6 months'],['2025','M.Sc · Bishop Heber'],['2025','Head of Mobile · Digihope'],['2026','Engineer · Massclick']];
 const S4 = '<rect class="bg" width="1000" height="1000"/>' +
   YEARS.map((y,i) => { const r = 450 - i*62; return '<circle cx="500" cy="500" r="'+r+'" fill="none" stroke="'+(i===5?RED:RULE)+'" stroke-width="'+(i===5?4:3)+'"/>' + T(500, 500 - r + 30, 22, y[0]+'  '+y[1], 600, 'middle', i===5?RED:INK); }).join('') +
   '<rect x="430" y="430" width="140" height="140" fill="#fff"/>' + hole;
@@ -185,7 +199,7 @@ const LEVELS = [
   {svg:S1, unit:'the phone', lv:'10¹', title:'The app', text:'The Massclick Flutter app, which I built from its first commit to v2.1.1, in English and Tamil, on Android and iOS.', mv:'263 / 264', ml:'app commits are mine'},
   {svg:S2, unit:'the street', lv:'10²', title:'The street', text:'The search engine behind that tap: category intent, text score and distance ranking over ~18,000 places, with a nearby-pincode fallback.', mv:'7.8 → 89.3%', ml:'Trichy localities geocoded'},
   {svg:S3, unit:'the platform', lv:'10³', title:'The platform', text:'The API, MongoDB on its own server after a ~90 s cutover, 36,187 S3 files re-keyed, push, OTP, payments and monitoring.', mv:'33,096 / 33,096', ml:'S3 objects moved, 0 failed'},
-  {svg:S4, unit:'the journey', lv:'10⁴', title:'The journey', text:'From Manapparai to Trichy to production: two degrees, an internship, head of mobile, and now Massclick.', mv:'2018 → 2026', ml:'eight years, one direction'}
+  {svg:S4, unit:'the journey', lv:'10⁴', title:'The journey', text:'Two degrees in Trichy, a six-month internship at Syuap (Flutter, then React), a year as Head of Mobile at Digihope, and Massclick since April 2026.', mv:'3 teams', ml:'Syuap → Digihope → Massclick'}
 ];
 
 if (reduce){

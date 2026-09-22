@@ -116,6 +116,19 @@ header a{font:500 .8rem var(--f-mono);color:var(--text)}
 .static-list{display:none}
 .static .static-list{display:grid;gap:16px}
 
+/* bench: other units */
+.bench{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:980px){ .bench{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:620px){ .bench{grid-template-columns:1fr} }
+.unit{position:relative;background:rgba(16,38,29,.78);border:1px solid var(--grid-major);padding:20px;display:grid;gap:10px;align-content:start}
+.unit::after{content:"";position:absolute;right:-1px;bottom:-1px;width:14px;height:14px;border-right:3px solid var(--yellow);border-bottom:3px solid var(--yellow)}
+.unit .row1{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.unit .tagno{font:600 .7rem var(--f-mono);color:var(--ink);background:var(--yellow);padding:3px 7px}
+.unit .when{font:500 .75rem var(--f-mono);color:var(--muted)}
+.unit h3{font:800 1.45rem/1.05 var(--f-head);font-stretch:110%;letter-spacing:-.02em}
+.unit .role{font:500 .8rem var(--f-mono);color:var(--yellow)}
+.unit p{color:var(--muted);font-size:.95rem}
+.unit.job{grid-column:span 1;background:var(--ink)}
 /* BOM */
 section.sec{margin-block:clamp(80px,12vw,160px)}
 .sec h2.big{font:900 clamp(2.2rem,1.3rem + 3.4vw,4.4rem)/.92 var(--f-head);font-stretch:118%;letter-spacing:-.035em;margin-bottom:10px}
@@ -150,7 +163,7 @@ tr:last-child td{border-bottom:0}
   <section class="hero">
     <p class="label">Software Engineer · Massclick · Tiruchirappalli</p>
     <h1>Look <em>inside</em> what I build.</h1>
-    <p>I'm <strong>M.K. Abishek</strong>. At Massclick, a local-search platform for Tamil Nadu, I work on every layer, from the app in your hand to the servers under it. Here it is, taken apart.</p>
+    <p>I'm <strong>M.K. Abishek</strong>. I've been shipping apps since 2024: an internship at Syuap, a year leading mobile at Digihope, and now every layer of Massclick. Here's my current build, taken apart.</p>
     <span class="cue"><i></i>Scroll to take it apart</span>
   </section>
 
@@ -199,6 +212,20 @@ tr:last-child td{border-bottom:0}
   </div>
   <div class="static-list" id="staticList"></div>
 
+  <section class="sec" id="bench">
+    <p class="label">Other units on the bench</p>
+    <h2 class="big">Before this build</h2>
+    <p class="intro">Massclick is the unit on the mat today. These came first: two jobs and the apps I shipped along the way.</p>
+    <div class="bench">
+      <article class="unit job"><div class="row1"><span class="tagno">U-02 · job</span><span class="when">Apr 2025 – Mar 2026</span></div><h3>Digihope Technologies</h3><span class="role">Head of Mobile App Development · 1 year</span><p>Led cross-platform Flutter apps for Android and iOS. Set the app architecture and state management, ran every Play Console, App Store and TestFlight release, cut crash rates, and mentored junior developers alongside the PHP and Express backend teams.</p><div class="chips"><span>Flutter</span><span>iOS</span><span>Android</span><span>TestFlight</span><span>Team lead</span></div></article>
+      <article class="unit job"><div class="row1"><span class="tagno">U-01 · job</span><span class="when">Jan – Jun 2024</span></div><h3>Syuap Tech Solution</h3><span class="role">Intern · 6 months, during my M.Sc</span><p>Three months building Flutter mobile apps, then three months on React. Worked in Agile sprints and shipped enhancements to apps already in production.</p><div class="chips"><span>Flutter</span><span>React</span><span>Agile</span></div></article>
+      <article class="unit"><div class="row1"><span class="tagno">A-04</span><span class="when">Flutter · Firebase</span></div><h3>VandiZone</h3><span class="role">Two apps: customer + captain</span><p>A booking app and a captain/owner app kept in sync in real time, with Google Maps live tracking, trip history, phone login and push alerts for every trip.</p></article>
+      <article class="unit"><div class="row1"><span class="tagno">A-03</span><span class="when">Flutter · AWS</span></div><h3>Veezzo</h3><span class="role">Food delivery</span><p>Browse restaurants, order and track the delivery live. API Gateway, Lambda and S3 behind it, plus a secure payment gateway.</p></article>
+      <article class="unit"><div class="row1"><span class="tagno">A-02</span><span class="when">React · Express</span></div><h3>Vmark</h3><span class="role">Multi-seller e-commerce</span><p>Sellers register, upload and manage their own products. Auth, product CRUD and a React front end on an Express API.</p></article>
+      <article class="unit"><div class="row1"><span class="tagno">A-01</span><span class="when">Flutter · Laravel</span></div><h3>COS OD</h3><span class="role">Class attendance</span><p>A mobile app for class-wise attendance, backed by a Laravel REST API. Where the Flutter habit started.</p></article>
+    </div>
+  </section>
+
   <section class="sec" id="bom">
     <p class="label">Parts list</p>
     <h2 class="big">Bill of materials</h2>
@@ -218,14 +245,15 @@ tr:last-child td{border-bottom:0}
 
   <section class="sec" id="log">
     <p class="label">Service history</p>
-    <h2 class="big">How this unit was built</h2>
+    <h2 class="big">How this engineer was built</h2>
     <div class="log">
       <div><span class="y">2018</span><div><h3>SSLC, Lakshmi Matric Hr. Sec. School</h3><p>Manapparai. GPA 8.2.</p></div></div>
       <div><span class="y">2020</span><div><h3>HSC · Student of the Year</h3><p>GPA 7.6, Student of the Year in Higher Education.</p></div></div>
-      <div><span class="y">2023</span><div><h3>B.Sc, National College of Arts and Science</h3><p>Tiruchirappalli, GPA 8.4.</p></div></div>
-      <div><span class="y">2024</span><div><h3>Intern, Syuap Tech Solution</h3><p>Flutter, PHP and Express.js.</p></div></div>
-      <div><span class="y">2025</span><div><h3>M.Sc, Bishop Heber · Head of Mobile, Digihope</h3><p>GPA 8.6. Flutter apps through Play Console and TestFlight.</p></div></div>
-      <div><span class="y">2026</span><div><h3>Software Engineer, Massclick</h3><p>First commit on the app, 1 April 2026.</p></div></div>
+      <div><span class="y">2023</span><div><h3>B.Sc, National College of Arts and Science</h3><p>Tiruchirappalli, 2020–2023, GPA 8.4. Organised Naco Tech 2022.</p></div></div>
+      <div><span class="y">2024</span><div><h3>Intern, Syuap Tech Solution</h3><p>Six months during my M.Sc: three on Flutter mobile, three on React.</p></div></div>
+      <div><span class="y">2025</span><div><h3>M.Sc, Bishop Heber College</h3><p>2023–2025, GPA 8.6.</p></div></div>
+      <div><span class="y">2025</span><div><h3>Head of Mobile App Development, Digihope</h3><p>One year, April 2025 to March 2026. Led the Flutter apps and every store release.</p></div></div>
+      <div><span class="y">2026</span><div><h3>Software Engineer, Massclick</h3><p>From April 2026. First commit on the app on day one.</p></div></div>
     </div>
   </section>
 

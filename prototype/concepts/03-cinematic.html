@@ -52,7 +52,7 @@ header .ch{font:500 .75rem var(--f-mono);letter-spacing:.1em}
 .dots i.on{background:var(--ink)}
 
 /* C · work gallery (paper, horizontal) */
-.s-work{--h:520vh}
+.s-work{--h:760vh}
 .s-work .pin{background:var(--paper);color:var(--ink);display:grid;grid-template-rows:auto 1fr;padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
 .s-work h2{font:900 clamp(2.6rem,1.6rem + 5vw,7rem)/.85 var(--f-head);text-transform:uppercase}
 .track{display:flex;gap:clamp(14px,2vw,28px);align-items:center;padding-inline:clamp(16px,5vw,64px);transform:translateX(var(--tx,0px));will-change:transform}
@@ -115,7 +115,7 @@ header .ch{font:500 .75rem var(--f-mono);letter-spacing:.1em}
     <div class="pin gut">
       <p class="label" style="color:#BDBDBD;margin-bottom:18px">Software Engineer · Massclick · Tiruchirappalli</p>
       <h1 class="name" aria-label="Abishek"><span style="--k:.2">A</span><span style="--k:.55">B</span><span class="o" style="--k:.35">I</span><span style="--k:.8">S</span><span style="--k:.45">H</span><span class="o" style="--k:.7">E</span><span style="--k:.3">K</span></h1>
-      <div class="meta"><p>I'm <strong>M.K. Abishek</strong>. I build the app, the API, and the server it runs on, for Massclick, a local-search platform for Tamil Nadu.</p><span class="cue">Scroll · 6 chapters</span></div>
+      <div class="meta"><p>I'm <strong>M.K. Abishek</strong>. I build the app, the API, and the server it runs on. Syuap, then a year leading mobile at Digihope, now Massclick.</p><span class="cue">Scroll · 6 chapters</span></div>
     </div>
   </section>
 
@@ -147,11 +147,11 @@ header .ch{font:500 .75rem var(--f-mono);letter-spacing:.1em}
       <p class="label">Chapter 05 · Journey</p>
       <h2>Manapparai to production.</h2>
       <div class="years" id="years">
-        <div><b>2018</b><span>SSLC · Lakshmi Matric, Manapparai</span></div>
-        <div><b>2020</b><span>HSC · Student of the Year</span></div>
+        <div><b>2020</b><span>HSC · Manapparai · Student of the Year</span></div>
         <div><b>2023</b><span>B.Sc · National College, Trichy</span></div>
-        <div><b>2024</b><span>Intern · Syuap Tech</span></div>
-        <div><b>2025</b><span>M.Sc · Bishop Heber · Head of Mobile, Digihope</span></div>
+        <div><b>2024</b><span>Intern · Syuap · 3 mo Flutter + 3 mo React</span></div>
+        <div><b>2025</b><span>M.Sc · Bishop Heber College</span></div>
+        <div><b>2025</b><span>Head of Mobile · Digihope · 1 year</span></div>
         <div><b>2026</b><span>Software Engineer · Massclick</span></div>
       </div>
     </div>
@@ -184,9 +184,13 @@ const WORK = [
   ['Infra','The Database Move','Every MongoDB database moved to a dedicated server, with nightly and off-box backups.','~90 s','production cutover'],
   ['Cloud','36,187 Files, Zero Lost','Every S3 object re-keyed with plan, verify, resume and rollback tooling.','33,096 / 33,096','copied, 0 failed'],
   ['Web','Fast on a Budget Phone','A server-rendered hero so mobile LCP paints before JavaScript.','173 → 92 KB','business-page bundle'],
-  ['Ops','The Crawl Trap','Stopped Googlebot generating junk URLs that pinned the database CPU.','6–7% → ~0.1%','client error rate']
+  ['Ops','The Crawl Trap','Stopped Googlebot generating junk URLs that pinned the database CPU.','6–7% → ~0.1%','client error rate'],
+  ['Digihope · 2025–26','Head of Mobile','A year leading Flutter apps for Android and iOS: architecture, store releases, crash rates, and mentoring juniors.','1 year','leading the mobile team'],
+  ['Syuap · 2024','The Internship','Six months during my M.Sc: three on Flutter mobile, three on React, in Agile sprints on live apps.','3 + 3 months','mobile, then React'],
+  ['Flutter · Firebase','VandiZone','Customer and captain apps synced in real time, with Google Maps live tracking and trip alerts.','2 apps','one live booking system'],
+  ['Flutter · AWS','Veezzo','Food delivery with live order tracking on API Gateway, Lambda and S3, plus payments.','Lambda + S3','serverless backend']
 ];
-$('#track').innerHTML = WORK.map((w,i) => '<article class="wcard'+(i%3===1?' accent':'')+'"><span class="no">0'+(i+1)+'</span><span class="area">'+w[0]+'</span><div style="align-self:end"><h3>'+w[1]+'</h3><p>'+w[2]+'</p></div><div class="mv">'+w[3]+'<small>'+w[4]+'</small></div></article>').join('');
+$('#track').innerHTML = WORK.map((w,i) => '<article class="wcard'+((i%3===1||i===6)?' accent':'')+'"><span class="no">0'+(i+1)+'</span><span class="area">'+w[0]+'</span><div style="align-self:end"><h3>'+w[1]+'</h3><p>'+w[2]+'</p></div><div class="mv">'+w[3]+'<small>'+w[4]+'</small></div></article>').join('');
 $('#bignum').innerHTML = PROOF.map(p => '<div>'+p.f(p.n)+'</div>').join('');
 $('#pdots').innerHTML = PROOF.map(() => '<i></i>').join('');
 // system diagram

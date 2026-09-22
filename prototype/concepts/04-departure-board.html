@@ -54,11 +54,11 @@ section.sec{margin-block:clamp(64px,10vw,130px)}
 .c-amber{--c:var(--amber)} .c-green{--c:var(--green)} .c-dim{--c:var(--dim)}
 .detail{grid-column:1 / -1;font:500 1rem/1.45 var(--f-sign);color:#BFBFBF;padding:2px 0 4px;max-width:80ch}
 .brow .detail{display:block}
-#dep{--cols:5.5em minmax(0,1fr) 3.2em 10em;--minw:640px}
+#dep,#past{--cols:5.5em minmax(0,1fr) 3.2em 10em;--minw:640px}
 #arr{--cols:minmax(0,1fr) 12em;--minw:520px}
 #route{--cols:4.4em minmax(0,1fr);--minw:0}
 @media (max-width:700px){
-  #dep{--cols:4.6em minmax(0,1fr) 2.6em 8.4em;--minw:560px}
+  #dep,#past{--cols:4.6em minmax(0,1fr) 2.6em 8.4em;--minw:560px}
 }
 .stop .nm{font:800 clamp(1.4rem,1rem + 1.4vw,2.1rem)/1.05 var(--f-sign);letter-spacing:.02em;text-transform:uppercase}
 .stop .nm span{display:block;font:600 clamp(1rem,.9rem + .5vw,1.3rem)/1.3 var(--f-ta);color:var(--amber);letter-spacing:0;text-transform:none}
@@ -89,12 +89,19 @@ section.sec{margin-block:clamp(64px,10vw,130px)}
       <span class="en">Abishek Jn.</span>
       <span class="sub"><span>Software Engineer</span><span>Massclick</span><span>Tiruchirappalli · TPJ</span></span>
     </div>
-    <p class="intro">Welcome aboard. I'm <strong>M.K. Abishek</strong>. I build the app, the API and the servers for Massclick, a local-search platform for Tamil Nadu. Every line on these boards really shipped.</p>
+    <p class="intro">Welcome aboard. I'm <strong>M.K. Abishek</strong>, a mobile and full-stack engineer. I interned at Syuap, led mobile at Digihope for a year, and now build the app, the API and the servers at Massclick. Every line on these boards really shipped.</p>
   </section>
 
   <section class="sec">
     <div class="bhead"><h2>Departures<small lang="ta">புறப்பாடு · selected work</small></h2><span class="label">Scroll · the boards update as you arrive</span></div>
     <div class="board" id="dep" data-board>
+      <div class="cols"><span>When</span><span>Destination</span><span>Plat.</span><span>Status</span></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="bhead"><h2>Earlier departures<small lang="ta">முந்தைய பயணங்கள் · before Massclick</small></h2><span class="label">Jobs and apps that already left the station</span></div>
+    <div class="board" id="past" data-board>
       <div class="cols"><span>When</span><span>Destination</span><span>Plat.</span><span>Status</span></div>
     </div>
   </section>
@@ -124,7 +131,7 @@ section.sec{margin-block:clamp(64px,10vw,130px)}
     <p class="note">Concept 04 of 4 · Departure board · sketch, not the final site</p>
   </section>
 </main>
-<div class="announce" aria-hidden="true"><span>Passengers are requested to note · Massclick app built from its first commit to v2.1.1 · MongoDB moved to its own server with ~90 s downtime · 33,096 of 33,096 S3 objects re-keyed, 0 failed · Search now geocodes 89.3% of Trichy localities · Hiring teams, please proceed to platform 1 ·</span></div>
+<div class="announce" aria-hidden="true"><span>Passengers are requested to note · Head of Mobile at Digihope for a year · six-month internship at Syuap, Flutter then React · Massclick app built from its first commit to v2.1.1 · MongoDB moved to its own server with ~90 s downtime · 33,096 of 33,096 S3 objects re-keyed, 0 failed · Search now geocodes 89.3% of Trichy localities · Hiring teams, please proceed to platform 1 ·</span></div>
 
 <script>
 (() => {
@@ -142,14 +149,23 @@ const DEP = [
 ];
 const ARR = [['COMMITS · APP + PLATFORM','1,557'],['S3 OBJECTS RE-KEYED','33,096'],['PLACES IN LOCATION GRAPH','~18,300'],['WEB→MOBILE PARITY ITEMS','~25'],['SITEMAP URLS','24,000+'],['TRUE DUPLICATE LISTINGS FOUND','41']];
 const ROUTE = [
-  ['2018','Manapparai','மணப்பாறை','SSLC, Lakshmi Matric Hr. Sec. School. GPA 8.2.'],
-  ['2020','Manapparai','மணப்பாறை','HSC, GPA 7.6. Student of the Year in Higher Education.'],
-  ['2023','Tiruchirappalli','திருச்சிராப்பள்ளி','B.Sc, National College of Arts and Science. GPA 8.4.'],
-  ['2024','Syuap Tech','பயிற்சி','Intern: Flutter, PHP and Express.js in Agile sprints.'],
-  ['2025','Bishop Heber · Digihope','பிஷப் ஹீபர்','M.Sc, GPA 8.6. Head of Mobile App Development at Digihope.'],
-  ['2026','Massclick','மாஸ்கிளிக்','Software Engineer. First commit on the app, 1 April 2026.']
+  ['2020','Manapparai','மணப்பாறை','SSLC 2018 and HSC 2020 at Lakshmi Matric Hr. Sec. School. Student of the Year in Higher Education.'],
+  ['2023','Tiruchirappalli','திருச்சிராப்பள்ளி','B.Sc, National College of Arts and Science, 2020–2023. GPA 8.4.'],
+  ['2024','Syuap Tech','பயிற்சி','Six-month internship during my M.Sc: three months Flutter mobile, three months React.'],
+  ['2025','Bishop Heber College','முதுகலை','M.Sc, 2023–2025. GPA 8.6.'],
+  ['2025','Digihope Technologies','மொபைல் தலைமை','Head of Mobile App Development for one year, April 2025 to March 2026.'],
+  ['2026','Massclick','மாஸ்கிளிக்','Software Engineer from April 2026. First commit on the app on day one.']
 ];
 $('#dep').insertAdjacentHTML('beforeend', DEP.map(d => '<div class="brow">'+cells(d[0],'c-dim')+cells(d[1])+cells(d[2],'c-amber')+cells(d[3],'c-green')+'<span class="detail">'+d[4]+'</span></div>').join(''));
+const PAST = [
+  ['APR 25','DIGIHOPE MOBILE','D','DEPARTED','One year as Head of Mobile App Development. Led Flutter apps for Android and iOS, owned architecture and every Play Store, App Store and TestFlight release, cut crash rates, mentored juniors.'],
+  ['JAN 24','SYUAP INTERN','S','DEPARTED','During my M.Sc: three months of Flutter mobile work, then three months of React, in Agile sprints on live apps.'],
+  ['APP','VANDIZONE','A','DEPARTED','Customer and captain apps synced in real time with Firebase, Google Maps live tracking, trip history and push alerts.'],
+  ['APP','VEEZZO','A','DEPARTED','Food delivery in Flutter on AWS API Gateway, Lambda and S3, with live order tracking and a payment gateway.'],
+  ['WEB','VMARK','W','DEPARTED','Multi-seller e-commerce in React and Express: sellers register and manage their own products.'],
+  ['APP','COS OD','A','DEPARTED','Class-wise attendance app in Flutter on a Laravel REST API.']
+];
+$('#past').insertAdjacentHTML('beforeend', PAST.map(d => '<div class="brow">'+cells(d[0],'c-dim')+cells(d[1])+cells(d[2],'c-amber')+cells(d[3],'c-dim')+'<span class="detail">'+d[4]+'</span></div>').join(''));
 $('#arr').insertAdjacentHTML('beforeend', ARR.map(a => '<div class="brow">'+cells(a[0])+cells(a[1],'c-amber')+'</div>').join(''));
 $('#route').insertAdjacentHTML('beforeend', ROUTE.map((r,i) => '<div class="brow stop'+(i===ROUTE.length-1?' now':'')+'">'+cells(r[0],'c-amber')+'<div><div class="nm">'+r[1]+'<span lang="ta">'+r[2]+'</span></div><p>'+r[3]+'</p></div></div>').join(''));
 $('#now').insertAdjacentHTML('beforeend', '<div class="brow">'+cells('YOUR TEAM · PLATFORM 1 · ON TIME','c-green')+'</div>');
