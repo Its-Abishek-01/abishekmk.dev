@@ -58,8 +58,8 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 - [ ] Deploy Firestore rules (`firebase deploy --only firestore:rules`), needs OK
 - [ ] Buy abishekmk.dev (Abishek; RDAP 404 on 2026-09-22 = looked unregistered) → add custom domain in App Hosting → DNS records → HTTPS
 - [x] Enquiry alerts to Abishek's phone via Telegram bot (`lib/server/telegram.ts`, secrets `telegram-bot-token` / `telegram-chat-id` in apphosting.yaml)
-- [ ] Abishek: create the bot, set both secrets, THEN push (a rollout fails if a referenced secret is missing)
-- [ ] Send one test enquiry and confirm the phone gets it
+- [x] Bot created, secrets set + access granted, `15486a1` live
+- [x] Live test 2026-09-22: `{"ok":true,"saved":true,"alerted":true}`: saved to Firestore and sent to Telegram
 
 ## Phase 4: Home page
 - [ ] Hero + search (index builder + scorer + combobox a11y)
@@ -88,6 +88,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Session log
 | Date | What happened |
 |---|---|
+| 2026-09-22 | Telegram enquiry alerts live and verified (saved + alerted). Two TEST enquiries in Firestore are safe to delete. |
 | 2026-09-22 | SITE LIVE on App Hosting (asia-southeast1). Enquiry → Firestore verified. Domain not bought yet. |
 | 2026-09-22 | Firebase project abishekmk-dev created; Firestore creation waits on the API being enabled in the console. Config files committed. |
 | 2026-09-22 | Repo Its-Abishek-01/abishekmk.dev created (private), dev + main pushed. Repo-local git credential helper = `gh auth git-credential`. |
