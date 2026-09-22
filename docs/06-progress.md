@@ -55,7 +55,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 - [x] Firestore (default) created, production mode (Abishek)
 - [x] App Hosting backend `abishekmk` (asia-southeast1), auto-rollout from `main`: **LIVE** https://abishekmk--abishekmk-dev.asia-southeast1.hosted.app
 - [x] Live checks 2026-09-22: `/`, `/portfolio`, sitemap, robots = 200; `/api/enquiry` saves to Firestore (one labelled TEST doc, safe to delete)
-- [ ] Deploy Firestore rules (`firebase deploy --only firestore:rules`), needs OK
+- [x] Firestore rules deployed 2026-09-22 (deny all client access); public REST read of `enquiries` returns 403
 - [ ] Buy abishekmk.dev (Abishek; RDAP 404 on 2026-09-22 = looked unregistered) → add custom domain in App Hosting → DNS records → HTTPS
 - [x] Enquiry alerts to Abishek's phone via Telegram bot (`lib/server/telegram.ts`, secrets `telegram-bot-token` / `telegram-chat-id` in apphosting.yaml)
 - [x] Bot created, secrets set + access granted, `15486a1` live
