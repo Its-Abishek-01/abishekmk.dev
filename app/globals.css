@@ -1,0 +1,5 @@
+/* Site-wide base. Each page's own look lives in its scoped stylesheet (.lp landing, .pf portfolio). */
+html, body { margin: 0; padding: 0; }
+body { -webkit-font-smoothing: antialiased; }
+body:has(.lp) { background: #FFFFFF; }
+body:has(.pf) { background: #10130F; }

@@ -3,7 +3,17 @@
 Personal portfolio for **M.K. Abishek**, Software Engineer at Massclick (Tiruchirappalli).
 Full-stack + mobile + infrastructure work, shown as real systems with real numbers.
 
-> **Status:** Phase 0 (workspace) done. No app code yet. See [`docs/06-progress.md`](docs/06-progress.md).
+> **Status:** Phase 3. Both designs are locked and ported into a Next.js app: `/` (freelance landing) and `/portfolio`. See [`docs/06-progress.md`](docs/06-progress.md).
+
+## Run it
+
+```bash
+npm install
+npm run typecheck
+npm run dev      # http://localhost:3000  (ask before running, per CLAUDE.md)
+```
+
+The locked designs live in `prototype/`. After editing one, regenerate the app's styles and markup with `python scripts/port_prototypes.py`.
 
 ## Where things live
 

@@ -41,12 +41,17 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
   - 04 Departure board · https://claude.ai/artifact/MuFXNjCB2Aess78jyehMVa
 
 ## Phase 3: App scaffold & Firebase
-- [ ] Next.js 16 + TS + Tailwind v4 + Motion scaffold (ask before installing)
-- [ ] Token pipeline: `tokens.json` → CSS variables → Tailwind theme
-- [ ] Contrast check script + CI workflow (typecheck, lint, test, build)
-- [ ] Create Firebase project (Blaze), App Hosting backend, Firestore, App Check
-- [ ] GitHub remote + App Hosting auto-rollout from `main`
-- [ ] First deploy of a "coming soon" shell (verify HTTP 200)
+- [x] Next.js 16 + TypeScript app (`app/`), deps installed (next, react 19, gsap, lenis, zod, firebase-admin)
+- [x] Locked designs ported with zero drift: `/` = landing v0.2, `/portfolio` = portfolio v0.5 (D-022)
+- [x] SEO basics: metadata, canonical, JSON-LD (ProfessionalService + FAQPage, Person), sitemap.xml, robots.txt
+- [x] `/api/enquiry` → Firestore (zod validation, per-IP rate limit)
+- [x] Typecheck passes (`npm run typecheck`)
+- [ ] First production build (`npm run build`), needs Abishek's OK
+- [ ] Abishek signs in: `gh auth login` as Its-Abishek-01, `firebase login:add` as abishek.mk.01@gmail.com
+- [ ] Create GitHub repo (Its-Abishek-01) + push `main`/`dev`
+- [ ] Create Firebase project (Blaze) + App Hosting backend (auto-rollout from `main`) + Firestore + rules
+- [ ] Connect abishekmk.dev (DNS) + HTTPS
+- [ ] Enquiry notifications to Abishek (email or push)
 
 ## Phase 4: Home page
 - [ ] Hero + search (index builder + scorer + combobox a11y)
@@ -75,6 +80,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Session log
 | Date | What happened |
 |---|---|
+| 2026-09-22 | Phase 3 started: Next.js app scaffolded, both locked designs ported, SEO + enquiry API added, typecheck green (D-021, D-022). |
 | 2026-09-22 | Landing v0.2 LOCKED, WhatsApp number confirmed (D-020). Starting Phase 3. |
 | 2026-09-22 | Landing v0.2: Apple-like product page, VandiZone + Massclick as past projects (D-019). |
 | 2026-09-22 | Landing v0.1 built and published (D-017, D-018). |
