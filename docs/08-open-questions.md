@@ -29,7 +29,7 @@
 20. Kolam logo mark: generated in code, or hand-drawn by you?
 
 ## Landing page
-21. Is 93451 61419 also your WhatsApp number?
+21. ✅ 2026-09-22 yes. Is 93451 61419 also your WhatsApp number?
 22. Can we name Massclick, Digihope and Syuap on a public freelance page? (currently named)
 23. Any real client testimonial (VandiZone client?) we can quote, with permission?
 24. Domain name for the site (for SEO and the Google Business Profile)

@@ -1,6 +1,6 @@
 # 06 — Progress (live tracker)
 
-**Last updated:** 2026-09-22 · **Current phase:** 2b, freelance landing page (portfolio design locked)
+**Last updated:** 2026-09-22 · **Current phase:** 3, build the real site (both designs locked: landing v0.2 at `/`, portfolio v0.5 at `/portfolio`)
 Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 
 ## Phase 0: Workspace ✅
@@ -33,7 +33,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Phase 2b: Freelance landing page (D-016)
 - [x] Answer landing questions (D-017)
 - [x] Landing v0.1 · https://claude.ai/artifact/6QzRnhdinBUJFbpef5ZF2X (reviewed: wanted more space + Apple-like)
-- [~] Landing v0.2 · https://claude.ai/artifact/Kidn8byNzUV6bgom8eiPR9 (prototype/landing-v02.html) → review
+- [x] **Landing v0.2 LOCKED** · https://claude.ai/artifact/Kidn8byNzUV6bgom8eiPR9 (tag v0.2-landing-locked)
 - [ ] SEO plan: keywords, metadata, JSON-LD, sitemap, Google Business Profile
   - 01 Teardown · https://claude.ai/artifact/2dVCMpLHm3qcTkCLs6By8G
   - 02 Powers of Ten · https://claude.ai/artifact/ALUb5gs3rJyNAUZ7F6h3Rf
@@ -75,6 +75,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Session log
 | Date | What happened |
 |---|---|
+| 2026-09-22 | Landing v0.2 LOCKED, WhatsApp number confirmed (D-020). Starting Phase 3. |
 | 2026-09-22 | Landing v0.2: Apple-like product page, VandiZone + Massclick as past projects (D-019). |
 | 2026-09-22 | Landing v0.1 built and published (D-017, D-018). |
 | 2026-09-22 | Portfolio LOCKED at v0.5 (D-015). Next: freelance landing page with SEO (D-016). |

@@ -10,7 +10,7 @@ Sources: `MC` = `D:\dev_abishek\massclick` (git + tracker docs) · `APP` = `mass
 |---|---|---|
 | Name | M.K. Abishek | verified (resume) |
 | Email | abishek.mk.01@gmail.com | verified (resume) |
-| Phone | 9345161419 — show on site? | ask |
+| Phone / WhatsApp | +91 93451 61419, shown on the landing page (call + WhatsApp) | confirmed 2026-09-22 |
 | LinkedIn | linkedin.com/in/its-abishek-mk | verified (resume) |
 | GitHub | github.com/Its-Abishek-01 | verified (resume) |
 | Location | Tiruchirappalli, Tamil Nadu | verified |
