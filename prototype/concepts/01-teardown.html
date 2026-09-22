@@ -1,0 +1,301 @@
+<title>Abishek Teardown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Concept 01 · Teardown · "cutting mat" (single deliberate look) */
+:root{
+  --mat:#173F31; --mat-2:#1C4A3A; --grid:#22533F; --grid-major:#2D6650;
+  --text:#F1EEE4; --muted:#B4CBBE; --yellow:#F2C94C; --ink:#10261D;
+  --board:#0F2233; --trace:#D9A441; --steel:#C9CDC6; --steel-2:#9EA49B;
+  --f-head:'Archivo','Arial Narrow',ui-sans-serif,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background-color:var(--mat);color:var(--text);font-family:var(--f-head);font-stretch:100%;font-size:1.0625rem;line-height:1.6;padding-inline:clamp(16px,4vw,48px);padding-block:0;overflow-x:clip;
+  background-image:linear-gradient(var(--grid-major) 1px,transparent 1px),linear-gradient(90deg,var(--grid-major) 1px,transparent 1px),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:100px 100px,100px 100px,20px 20px,20px 20px;background-attachment:fixed}
+:focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+.mono{font-family:var(--f-mono)}
+.label{font:500 .75rem/1.3 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:1200px;margin-inline:auto}
+
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;margin-inline:calc(-1 * clamp(16px,4vw,48px));padding:12px clamp(16px,4vw,48px);background:rgba(23,63,49,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--grid-major)}
+header .wrap{display:flex;align-items:center;gap:16px}
+header b{font:800 1.05rem/1 var(--f-head);font-stretch:112%;letter-spacing:-.01em;margin-right:auto}
+header .tag{font:500 .72rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:var(--yellow);padding:5px 8px}
+header a{font:500 .8rem var(--f-mono);color:var(--text)}
+
+/* ruler progress (right edge) */
+.ruler{position:fixed;right:0;top:0;bottom:0;width:26px;z-index:20;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(16,38,29,.5));
+  background-image:repeating-linear-gradient(to bottom,var(--muted) 0 1px,transparent 1px 10px);background-size:8px 100%;background-repeat:no-repeat;background-position:right 0 top 0;opacity:.5}
+.ruler-mark{position:fixed;right:0;top:0;z-index:21;width:26px;height:2px;background:var(--yellow);pointer-events:none;box-shadow:0 0 0 1px var(--ink)}
+.ruler-mark span{position:absolute;right:30px;top:-8px;font:600 .68rem var(--f-mono);color:var(--yellow);white-space:nowrap}
+@media (max-width:640px){ .ruler,.ruler-mark{display:none} }
+
+/* hero */
+.hero{padding-block:clamp(48px,9vw,120px) clamp(32px,5vw,64px);display:grid;gap:22px}
+.hero h1{font:900 clamp(3rem,1.4rem + 7vw,8.4rem)/.86 var(--f-head);font-stretch:125%;letter-spacing:-.045em;max-width:12ch}
+.hero h1 em{font-style:normal;color:var(--yellow)}
+.hero p{max-width:54ch;color:var(--muted);font-size:1.15rem}
+.hero p strong{color:var(--text);font-weight:600}
+.cue{display:inline-flex;align-items:center;gap:12px;font:500 .8rem var(--f-mono);color:var(--yellow);letter-spacing:.08em;text-transform:uppercase}
+.cue i{width:36px;height:1px;background:var(--yellow)}
+
+/* stage */
+.stage-wrap{position:relative;height:720vh}
+.stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + 56px);height:calc(100vh - 56px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:center;gap:clamp(16px,4vw,48px)}
+.viewport{position:relative;height:100%;display:grid;place-items:center;perspective:1600px}
+.assembly{position:relative;width:min(240px,46vw);aspect-ratio:1/2;transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateZ(var(--rz,0deg))}
+.plate{position:absolute;inset:0;border-radius:30px;transform-style:preserve-3d;transform:translateZ(var(--z,0px));transition:outline-color .3s,opacity .35s,box-shadow .3s;outline:2px solid transparent;outline-offset:6px}
+.plate.dim{opacity:.4}
+.plate.on{outline-color:var(--yellow);box-shadow:0 0 0 1px var(--ink),0 30px 60px rgba(0,0,0,.35)}
+.pn{position:absolute;left:-10px;top:18px;transform:translateX(-100%);font:600 .7rem var(--f-mono);color:var(--ink);background:var(--yellow);padding:3px 6px;white-space:nowrap}
+.plate:not(.on) .pn{background:var(--mat-2);color:var(--muted)}
+/* P-01 screen */
+.p1{background:#0D0F12;border:6px solid #23272B;padding:26px 14px 14px;display:flex;flex-direction:column;gap:9px;overflow:hidden}
+.p1 .sb{display:flex;justify-content:space-between;font:500 9px var(--f-mono);color:#9aa}
+.p1 .logo{font:800 15px var(--f-head);color:#fff;letter-spacing:-.01em}
+.p1 .srch{height:30px;border-radius:10px;background:#1B1F24;border:1px solid #2E343A;font:500 10px var(--f-mono);color:#9aa;display:flex;align-items:center;padding-inline:10px}
+.p1 .biz{height:48px;border-radius:10px;background:#15191D;border:1px solid #262B31;display:grid;grid-template-columns:30px 1fr;gap:8px;align-items:center;padding:0 8px}
+.p1 .biz i{width:30px;height:30px;border-radius:8px;background:#F2A93B}
+.p1 .biz span{display:block;height:6px;border-radius:3px;background:#39414A;margin-block:4px}
+.p1 .biz span+span{width:60%;background:#2A3037}
+.p1 .nav{margin-top:auto;height:36px;border-radius:14px;background:#1B1F24;display:flex;justify-content:space-around;align-items:center}
+.p1 .nav b{width:14px;height:14px;border-radius:4px;background:#39414A}
+.p1 .nav b:first-child{background:#F2A93B}
+/* P-02 interface wireframe */
+.p2{background:rgba(241,238,228,.06);border:1.5px dashed var(--text);padding:26px 14px 14px;display:flex;flex-direction:column;gap:9px}
+.p2 div{border:1px dashed var(--muted);border-radius:8px;font:500 9px var(--f-mono);color:var(--muted);display:flex;align-items:center;justify-content:center}
+.p2 .h{height:56px}.p2 .r{height:36px}.p2 .g{flex:1}
+/* P-03 logic board */
+.p3{background:var(--board);border:1px solid #1E3A52;overflow:hidden}
+.p3 svg{width:100%;height:100%;display:block}
+/* P-04 engine */
+.p4{background:#EDE9DD;color:var(--ink);padding:24px 16px;display:flex;flex-direction:column;gap:6px;font:500 10.5px/1.5 var(--f-mono)}
+.p4 b{font:800 13px var(--f-head);letter-spacing:.02em;margin-bottom:4px}
+.p4 span{display:flex;gap:8px;border-bottom:1px solid #D4CFBF;padding-bottom:4px}
+.p4 span em{font-style:normal;font-weight:600;width:38px;color:#7A5A12}
+/* P-05 chassis */
+.p5{background:linear-gradient(160deg,var(--steel),var(--steel-2));border:1px solid #858B82;padding:26px 18px;display:flex;flex-direction:column;gap:12px}
+.p5 .drive{height:54px;border-radius:10px;background:#2B2F2B;color:#E7E4DA;font:600 11px var(--f-mono);display:flex;align-items:center;justify-content:space-between;padding-inline:12px}
+.p5 .drive i{width:8px;height:8px;border-radius:50%;background:#6BDB8F;box-shadow:0 0 8px #6BDB8F}
+.p5 .screw{position:absolute;width:12px;height:12px;border-radius:50%;background:#8E948B;border:1px solid #6E746C}
+.p5 .screw::after{content:"";position:absolute;left:2px;right:2px;top:5px;height:1.5px;background:#5B6059}
+
+/* callout */
+.callout{position:relative;background:var(--ink);border:1px solid var(--grid-major);padding:24px;display:grid;gap:12px;max-width:460px}
+.callout::before{content:"";position:absolute;left:-1px;top:-1px;width:18px;height:18px;border-left:3px solid var(--yellow);border-top:3px solid var(--yellow)}
+.callout .row1{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.callout .pno{font:600 .75rem var(--f-mono);color:var(--ink);background:var(--yellow);padding:4px 8px}
+.callout .step{font:500 .75rem var(--f-mono);color:var(--muted)}
+.callout h2{font:800 clamp(1.7rem,1.2rem + 1.8vw,2.6rem)/1 var(--f-head);font-stretch:108%;letter-spacing:-.02em}
+.callout p{color:var(--muted);font-size:1rem}
+.callout .metric{border-top:1px dashed var(--grid-major);padding-top:12px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.callout .metric b{font:600 clamp(1.4rem,1.1rem + 1vw,2rem)/1 var(--f-mono);color:var(--yellow);font-variant-numeric:tabular-nums}
+.callout .metric span{font-size:.875rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font:500 .72rem var(--f-mono);border:1px solid var(--grid-major);padding:4px 8px;color:var(--text)}
+.callout.swap{animation:swap .45s cubic-bezier(.16,1,.3,1)}
+@keyframes swap{from{transform:translateY(10px);opacity:.3}to{transform:none;opacity:1}}
+@media (max-width:860px){
+  .stage{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto;gap:8px;padding-bottom:12px}
+  .assembly{width:min(150px,36vw)}
+  .callout{padding:16px;gap:8px;max-width:none}
+  .callout p{font-size:.9rem}
+}
+
+/* static fallback (reduced motion) */
+.static .stage-wrap{height:auto}
+.static .stage{position:relative;top:0;height:auto;grid-template-columns:1fr}
+.static .viewport{height:auto;padding-block:120px}
+.static #callout{display:none}
+.static-list{display:none}
+.static .static-list{display:grid;gap:16px}
+
+/* BOM */
+section.sec{margin-block:clamp(80px,12vw,160px)}
+.sec h2.big{font:900 clamp(2.2rem,1.3rem + 3.4vw,4.4rem)/.92 var(--f-head);font-stretch:118%;letter-spacing:-.035em;margin-bottom:10px}
+.sec .intro{color:var(--muted);max-width:52ch;margin-bottom:28px}
+.table{overflow-x:auto;border:1px solid var(--grid-major);background:rgba(16,38,29,.72)}
+table{width:100%;border-collapse:collapse;font:500 .9rem/1.4 var(--f-mono);min-width:560px}
+th{text-align:left;font:600 .7rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--grid-major)}
+td{padding:14px;border-bottom:1px solid var(--grid);vertical-align:top}
+td.q{color:var(--yellow);font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.pn2{color:var(--muted)}
+tr:last-child td{border-bottom:0}
+.log{display:grid;gap:0;border-top:1px solid var(--grid-major)}
+.log div{display:grid;grid-template-columns:90px minmax(0,1fr);gap:18px;padding:16px 0;border-bottom:1px solid var(--grid-major)}
+.log .y{font:600 .95rem var(--f-mono);color:var(--yellow)}
+.log h3{font:800 1.2rem/1.2 var(--f-head);font-stretch:106%}
+.log p{color:var(--muted);font-size:.95rem}
+.end{display:grid;gap:18px;padding-block:40px 140px}
+.end h2{font:900 clamp(2.6rem,1.3rem + 5vw,6rem)/.88 var(--f-head);font-stretch:125%;letter-spacing:-.045em;max-width:14ch}
+.ctas{display:flex;flex-wrap:wrap;gap:10px}
+.cta{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;font:600 .9rem var(--f-mono);text-decoration:none;color:var(--text);border:1px solid var(--text)}
+.cta.y{background:var(--yellow);color:var(--ink);border-color:var(--yellow)}
+.note{font:500 .72rem var(--f-mono);color:var(--muted)}
+@media (prefers-reduced-motion: reduce){ *{animation:none!important;transition:none!important} }
+</style>
+
+<div class="ruler" aria-hidden="true"></div>
+<div class="ruler-mark" id="rmark" aria-hidden="true"><span id="rtxt">0 mm</span></div>
+
+<header><div class="wrap"><b>M.K. Abishek</b><span class="tag">Teardown Nº 01</span><a href="#end">Contact</a></div></header>
+
+<main class="wrap" id="main">
+  <section class="hero">
+    <p class="label">Software Engineer · Massclick · Tiruchirappalli</p>
+    <h1>Look <em>inside</em> what I build.</h1>
+    <p>I'm <strong>M.K. Abishek</strong>. At Massclick, a local-search platform for Tamil Nadu, I work on every layer, from the app in your hand to the servers under it. Here it is, taken apart.</p>
+    <span class="cue"><i></i>Scroll to take it apart</span>
+  </section>
+
+  <div class="stage-wrap" id="stageWrap">
+    <div class="stage" id="stage">
+      <div class="viewport" aria-hidden="true">
+        <div class="assembly" id="assembly">
+          <div class="plate p5" data-i="4"><span class="pn">P-05 · chassis</span>
+            <span class="screw" style="left:12px;top:12px"></span><span class="screw" style="right:12px;top:12px"></span><span class="screw" style="left:12px;bottom:12px"></span><span class="screw" style="right:12px;bottom:12px"></span>
+            <div class="drive">MONGODB<i></i></div><div class="drive">REDIS<i></i></div><div class="drive">AWS S3<i></i></div><div class="drive">NGINX ×2<i></i></div><div class="drive">GRAFANA<i></i></div>
+          </div>
+          <div class="plate p4" data-i="3"><span class="pn">P-04 · engine</span>
+            <b>EXPRESS API</b>
+            <span><em>GET</em>/search</span><span><em>GET</em>/nearby</span><span><em>GET</em>/v2/location</span><span><em>POST</em>/leads</span><span><em>POST</em>/pay</span><span><em>POST</em>/otp</span><span><em>WS</em>chat:*</span><span><em>GET</em>/sitemap</span>
+          </div>
+          <div class="plate p3" data-i="2"><span class="pn">P-03 · logic board</span>
+            <svg viewBox="0 0 240 480" preserveAspectRatio="none">
+              <g stroke="#D9A441" stroke-width="2" fill="none" opacity=".85">
+                <path d="M30 60 H120 V140 H210"/><path d="M30 110 H80 V230 H160"/><path d="M210 200 V300 H60 V380"/><path d="M120 420 V340 H200"/><path d="M40 300 H20 V440 H140"/><path d="M180 60 V20"/><path d="M60 180 H20"/>
+              </g>
+              <g fill="#0B1A28" stroke="#3E6A8C" stroke-width="1.5">
+                <rect x="60" y="150" width="80" height="60" rx="4"/><rect x="140" y="260" width="70" height="56" rx="4"/><rect x="40" y="350" width="70" height="56" rx="4"/>
+              </g>
+              <g fill="#B9D3E6" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" text-anchor="middle">
+                <text x="100" y="185">AUTH</text><text x="175" y="293">LEADS</text><text x="75" y="383">WS</text>
+              </g>
+              <g fill="#D9A441"><circle cx="30" cy="60" r="4"/><circle cx="30" cy="110" r="4"/><circle cx="210" cy="140" r="4"/><circle cx="160" cy="230" r="4"/><circle cx="60" cy="380" r="4"/><circle cx="200" cy="340" r="4"/><circle cx="140" cy="440" r="4"/></g>
+            </svg>
+          </div>
+          <div class="plate p2" data-i="1"><span class="pn">P-02 · interface</span>
+            <div class="h">SSR HERO</div><div class="r">SEARCH BAR</div><div class="r">DISTRICT URL · /trichy/…</div><div class="g">RESULTS · JSON-LD</div>
+          </div>
+          <div class="plate p1" data-i="0"><span class="pn">P-01 · glass + app</span>
+            <div class="sb"><span>9:41</span><span>EN · த</span></div>
+            <div class="logo">massclick</div>
+            <div class="srch">Search in Tiruchirappalli…</div>
+            <div class="biz"><i></i><div><span></span><span></span></div></div>
+            <div class="biz"><i style="background:#4CC3AE"></i><div><span></span><span></span></div></div>
+            <div class="biz"><i style="background:#E8604A"></i><div><span></span><span></span></div></div>
+            <div class="nav"><b></b><b></b><b></b></div>
+          </div>
+        </div>
+      </div>
+      <article class="callout" id="callout" aria-live="polite"></article>
+    </div>
+  </div>
+  <div class="static-list" id="staticList"></div>
+
+  <section class="sec" id="bom">
+    <p class="label">Parts list</p>
+    <h2 class="big">Bill of materials</h2>
+    <p class="intro">Every part above, counted. The numbers come from git history, migration logs and incident notes.</p>
+    <div class="table"><table>
+      <thead><tr><th>Part</th><th>Component</th><th>Qty</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td class="pn2">P-00</td><td>Commits authored</td><td class="q">1,557</td><td>1,294 on the platform, 263 of 264 on the app, since April 2026</td></tr>
+        <tr><td class="pn2">P-05</td><td>S3 objects re-keyed</td><td class="q">33,096 / 33,096</td><td>0 failed, nothing deleted, 51 call sites moved behind a lint gate</td></tr>
+        <tr><td class="pn2">P-05</td><td>Production DB cutover</td><td class="q">~90 s</td><td>MongoDB moved to its own server, with nightly and off-box backups</td></tr>
+        <tr><td class="pn2">P-04</td><td>Geo coverage, Trichy localities</td><td class="q">7.8 → 89.3%</td><td>Coordinates for distance-ranked search over ~18,000 places</td></tr>
+        <tr><td class="pn2">P-02</td><td>Business-page bundle</td><td class="q">173 → 92 KB</td><td>Brotli, plus a server-rendered hero for mobile LCP</td></tr>
+        <tr><td class="pn2">P-05</td><td>Client error rate</td><td class="q">6–7% → ~0.1%</td><td>After fixing the Googlebot crawl trap and serving 410s</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="sec" id="log">
+    <p class="label">Service history</p>
+    <h2 class="big">How this unit was built</h2>
+    <div class="log">
+      <div><span class="y">2018</span><div><h3>SSLC, Lakshmi Matric Hr. Sec. School</h3><p>Manapparai. GPA 8.2.</p></div></div>
+      <div><span class="y">2020</span><div><h3>HSC · Student of the Year</h3><p>GPA 7.6, Student of the Year in Higher Education.</p></div></div>
+      <div><span class="y">2023</span><div><h3>B.Sc, National College of Arts and Science</h3><p>Tiruchirappalli, GPA 8.4.</p></div></div>
+      <div><span class="y">2024</span><div><h3>Intern, Syuap Tech Solution</h3><p>Flutter, PHP and Express.js.</p></div></div>
+      <div><span class="y">2025</span><div><h3>M.Sc, Bishop Heber · Head of Mobile, Digihope</h3><p>GPA 8.6. Flutter apps through Play Console and TestFlight.</p></div></div>
+      <div><span class="y">2026</span><div><h3>Software Engineer, Massclick</h3><p>First commit on the app, 1 April 2026.</p></div></div>
+    </div>
+  </section>
+
+  <section class="end" id="end">
+    <p class="label">Reassembled</p>
+    <h2>Every part back in place. Want one built?</h2>
+    <div class="ctas"><a class="cta y" href="mailto:abishek.mk.01@gmail.com">Email me</a><a class="cta" href="https://www.linkedin.com/in/its-abishek-mk" target="_blank" rel="noopener">LinkedIn</a><a class="cta" href="https://github.com/Its-Abishek-01" target="_blank" rel="noopener">GitHub</a></div>
+    <p class="note">Concept 01 of 4 · Teardown · sketch, not the final site</p>
+  </section>
+</main>
+
+<script>
+(() => {
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clamp = (v,a=0,b=1) => Math.min(b, Math.max(a, v));
+const ease = t => t<.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+const PARTS = [
+  {pn:'P-01', part:'Glass + app', title:'The app in your hand', text:'The Massclick Flutter app, built from its first commit to v2.1.1: Riverpod, go_router, OTP auto-fill, deep links, English and Tamil.', mv:'263 / 264', ml:'commits in the app repo are mine', chips:['Flutter','Dart','Riverpod','FCM']},
+  {pn:'P-02', part:'Interface', title:'The page that paints first', text:'React web with a server-rendered business hero, so a budget phone sees content before any JavaScript runs. District URLs and JSON-LD for search engines.', mv:'173 → 92 KB', ml:'business-page bundle, brotli', chips:['React','Express SSR','SEO']},
+  {pn:'P-03', part:'Logic board', title:'Leads that never get lost', text:'Auth policies, OTP, and a lead pipeline that saves first, then sends WhatsApp, push and live-socket alerts independently.', mv:'save-first', ml:'alerts decoupled from capture', chips:['Node.js','Socket.IO','MSG91','FCM']},
+  {pn:'P-04', part:'Engine', title:'Search that knows the street', text:'Category intent, text score and distance ranking over an 18,000-place location graph, with a nearby-pincode fallback. PhonePe checkout on the same API.', mv:'7.8 → 89.3%', ml:'Trichy localities with coordinates', chips:['Express','MongoDB','Redis','PhonePe']},
+  {pn:'P-05', part:'Chassis', title:'The metal underneath', text:'MongoDB moved to its own server. 36,187 S3 files re-keyed. nginx over two API replicas, and Grafana watching all of it.', mv:'33,096 / 33,096', ml:'S3 objects copied, 0 failed', chips:['MongoDB','AWS S3','nginx','Docker','Grafana']}
+];
+const callout = $('#callout'), plates = $$('.plate'), asm = $('#assembly');
+let shown = -2;
+function renderCallout(i){
+  if (i === shown) return; shown = i;
+  if (i < 0){ callout.innerHTML = '<div class="row1"><span class="pno">5 PARTS</span><span class="step">assembled</span></div><h2>One product, five layers.</h2><p>Keep scrolling. Each layer lifts out with what I did in it.</p>'; }
+  else if (i >= PARTS.length){ callout.innerHTML = '<div class="row1"><span class="pno">DONE</span><span class="step">reassembling</span></div><h2>Every layer, one engineer.</h2><p>Mobile, web, backend, data and infrastructure. The parts list is below.</p>'; }
+  else { const p = PARTS[i]; callout.innerHTML = '<div class="row1"><span class="pno">'+p.pn+' · '+p.part+'</span><span class="step">'+(i+1)+' / 5</span></div><h2>'+p.title+'</h2><p>'+p.text+'</p><div class="chips">'+p.chips.map(c=>'<span>'+c+'</span>').join('')+'</div><div class="metric"><b>'+p.mv+'</b><span>'+p.ml+'</span></div>'; }
+  callout.classList.remove('swap'); void callout.offsetWidth; callout.classList.add('swap');
+}
+if (reduce){
+  document.body.classList.add('static');
+  $('#staticList').innerHTML = PARTS.map(p => '<article class="callout"><div class="row1"><span class="pno">'+p.pn+' · '+p.part+'</span></div><h2>'+p.title+'</h2><p>'+p.text+'</p><div class="metric"><b>'+p.mv+'</b><span>'+p.ml+'</span></div></article>').join('');
+  asm.style.setProperty('--rx','56deg'); asm.style.setProperty('--rz','-34deg');
+  plates.forEach(pl => pl.style.setProperty('--z', ((4 - +pl.dataset.i) * 60) + 'px'));
+  return;
+}
+const wrap = $('#stageWrap'), rmark = $('#rmark'), rtxt = $('#rtxt');
+let queued = false;
+function frame(){
+  queued = false;
+  const vh = innerHeight, r = wrap.getBoundingClientRect();
+  const p = clamp(-r.top / (r.height - vh));
+  // phases: 0-.10 tilt · .10-.22 explode · .22-.88 five parts · .88-1 reassemble
+  const tilt = ease(clamp(p/.10)), explode = ease(clamp((p-.10)/.12)), back = ease(clamp((p-.88)/.12));
+  const spread = explode * (1 - back);
+  const small = innerWidth < 860, gap = small ? 44 : 78;
+  asm.style.setProperty('--rx', (tilt*56).toFixed(2)+'deg');
+  asm.style.setProperty('--rz', (-tilt*34).toFixed(2)+'deg');
+  let active = -1;
+  if (p >= .22 && p < .88) active = Math.min(4, Math.floor((p-.22)/.132));
+  else if (p >= .88) active = 5;
+  plates.forEach(pl => {
+    const i = +pl.dataset.i;
+    let z = (4 - i) * gap * spread + (4 - i) * 3;
+    if (i === active) z += 26 * spread;
+    pl.style.setProperty('--z', z.toFixed(1)+'px');
+    pl.classList.toggle('on', i === active);
+    pl.classList.toggle('dim', active >= 0 && active < 5 && i !== active);
+  });
+  renderCallout(p < .22 ? -1 : active);
+  const dp = clamp(scrollY / (document.documentElement.scrollHeight - vh));
+  rmark.style.transform = 'translateY(' + (dp * (vh - 2)).toFixed(1) + 'px)';
+  rtxt.textContent = Math.round(dp * 1000) + ' mm';
+}
+const schedule = () => { if (!queued){ queued = true; requestAnimationFrame(frame); } };
+addEventListener('scroll', schedule, {passive:true}); addEventListener('resize', schedule);
+frame();
+})();
+</script>

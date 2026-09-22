@@ -1,0 +1,239 @@
+<title>Abishek Cinematic Chapters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500..900&family=DM+Sans:opsz,wght@9..40,400..700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Concept 03 · Cinematic chapters · poster colour blocks (single deliberate look) */
+:root{
+  --ink:#121212; --paper:#FFFFFF; --tomato:#EF4B2C; --cobalt:#1E3BC8; --bone:#EDEAE3; --smoke:#8C8C8C;
+  --f-head:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
+  --f-text:'DM Sans',ui-sans-serif,system-ui,sans-serif;
+  --f-mono:'DM Mono',ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--f-text);font-size:1.0625rem;line-height:1.55;overflow-x:clip}
+:focus-visible{outline:2px solid var(--tomato);outline-offset:3px}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+.label{font:500 .75rem/1.3 var(--f-mono);letter-spacing:.14em;text-transform:uppercase}
+.gut{padding-inline:clamp(16px,5vw,64px)}
+
+header{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(env(safe-area-inset-top,0px) + 14px) clamp(16px,5vw,64px) 14px;display:flex;align-items:center;gap:16px;mix-blend-mode:difference;color:#fff;pointer-events:none}
+header b{font:800 1.2rem/1 var(--f-head);letter-spacing:.02em;text-transform:uppercase;margin-right:auto}
+header .ch{font:500 .75rem var(--f-mono);letter-spacing:.1em}
+.progress{position:fixed;left:0;top:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--tomato);z-index:60}
+
+/* scene system: each .scene is tall; its .pin sticks; the next scene overlaps by 100vh and slides over */
+.scene{position:relative;height:var(--h,220vh)}
+.scene + .scene{margin-top:-100vh}
+.pin{position:sticky;top:0;height:100vh;overflow:hidden;transform-origin:50% 0%;will-change:transform}
+.pin::after{content:"";position:absolute;inset:0;background:#000;opacity:var(--dim,0);pointer-events:none}
+
+/* A · hero (ink) */
+.s-hero .pin{background:var(--ink);display:grid;align-content:end;padding-bottom:clamp(40px,8vh,90px)}
+.s-hero .name{font:900 clamp(5rem,24vw,26rem)/.78 var(--f-head);letter-spacing:-.01em;text-transform:uppercase;display:flex;flex-wrap:nowrap;white-space:nowrap}
+.s-hero .name span{display:inline-block;transform:translateY(calc(var(--k) * var(--p,0) * -34vh));color:var(--paper)}
+.s-hero .name span.o{color:transparent;-webkit-text-stroke:2px var(--paper)}
+.s-hero .meta{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:28px;align-items:end}
+.s-hero .meta p{max-width:44ch;color:#CFCFCF;font-size:1.15rem}
+.s-hero .meta p strong{color:#fff;font-weight:600}
+.cue{font:500 .75rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--tomato)}
+
+/* B · proof (tomato) */
+.s-proof{--h:420vh}
+.s-proof .pin{background:var(--tomato);color:var(--ink);display:grid;align-content:center}
+.s-proof .top{display:flex;justify-content:space-between;gap:16px;position:absolute;top:calc(env(safe-area-inset-top,0px) + 64px);left:clamp(16px,5vw,64px);right:clamp(16px,5vw,64px)}
+.bignum{position:relative;height:1em;font:900 clamp(4.6rem,19vw,20rem)/1 var(--f-head);letter-spacing:-.01em}
+.bignum div{position:absolute;left:0;top:0;white-space:nowrap;transform:translateY(calc((var(--o,1)) * 60%));opacity:calc(1 - min(1, max(var(--o,1), var(--o,1) * -1)));font-variant-numeric:tabular-nums}
+.proof-cap{margin-top:26px;min-height:3.4em;max-width:40ch;font-size:clamp(1.05rem,.95rem + .5vw,1.35rem);font-weight:500}
+.dots{display:flex;gap:8px;margin-top:22px}
+.dots i{width:28px;height:4px;background:rgba(18,18,18,.25)}
+.dots i.on{background:var(--ink)}
+
+/* C · work gallery (paper, horizontal) */
+.s-work{--h:520vh}
+.s-work .pin{background:var(--paper);color:var(--ink);display:grid;grid-template-rows:auto 1fr;padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+.s-work h2{font:900 clamp(2.6rem,1.6rem + 5vw,7rem)/.85 var(--f-head);text-transform:uppercase}
+.track{display:flex;gap:clamp(14px,2vw,28px);align-items:center;padding-inline:clamp(16px,5vw,64px);transform:translateX(var(--tx,0px));will-change:transform}
+.wcard{flex:none;width:clamp(280px,42vw,560px);height:min(62vh,540px);background:var(--bone);display:grid;grid-template-rows:auto 1fr auto;padding:clamp(18px,2.2vw,30px);position:relative;overflow:hidden}
+.wcard .no{font:900 clamp(4rem,8vw,8rem)/.8 var(--f-head);color:var(--ink);opacity:.12;position:absolute;right:14px;top:10px}
+.wcard .area{font:500 .72rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:#555}
+.wcard h3{font:800 clamp(2rem,1.4rem + 2.2vw,3.4rem)/.9 var(--f-head);text-transform:uppercase;align-self:end;margin-bottom:12px}
+.wcard p{color:#3D3D3D;font-size:.975rem;max-width:40ch}
+.wcard .mv{border-top:2px solid var(--ink);padding-top:12px;margin-top:16px;font:500 clamp(1.2rem,1rem + .8vw,1.7rem)/1.1 var(--f-mono)}
+.wcard .mv small{display:block;font:400 .78rem var(--f-text);color:#555;margin-top:4px}
+.wcard.accent{background:var(--ink);color:var(--paper)}
+.wcard.accent h3{color:var(--paper)}.wcard.accent p,.wcard.accent .area,.wcard.accent .mv small{color:#BDBDBD}.wcard.accent .mv{border-color:var(--paper)}.wcard.accent .no{color:var(--paper)}
+
+/* D · system (cobalt) */
+.s-sys{--h:320vh}
+.s-sys .pin{background:var(--cobalt);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(20px,4vw,56px);align-items:center}
+.s-sys h2{font:900 clamp(2.6rem,1.6rem + 4.4vw,6.4rem)/.85 var(--f-head);text-transform:uppercase}
+.s-sys p{color:#D6DCFA;max-width:40ch;margin-top:18px}
+.s-sys p b{color:#fff;font-weight:600}
+#sys{width:100%;height:auto;display:block}
+#sys .ln{fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round}
+#sys .nd{fill:var(--cobalt);stroke:#fff;stroke-width:3}
+#sys text{font:700 22px 'Big Shoulders Display',sans-serif;fill:#fff;letter-spacing:.04em;text-transform:uppercase}
+@media (max-width:860px){ .s-sys .pin{grid-template-columns:1fr;align-content:center} }
+
+/* E · journey (bone) */
+.s-jour{--h:260vh}
+.s-jour .pin{background:var(--bone);color:var(--ink);display:grid;align-content:center;gap:24px}
+.s-jour h2{font:900 clamp(2.4rem,1.5rem + 4vw,6rem)/.85 var(--f-head);text-transform:uppercase}
+.years{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:3px solid var(--ink)}
+.years div{padding:14px 14px 0 0;opacity:calc(.18 + .82 * var(--v,1));transform:translateY(calc((1 - var(--v,1)) * 30px))}
+.years b{font:900 clamp(1.8rem,1rem + 2.4vw,3.4rem)/1 var(--f-head)}
+.years span{display:block;font-size:.875rem;color:#444;margin-top:6px}
+@media (max-width:760px){ .years{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:14px} }
+
+/* F · contact (ink) */
+.s-end{--h:100vh}
+.s-end .pin{background:var(--ink);display:grid;align-content:center;gap:22px}
+.s-end h2{font:900 clamp(3rem,1.6rem + 7vw,10rem)/.82 var(--f-head);text-transform:uppercase;max-width:12ch}
+.s-end h2 em{font-style:normal;color:var(--tomato)}
+.ctas{display:flex;flex-wrap:wrap;gap:10px}
+.cta{display:inline-flex;align-items:center;min-height:50px;padding:0 22px;font:600 .95rem var(--f-text);text-decoration:none;color:#fff;border:2px solid #fff}
+.cta.t{background:var(--tomato);border-color:var(--tomato);color:var(--ink)}
+.note{font:500 .72rem var(--f-mono);color:var(--smoke)}
+
+/* reduced motion: unpin everything, gallery becomes a grid */
+.static .scene{height:auto!important;margin-top:0!important}
+.static .pin{position:relative;height:auto;min-height:100vh;padding-block:100px}
+.static .track{flex-wrap:wrap;transform:none}
+.static .wcard{width:100%;max-width:560px}
+.static .bignum{height:auto;display:grid;gap:10px}
+.static .bignum div{position:relative;transform:none;opacity:1;font-size:clamp(3rem,10vw,7rem)}
+</style>
+
+<div class="progress" id="prog" aria-hidden="true"></div>
+<header><b>M.K. Abishek</b><span class="ch" id="chap">01 · Hello</span></header>
+
+<main>
+  <section class="scene s-hero" data-ch="01 · Hello" style="--h:200vh">
+    <div class="pin gut">
+      <p class="label" style="color:#BDBDBD;margin-bottom:18px">Software Engineer · Massclick · Tiruchirappalli</p>
+      <h1 class="name" aria-label="Abishek"><span style="--k:.2">A</span><span style="--k:.55">B</span><span class="o" style="--k:.35">I</span><span style="--k:.8">S</span><span style="--k:.45">H</span><span class="o" style="--k:.7">E</span><span style="--k:.3">K</span></h1>
+      <div class="meta"><p>I'm <strong>M.K. Abishek</strong>. I build the app, the API, and the server it runs on, for Massclick, a local-search platform for Tamil Nadu.</p><span class="cue">Scroll · 6 chapters</span></div>
+    </div>
+  </section>
+
+  <section class="scene s-proof" data-ch="02 · Proof">
+    <div class="pin gut">
+      <div class="top"><span class="label">Chapter 02 · Proof</span><span class="label" id="pIdx">1 / 4</span></div>
+      <div class="bignum" id="bignum" aria-live="polite"></div>
+      <p class="proof-cap" id="pcap"></p>
+      <div class="dots" id="pdots"></div>
+    </div>
+  </section>
+
+  <section class="scene s-work" data-ch="03 · Work">
+    <div class="pin">
+      <div class="gut" style="display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:clamp(14px,3vh,32px)"><h2>Selected<br>work</h2><span class="label" style="color:#555">Keep scrolling · it moves sideways</span></div>
+      <div class="track" id="track"></div>
+    </div>
+  </section>
+
+  <section class="scene s-sys" data-ch="04 · System">
+    <div class="pin gut">
+      <div><p class="label" style="color:#D6DCFA">Chapter 04 · System</p><h2 style="margin-top:14px">One platform. Every layer.</h2><p>The <b>Flutter app</b> and <b>React web</b> go through <b>nginx</b> to an <b>Express API</b>, then out to <b>MongoDB</b>, <b>Redis</b>, <b>S3</b>, push, OTP and payments. I've worked on every line of this drawing.</p></div>
+      <svg id="sys" viewBox="0 0 700 520" aria-label="Massclick system diagram" role="img"></svg>
+    </div>
+  </section>
+
+  <section class="scene s-jour" data-ch="05 · Journey">
+    <div class="pin gut">
+      <p class="label">Chapter 05 · Journey</p>
+      <h2>Manapparai to production.</h2>
+      <div class="years" id="years">
+        <div><b>2018</b><span>SSLC · Lakshmi Matric, Manapparai</span></div>
+        <div><b>2020</b><span>HSC · Student of the Year</span></div>
+        <div><b>2023</b><span>B.Sc · National College, Trichy</span></div>
+        <div><b>2024</b><span>Intern · Syuap Tech</span></div>
+        <div><b>2025</b><span>M.Sc · Bishop Heber · Head of Mobile, Digihope</span></div>
+        <div><b>2026</b><span>Software Engineer · Massclick</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene s-end" data-ch="06 · Contact">
+    <div class="pin gut">
+      <p class="label" style="color:#BDBDBD">Chapter 06 · Contact</p>
+      <h2>Your next chapter <em>needs</em> an engineer.</h2>
+      <div class="ctas"><a class="cta t" href="mailto:abishek.mk.01@gmail.com">Email me</a><a class="cta" href="https://www.linkedin.com/in/its-abishek-mk" target="_blank" rel="noopener">LinkedIn</a><a class="cta" href="https://github.com/Its-Abishek-01" target="_blank" rel="noopener">GitHub</a></div>
+      <p class="note">Concept 03 of 4 · Cinematic chapters · sketch, not the final site</p>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clamp = (v,a=0,b=1) => Math.min(b, Math.max(a, v));
+const PROOF = [
+  {n:1557, f:v => Math.round(v).toLocaleString('en-IN'), cap:'commits across the Massclick app and platform since April 2026.'},
+  {n:33096, f:v => Math.round(v).toLocaleString('en-IN') + '/33,096', cap:'S3 objects moved to clean keys. 0 failed, nothing deleted.'},
+  {n:90, f:v => '~' + Math.round(v) + 's', cap:'of production downtime moving MongoDB onto its own server.'},
+  {n:89.3, f:v => v.toFixed(1) + '%', cap:'of Trichy localities now geocoded for distance search, up from 7.8%.'}
+];
+const WORK = [
+  ['Mobile','Massclick Mobile','Built the Flutter app from its first commit to v2.1.1, in English and Tamil.','263 / 264','app commits are mine'],
+  ['Backend','Search & Geo','Category intent, text score and distance ranking over ~18,000 places.','7.8 → 89.3%','Trichy localities geocoded'],
+  ['Infra','The Database Move','Every MongoDB database moved to a dedicated server, with nightly and off-box backups.','~90 s','production cutover'],
+  ['Cloud','36,187 Files, Zero Lost','Every S3 object re-keyed with plan, verify, resume and rollback tooling.','33,096 / 33,096','copied, 0 failed'],
+  ['Web','Fast on a Budget Phone','A server-rendered hero so mobile LCP paints before JavaScript.','173 → 92 KB','business-page bundle'],
+  ['Ops','The Crawl Trap','Stopped Googlebot generating junk URLs that pinned the database CPU.','6–7% → ~0.1%','client error rate']
+];
+$('#track').innerHTML = WORK.map((w,i) => '<article class="wcard'+(i%3===1?' accent':'')+'"><span class="no">0'+(i+1)+'</span><span class="area">'+w[0]+'</span><div style="align-self:end"><h3>'+w[1]+'</h3><p>'+w[2]+'</p></div><div class="mv">'+w[3]+'<small>'+w[4]+'</small></div></article>').join('');
+$('#bignum').innerHTML = PROOF.map(p => '<div>'+p.f(p.n)+'</div>').join('');
+$('#pdots').innerHTML = PROOF.map(() => '<i></i>').join('');
+// system diagram
+const N = {app:[90,110,'App'],web:[90,300,'Web'],edge:[250,205,'nginx'],api:[420,205,'API'],mongo:[610,70,'Mongo'],redis:[640,205,'Redis'],s3:[610,340,'S3'],fcm:[330,440,'FCM'],otp:[470,450,'MSG91'],pay:[610,470,'PhonePe']};
+const E = [['app','edge'],['web','edge'],['edge','api'],['api','mongo'],['api','redis'],['api','s3'],['api','fcm'],['api','otp'],['api','pay']];
+const sys = $('#sys');
+sys.innerHTML = E.map(([a,b]) => { const A=N[a],B=N[b],dx=B[0]-A[0]; return '<path class="ln" d="M'+A[0]+' '+A[1]+' C'+(A[0]+dx/2)+' '+A[1]+', '+(B[0]-dx/2)+' '+B[1]+', '+B[0]+' '+B[1]+'"/>'; }).join('') +
+  Object.values(N).map(([x,y,l]) => '<g class="g"><circle class="nd" cx="'+x+'" cy="'+y+'" r="14"/><text x="'+x+'" y="'+(y+42)+'" text-anchor="middle">'+l+'</text></g>').join('');
+const lines = [...sys.querySelectorAll('.ln')], groups = [...sys.querySelectorAll('.g')];
+lines.forEach(l => { const L = l.getTotalLength(); l.style.strokeDasharray = L; l.dataset.L = L; });
+
+if (reduce){ document.body.classList.add('static'); lines.forEach(l => l.style.strokeDashoffset = 0); $('#pcap').textContent = PROOF.map(p => p.f(p.n) + ' ' + p.cap).join('  ·  '); return; }
+
+const scenes = $$('.scene'), pins = scenes.map(s => s.querySelector('.pin'));
+const chap = $('#chap'), prog = $('#prog'), track = $('#track'), bigDivs = [...$('#bignum').children], dots = [...$('#pdots').children], yrs = [...$('#years').children];
+let lastProof = -1, queued = false;
+function frame(){
+  queued = false;
+  const vh = innerHeight;
+  scenes.forEach((sc,i) => {
+    const r = sc.getBoundingClientRect(), total = r.height - vh;
+    const p = total > 0 ? clamp(-r.top / total) : clamp(-r.top / vh);
+    sc.style.setProperty('--p', p.toFixed(4));
+    // how far the NEXT scene has slid over this one
+    const nx = scenes[i+1];
+    if (nx){ const nr = nx.getBoundingClientRect(), q = clamp(1 - nr.top / vh); pins[i].style.transform = 'scale(' + (1 - q*.08).toFixed(4) + ')'; pins[i].style.setProperty('--dim', (q*.55).toFixed(3)); }
+    if (r.top <= vh*.5 && r.bottom > vh*.5) chap.textContent = sc.dataset.ch;
+    if (sc.classList.contains('s-proof')){
+      const idx = Math.min(PROOF.length - 1, Math.floor(p * PROOF.length)), local = clamp(p * PROOF.length - idx);
+      bigDivs.forEach((d,j) => { const o = j < idx ? -1 : j > idx ? 1 : 0; d.style.setProperty('--o', o); });
+      const pr = PROOF[idx]; bigDivs[idx].textContent = pr.f(pr.n * Math.min(1, local * 1.6));
+      if (idx !== lastProof){ lastProof = idx; $('#pcap').textContent = pr.cap; $('#pIdx').textContent = (idx+1) + ' / ' + PROOF.length; dots.forEach((d,j) => d.classList.toggle('on', j <= idx)); }
+    }
+    if (sc.classList.contains('s-work')){
+      const max = track.scrollWidth - innerWidth; track.style.setProperty('--tx', (-p * Math.max(0,max)).toFixed(1) + 'px');
+    }
+    if (sc.classList.contains('s-sys')){
+      const n = lines.length;
+      lines.forEach((l,j) => { const k = clamp(p * 1.4 * n - j); l.style.strokeDashoffset = (l.dataset.L * (1 - k)).toFixed(1); });
+      groups.forEach((g,j) => g.style.opacity = clamp(p * 1.6 * groups.length - j + 1).toFixed(2));
+    }
+    if (sc.classList.contains('s-jour')){ yrs.forEach((y,j) => y.style.setProperty('--v', clamp(p * 1.5 * yrs.length - j).toFixed(3))); }
+  });
+  prog.style.transform = 'scaleX(' + clamp(scrollY / (document.documentElement.scrollHeight - vh)).toFixed(4) + ')';
+}
+const schedule = () => { if (!queued){ queued = true; requestAnimationFrame(frame); } };
+addEventListener('scroll', schedule, {passive:true}); addEventListener('resize', schedule);
+frame();
+})();
+</script>

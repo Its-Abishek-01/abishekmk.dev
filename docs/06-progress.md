@@ -23,7 +23,12 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 - [x] Kolam grid: idle field + line-draw demo + scroll spine (v0.1)
 - [x] Type & color specimen (both themes, width slider, spring demo) (v0.1)
 - [x] Six case-study cards + proof strip + pinned system-map story + journey (v0.1)
-- [~] Abishek reviews v0.1 on phone + desktop → revise → sign off (link in 05-ui-pages.md)
+- [x] v0.1 (kolam) reviewed. Execution liked, idea rejected (D-010)
+- [~] Concept round: 4 sketches published, Abishek picks one (or a mix) → build it out → sign off
+  - 01 Teardown · https://claude.ai/artifact/2dVCMpLHm3qcTkCLs6By8G
+  - 02 Powers of Ten · https://claude.ai/artifact/ALUb5gs3rJyNAUZ7F6h3Rf
+  - 03 Cinematic chapters · https://claude.ai/artifact/NPHxd4yztNzmE2gbrSBzav
+  - 04 Departure board · https://claude.ai/artifact/MuFXNjCB2Aess78jyehMVa
 
 ## Phase 3: App scaffold & Firebase
 - [ ] Next.js 16 + TS + Tailwind v4 + Motion scaffold (ask before installing)
@@ -60,6 +65,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Session log
 | Date | What happened |
 |---|---|
+| 2026-09-22 | Kolam idea dropped (D-010). Four concept sketches built in prototype/concepts/, each with its own palette and type. |
 | 2026-09-22 | Prototype v0.1 published (scroll-first per D-009). Palette/type revised to "Threshold" + Anek (D-003r). Awaiting review. |
 | 2026-09-22 | Public GitHub repos reviewed; gh still only has Massclick-App (personal login pending). Phase 2 prototype started. |
 | 2026-09-22 | Concept, stack, Firebase owner (personal) and GitHub owner (Its-Abishek-01) accepted. |
