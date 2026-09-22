@@ -1,6 +1,6 @@
 # 06 — Progress (live tracker)
 
-**Last updated:** 2026-09-22 · **Current phase:** 3, build the real site (both designs locked: landing v0.2 at `/`, portfolio v0.5 at `/portfolio`)
+**Last updated:** 2026-09-22 · **Current phase:** 3, live on the hosted.app URL; next: domain, rules deploy, enquiry notifications. Built from (both designs locked: landing v0.2 at `/`, portfolio v0.5 at `/portfolio`)
 Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 
 ## Phase 0: Workspace ✅
@@ -51,11 +51,12 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 - [x] GitHub repo created (private): https://github.com/Its-Abishek-01/abishekmk.dev, `dev` + `main` pushed
 - [x] Firebase project created: `abishekmk-dev` (owner abishek.mk.01@gmail.com)
 - [x] Firebase config in repo: `.firebaserc`, `firebase.json`, `firestore.rules` (deny all client access), indexes
-- [ ] Abishek: enable Blaze billing on abishekmk-dev (console)
-- [ ] Abishek: create Firestore database (asia-south1, production mode). CLI create blocked until the Firestore API is enabled
-- [ ] Abishek: App Hosting backend → connect GitHub repo Its-Abishek-01/abishekmk.dev, branch `main`, auto-rollout
+- [x] Blaze billing enabled (Abishek)
+- [x] Firestore (default) created, production mode (Abishek)
+- [x] App Hosting backend `abishekmk` (asia-southeast1), auto-rollout from `main`: **LIVE** https://abishekmk--abishekmk-dev.asia-southeast1.hosted.app
+- [x] Live checks 2026-09-22: `/`, `/portfolio`, sitemap, robots = 200; `/api/enquiry` saves to Firestore (one labelled TEST doc, safe to delete)
 - [ ] Deploy Firestore rules (`firebase deploy --only firestore:rules`), needs OK
-- [ ] Connect abishekmk.dev (DNS) + HTTPS
+- [ ] Buy abishekmk.dev (Abishek; RDAP 404 on 2026-09-22 = looked unregistered) → add custom domain in App Hosting → DNS records → HTTPS
 - [ ] Enquiry notifications to Abishek (email or push)
 
 ## Phase 4: Home page
@@ -85,6 +86,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Session log
 | Date | What happened |
 |---|---|
+| 2026-09-22 | SITE LIVE on App Hosting (asia-southeast1). Enquiry → Firestore verified. Domain not bought yet. |
 | 2026-09-22 | Firebase project abishekmk-dev created; Firestore creation waits on the API being enabled in the console. Config files committed. |
 | 2026-09-22 | Repo Its-Abishek-01/abishekmk.dev created (private), dev + main pushed. Repo-local git credential helper = `gh auth git-credential`. |
 | 2026-09-22 | Phase 3 started: Next.js app scaffolded, both locked designs ported, SEO + enquiry API added, typecheck green (D-021, D-022). |
