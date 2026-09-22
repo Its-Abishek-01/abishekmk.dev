@@ -1,76 +1,62 @@
 # 04 — Design system
 
-Tokens live in [`../design/tokens.json`](../design/tokens.json). This doc explains them. **Everything here is `[assumed]` until the Phase 2 prototype is signed off.**
+Tokens live in [`../design/tokens.json`](../design/tokens.json). This doc explains them. **Everything here is `[assumed]` until the Phase 2 prototype is signed off. The palette and type were revised on 2026-09-22 before the prototype was built.**
 
 ## Personality
 **Precise, warm, alive.** It should feel like an engineer's instrument panel lit by morning light. There's quiet structure (the dot grid), one confident accent, and motion that means something. It should not feel like a neon-gradient "dev portfolio" template.
 
 Three words to test every screen against: **proof · craft · roots.**
 
-## Color
+## Color: "Threshold" (revised 2026-09-22, D-003)
 
-Dark is the default theme and light is a first-class alternative. Palette name: **Ink & Marigold**. Marigold is the flower of Tamil festivals and doorsteps, and it's the one accent. Teal is secondary and is used for "system/data" things like diagram lines and live indicators.
+The palette comes straight from the kolam's own materials: **white rice-flour lines on a freshly washed, dark threshold floor, with marigold placed at the center.** Dark is the default. The first draft (warm cream with a serif) was dropped because it's the most common AI-generated portfolio look.
 
 ### Dark (default)
 | Token | Hex | Use | Contrast vs bg |
 |---|---|---|---|
-| `bg` | `#0B0D10` | Page | — |
-| `surface` | `#14171C` | Cards, panels | — |
-| `raised` | `#1C2027` | Popovers, hover | — |
-| `line` | `#2A2F38` | Borders, grid dots (idle) | decorative |
-| `text` | `#EDE8DE` | Body + headings (warm paper, not pure white) | **15.93** |
-| `muted` | `#A09B91` | Secondary text | **7.03** |
-| `faint` | `#6E6A63` | Captions ≥ 18 px, disabled, decorative only | 3.62 ⚠ not for body |
-| `accent` | `#F2A93B` | Marigold: primary actions, focus, highlights | **9.74** |
-| `accent-2` | `#45C1B6` | Teal: diagram flows, live/data states | **8.85** |
-| `signal` | `#E8604A` | Kumkum red: errors, "incident" moments | **5.75** |
-| `on-accent` | `#0B0D10` | Text on marigold buttons | **9.74** |
+| `bg` | `#10130F` | Wet threshold floor: green-black, not neutral | — |
+| `surface` | `#171B16` | Cards, panels | — |
+| `raised` | `#1F241E` | Popovers, hover | — |
+| `line` | `#2C332B` | Borders, idle grid dots | decorative |
+| `text` | `#ECE9DF` | Rice-flour white | **15.41** |
+| `muted` | `#A4A697` | Secondary text | **7.56** |
+| `faint` | `#72766B` | Large/decorative only | 4.03 |
+| `accent` | `#F2A93B` | Marigold: actions, focus, highlights | **9.37** |
+| `accent-2` | `#4CC3AE` | Teal: system flows, data, live | **8.67** |
+| `signal` | `#EC6A52` | Kumkum: errors, incidents | **6.02** |
+| `on-accent` | `#10130F` | Text on marigold | **9.37** |
 
 ### Light
 | Token | Hex | Contrast vs bg |
 |---|---|---|
-| `bg` | `#F4F0E8` (rice-paper) | — |
-| `surface` | `#FBF8F2` | — |
+| `bg` | `#ECEEE7` (limestone, green-grey) | — |
+| `surface` | `#F6F7F2` | — |
 | `raised` | `#FFFFFF` | — |
-| `line` | `#DDD6C8` | decorative |
-| `text` | `#15171B` | **15.79** |
-| `muted` | `#5A564E` | **6.42** |
-| `faint` | `#8A857B` | 3.23 ⚠ decorative / large only |
-| `accent` | `#9A5B06` (deep marigold, darkened for text contrast) | **4.77** |
-| `accent-2` | `#0B6F68` | **5.30** |
-| `signal` | `#B3321F` | **5.45** |
-| `on-accent` | `#FBF8F2` on `accent` | **5.12** |
+| `line` | `#D3D7CB` | decorative |
+| `text` | `#141712` | **15.46** |
+| `muted` | `#51564B` | **6.45** |
+| `faint` | `#80857A` | 3.23 (large/decorative only) |
+| `accent` | `#8F5304` (deep marigold) | **5.27** |
+| `accent-2` | `#08665A` | **5.87** |
+| `signal` | `#AE2F1C` | **5.57** |
+| `on-accent` | `#F6F7F2` on accent | **5.73** |
 
-All contrast ratios were computed with the WCAG 2.x formula on 2026-09-22. Every body-text pair passes AA (≥ 4.5). The `faint` token is only for large text or non-text use in both themes. `scripts/check-contrast` will enforce this in CI.
+All ratios use the WCAG 2.x formula. Every text pair passes AA, and `faint` is never used for body text.
 
 **Color rules**
-- Accent covers at most ~5% of any screen. If everything glows, nothing does.
-- Teal only means "system": data, flows, live. Never use it for decoration.
-- No gradients on text. The single allowed gradient is the marigold "sunrise" glow behind the hero, at ≤ 12% opacity.
+- Accent covers at most ~5% of any screen. Marigold sits at the center of a kolam, not all over it.
+- Teal only means "system": flows, data, live. Never use it for decoration.
+- No gradients on text. The one allowed glow is a faint marigold bloom behind the hero kolam.
 
-## Typography `[assumed]`
+## Typography (revised 2026-09-22)
 | Role | Family | Why |
 |---|---|---|
-| Display | **Fraunces** (variable; opsz, SOFT, WONK axes) | Warm, characterful serif with optical sizing. Big headlines feel editorial, not templated |
-| Text / UI | **Geist** (variable) | Neutral and highly legible, with good tabular figures for metrics |
-| Mono | **Geist Mono** | Code, metric values, the search box, "console" elements |
-| Tamil (v2) | **Noto Sans Tamil** / **Mukta Malar** | If the Tamil version happens |
+| Display | **Anek Latin** (variable: width 75–125, weight 100–800), by Ek Type | An Indian foundry, and the same family has **Anek Tamil**, so one voice covers both scripts. Condensed-heavy headlines, wide for small labels |
+| Tamil | **Anek Tamil** | Small Tamil labels now (கோலம், புள்ளி), a full Tamil version later |
+| Text / UI | **Geist** | Neutral and legible, with good tabular figures |
+| Mono | **Geist Mono** | Search box, metrics, code, "console" elements |
 
-Fluid type scale (clamp, 360 → 1440 px viewport):
-| Token | Size | Line height | Tracking |
-|---|---|---|---|
-| `display-xl` | 56 → 128 px | 0.95 | −0.03em |
-| `display` | 40 → 80 px | 1.0 | −0.025em |
-| `h1` | 32 → 56 px | 1.05 | −0.02em |
-| `h2` | 26 → 40 px | 1.1 | −0.015em |
-| `h3` | 20 → 26 px | 1.25 | −0.01em |
-| `body-lg` | 18 → 20 px | 1.6 | 0 |
-| `body` | 16 → 17 px | 1.65 | 0 |
-| `small` | 14 px | 1.5 | 0.005em |
-| `mono-sm` | 13 px | 1.5 | 0 |
-| `eyebrow` | 12 px, uppercase, mono | 1.2 | 0.12em |
-
-Measure: 60–72ch for prose. Metrics always use `font-variant-numeric: tabular-nums`.
+Fluid scale unchanged (see tokens). Display headlines are set at width ~80 and weight 700–800, with tight tracking.
 
 ## Space, layout, shape
 - **Base unit 4 px.** Space scale: 0, 4, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192.

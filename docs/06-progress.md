@@ -19,11 +19,11 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 - [ ] Confirm the case-study list + order
 
 ## Phase 2: Design prototype (static HTML, no build)
-- [ ] Hero + search interaction prototype
-- [ ] Kolam grid: idle field + line-draw demo
-- [ ] Type & color specimen page (both themes)
-- [ ] One case-study card + one proof metric
-- [ ] Abishek reviews on his phone and desktop → revise → sign off
+- [x] Hero + search interaction prototype (v0.1)
+- [x] Kolam grid: idle field + line-draw demo + scroll spine (v0.1)
+- [x] Type & color specimen (both themes, width slider, spring demo) (v0.1)
+- [x] Six case-study cards + proof strip + pinned system-map story + journey (v0.1)
+- [~] Abishek reviews v0.1 on phone + desktop → revise → sign off (link in 05-ui-pages.md)
 
 ## Phase 3: App scaffold & Firebase
 - [ ] Next.js 16 + TS + Tailwind v4 + Motion scaffold (ask before installing)
@@ -60,6 +60,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Session log
 | Date | What happened |
 |---|---|
+| 2026-09-22 | Prototype v0.1 published (scroll-first per D-009). Palette/type revised to "Threshold" + Anek (D-003r). Awaiting review. |
 | 2026-09-22 | Public GitHub repos reviewed; gh still only has Massclick-App (personal login pending). Phase 2 prototype started. |
 | 2026-09-22 | Concept, stack, Firebase owner (personal) and GitHub owner (Its-Abishek-01) accepted. |
 | 2026-09-22 | Workspace set up (Phase 0). Concept, stack and design system drafted, all `[assumed]` pending review. |

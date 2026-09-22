@@ -12,11 +12,25 @@
 /resume.pdf       Always-current PDF résumé
 ```
 
+## Scroll narrative (D-009)
+The goal is to make visitors keep scrolling. **One continuous kolam line (the "spine") runs down the page**, drawn by scroll. It loops around every section heading and every journey milestone, and closes in a large kolam next to the contact CTA ("The line closes here"). Supporting motion:
+- a pulli dot field parallaxing at 0.35× with a pointer glow
+- the hero kolam draws itself, then a marigold bead keeps travelling it, and it floats and turns slightly on scroll
+- large outline Tamil words behind sections (வேலை, இணைப்பு, பயணம், கோலம்) at their own parallax speed
+- the system map as a pinned scroll story in 8 steps; each step lights its nodes and draws its flows
+- stats count up, and cards and milestones rise into place
+- the header kolam mark doubles as a reading-progress bar
+- a circular View Transition reveal on theme switch
+
+Reduced motion turns off parallax, the bead and the rises; the line still tracks scroll position.
+
+Prototype v0.1: `prototype/index.html`, published privately at https://claude.ai/artifact/RgafAPhexXDiuHBdwnPQXn
+
 ## Home: section by section
 
 ### 1. Hero: "Search my work"
 - Eyebrow: `SOFTWARE ENGINEER · MASSCLICK · TIRUCHIRAPPALLI`
-- Display headline (Fraunces): the chosen one-liner (see brief).
+- Display headline (Anek Latin, width-contrast words): the chosen one-liner (see brief).
 - **Search box** (mono, large). Placeholder cycles through `try "flutter"`, `try "outage"`, `try "seo"`. Suggested chips sit below it: `mobile` `search engine` `infra` `performance` `payments`.
 - Typing ranks case studies live. Each result row shows: title · a matched-term highlight · a *why it matched* note (e.g. `matched: stack=Flutter, 263 commits`) · a metric chip. This mimics the real engine's "category intent → text score" behavior.
 - Empty query shows the top 3 proofs.
