@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono, Anek_Latin, Anek_Tamil } from 'next/font/google';
 import './globals.css';
+import './live.css';
+import LiveWidget from '@/components/live/LiveWidget';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist', display: 'swap' });
 const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono', display: 'swap' });
@@ -25,7 +27,7 @@ export const viewport: Viewport = { width: 'device-width', initialScale: 1, view
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-IN" className={`${geist.variable} ${geistMono.variable} ${anek.variable} ${anekTamil.variable}`}>
-      <body>{children}</body>
+      <body>{children}<LiveWidget /></body>
     </html>
   );
 }

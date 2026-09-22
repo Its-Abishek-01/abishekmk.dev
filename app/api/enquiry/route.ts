@@ -1,10 +1,12 @@
-// Saves an enquiry from the landing page or the portfolio to Firestore.
-// Works on Firebase App Hosting (default credentials). Locally, without credentials, it returns 503 and the
-// visitor's WhatsApp/email hand-off still happens in the browser, so no enquiry is lost.
+// Saves an enquiry from the landing page or the portfolio to Firestore, then alerts Abishek on Telegram
+// (threaded under the visitor's live-visit message when we know their session).
+// Locally, without credentials, it returns 503 and the visitor's WhatsApp/email hand-off still happens in the browser.
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createHash } from 'node:crypto';
+import { getDb } from '@/lib/server/db';
+import { limited, ipHashOf } from '@/lib/server/rate';
 import { sendEnquiryAlert } from '@/lib/server/telegram';
+import { loadSession, validSid } from '@/lib/server/live';
 
 const Enquiry = z.object({
   name: z.string().trim().min(1).max(120),
@@ -14,49 +16,31 @@ const Enquiry = z.object({
   when: z.string().trim().max(60).optional().default(''),
   message: z.string().trim().max(3000).optional().default(''),
   via: z.enum(['wa', 'mail', 'portfolio']).optional().default('wa'),
+  sid: z.string().max(40).optional(),
 });
 
-// Small per-instance limit: 5 enquiries per IP per 10 minutes.
-const hits = new Map<string, number[]>();
-function limited(key: string): boolean {
-  const now = Date.now(), win = 10 * 60 * 1000;
-  const list = (hits.get(key) || []).filter(t => now - t < win);
-  list.push(now); hits.set(key, list);
-  return list.length > 5;
-}
-
-async function db() {
-  const configured = !!(process.env.FIREBASE_CONFIG || process.env.GOOGLE_CLOUD_PROJECT || process.env.GOOGLE_APPLICATION_CREDENTIALS);
-  if (!configured) return null;
-  const { getApps, initializeApp, applicationDefault } = await import('firebase-admin/app');
-  const { getFirestore } = await import('firebase-admin/firestore');
-  if (!getApps().length) initializeApp({ credential: applicationDefault() });
-  return getFirestore();
-}
-
 export async function POST(req: Request) {
-  const ip = (req.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
-  const ipHash = createHash('sha256').update(ip).digest('hex').slice(0, 16);
-  if (limited(ipHash)) return NextResponse.json({ ok: false, reason: 'rate-limited' }, { status: 429 });
+  const ipHash = ipHashOf(req);
+  if (limited('enquiry:' + ipHash, 5, 10 * 60 * 1000)) return NextResponse.json({ ok: false, reason: 'rate-limited' }, { status: 429 });
 
-  let body: unknown;
-  try { body = await req.json(); } catch { return NextResponse.json({ ok: false, reason: 'bad-json' }, { status: 400 }); }
-  const parsed = Enquiry.safeParse(body);
+  const parsed = Enquiry.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ ok: false, reason: 'invalid' }, { status: 400 });
+  const { sid, ...data } = parsed.data;
 
   // 1. Save it (the record of truth). 2. Ping Abishek's phone. Either one alone still counts as received.
-  let saved = false;
-  const firestore = await db().catch(() => null);
-  if (firestore) {
+  let saved = false, replyTo: number | undefined;
+  const db = await getDb();
+  if (db) {
     try {
       const { FieldValue } = await import('firebase-admin/firestore');
-      await firestore.collection('enquiries').add({ ...parsed.data, ipHash, createdAt: FieldValue.serverTimestamp(), status: 'new' });
+      await db.collection('enquiries').add({ ...data, sid: validSid(sid) ? sid : null, ipHash, createdAt: FieldValue.serverTimestamp(), status: 'new' });
       saved = true;
+      if (validSid(sid)) replyTo = (await loadSession(db, sid))?.tgMsgId ?? undefined;
     } catch (err) {
       console.error('enquiry: firestore write failed', err);
     }
   }
-  const alerted = await sendEnquiryAlert(parsed.data);
+  const alerted = await sendEnquiryAlert(data, replyTo);
   if (!saved && !alerted) return NextResponse.json({ ok: false, reason: 'not-configured' }, { status: 503 });
   return NextResponse.json({ ok: true, saved, alerted });
 }

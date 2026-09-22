@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
+import { emitLive } from '@/lib/live/emit';
 
 const WA = '919345161419';
 const wa = (t: string) => 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t);
@@ -58,7 +59,7 @@ export default function LandingBehaviors() {
           [site, app, url].forEach(e => e.classList.remove('out'));
         }, reduce ? 0 : 240));
       };
-      const onPick = (e: Event) => { const b = (e.target as HTMLElement).closest('button'); if (!b) return; picked = true; show(Number(b.dataset.i)); };
+      const onPick = (e: Event) => { const b = (e.target as HTMLElement).closest('button'); if (!b) return; picked = true; const i = Number(b.dataset.i); show(i); emitLive('pick', 'picked business type: ' + TYPES[i].label); };
       typesEl.addEventListener('click', onPick); cleanups.push(() => typesEl.removeEventListener('click', onPick));
       show(0);
       if (!reduce) { const iv = window.setInterval(() => { if (!picked && !document.hidden) show((cur + 1) % TYPES.length); }, 3400); cleanups.push(() => clearInterval(iv)); }
@@ -100,7 +101,9 @@ export default function LandingBehaviors() {
       if (!name || !ph) { if (note) { note.textContent = 'Please add your name and a phone number so I can reply.'; note.style.color = '#B3321F'; } (form.elements.namedItem(name ? 'phone' : 'name') as HTMLInputElement | null)?.focus(); return; }
       if (note) note.style.color = '';
       const needs = f.getAll('need').map(String);
-      const payload = { name, phone: ph, business: String(f.get('biz') || ''), needs, when: String(f.get('when') || ''), message: String(f.get('msg') || ''), via };
+      let sid: string | undefined; try { sid = localStorage.getItem('live-sid') || undefined; } catch { /* private mode */ }
+      const payload = { name, phone: ph, business: String(f.get('biz') || ''), needs, when: String(f.get('when') || ''), message: String(f.get('msg') || ''), via, sid };
+      emitLive('form', 'sent the enquiry form');
       fetch('/api/enquiry', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload), keepalive: true }).catch(() => {});
       const needText = needs.join(', ') || 'Not sure yet';
       const text = 'Hi Abishek, I’m ' + name + '.\nBusiness: ' + (payload.business || '-') + '\nI need: ' + needText + '\nWhen: ' + payload.when + '\nPhone: ' + ph + '\n\n' + payload.message;
@@ -110,6 +113,12 @@ export default function LandingBehaviors() {
     };
     form?.addEventListener('click', setVia); form?.addEventListener('submit', onSubmit);
     cleanups.push(() => { form?.removeEventListener('click', setVia); form?.removeEventListener('submit', onSubmit); });
+
+    /* sections reached (each reported once) */
+    const SECTIONS: Record<string, string> = { services: 'reached Services', how: 'reached How it works', work: 'reached Past projects', faq: 'reached FAQ', contact: 'reached Contact' };
+    const secIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const id = (e.target as HTMLElement).id; emitLive('section', SECTIONS[id]); secIO.unobserve(e.target); } }), { threshold: .35 });
+    Object.keys(SECTIONS).forEach(id => { const el = root.querySelector('#' + id); if (el) secIO.observe(el); });
+    cleanups.push(() => secIO.disconnect());
 
     /* floating WhatsApp */
     const fab = $('#fab');

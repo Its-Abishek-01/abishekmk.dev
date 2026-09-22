@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import type { FileMeta } from '@/lib/portfolio/content';
+import { emitLive } from '@/lib/live/emit';
 
 const LANG: Record<string, string> = { md: 'Markdown', dart: 'Dart', js: 'JavaScript', jsx: 'JavaScript React', sh: 'Shell Script', log: 'Log', json: 'JSON', yml: 'YAML' };
 const esc = (s: string) => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] as string);
@@ -84,6 +85,7 @@ export default function PortfolioBehaviors({ files }: { files: FileMeta[] }) {
         termPush('<span class="ok">✓</span> hot reload · ' + ms + ' ms · ' + esc(f.path));
         if (tree) $('a[data-go="' + f.id + '"]', tree)?.classList.add('done');
         if (f.id === 'ship') runPipeline();
+        if (f.id !== 'readme') emitLive('file', 'opened ' + f.path);
       };
       termCmd(f.cmd, () => {
         if (!motion) { finish(); return; }
@@ -132,7 +134,7 @@ export default function PortfolioBehaviors({ files }: { files: FileMeta[] }) {
     const setAct = (i: number) => { if (!resEl || !qEl) return; const o = $$('.opt[data-id]', resEl); if (!o.length) return; act = (i + o.length) % o.length; o.forEach((x, j) => x.setAttribute('aria-selected', String(j === act))); o[act].scrollIntoView({ block: 'nearest' }); qEl.setAttribute('aria-activedescendant', o[act].id); };
     const openPal = () => { lastFocus = document.activeElement as HTMLElement; pal?.classList.add('open'); if (qEl) qEl.value = ''; renderPal(); timers.push(window.setTimeout(() => qEl?.focus(), 30)); lenis?.stop(); };
     const closePal = () => { pal?.classList.remove('open'); lenis?.start(); lastFocus?.focus?.(); };
-    const pick = (id: string) => { closePal(); goTo(id); };
+    const pick = (id: string) => { const q = qEl?.value.trim(); if (q) emitLive('search', 'searched “' + q + '” → ' + id); closePal(); goTo(id); };
     if (qEl) { on(qEl, 'input', renderPal); on(qEl, 'keydown', e => { const k = (e as KeyboardEvent).key; if (k === 'ArrowDown') { e.preventDefault(); setAct(act + 1); } else if (k === 'ArrowUp') { e.preventDefault(); setAct(act - 1); } else if (k === 'Enter' && cur[act]) { e.preventDefault(); pick(cur[act].id); } }); }
     if (resEl) on(resEl, 'click', e => { const o = (e.target as HTMLElement).closest<HTMLElement>('.opt[data-id]'); if (o?.dataset.id) pick(o.dataset.id); });
     if (pal) on(pal, 'click', e => { if (e.target === pal) closePal(); });
@@ -154,7 +156,9 @@ export default function PortfolioBehaviors({ files }: { files: FileMeta[] }) {
       const form = e.target as HTMLFormElement; if (form.id !== 'brief') return; e.preventDefault();
       const f = new FormData(form), name = String(f.get('name') || '').trim(), who = String(f.get('contact') || '').trim();
       if (!name || !who) { termPush('<span style="color:var(--red)">✗</span> contact.sh: --name and --reply-to are required'); (form.elements.namedItem(name ? 'contact' : 'name') as HTMLInputElement | null)?.focus(); return; }
-      fetch('/api/enquiry', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name, phone: who, needs: [String(f.get('type') || '')], message: String(f.get('msg') || ''), via: 'portfolio' }), keepalive: true }).catch(() => {});
+      let sid: string | undefined; try { sid = localStorage.getItem('live-sid') || undefined; } catch { /* private mode */ }
+      emitLive('form', 'ran contact.sh');
+      fetch('/api/enquiry', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name, phone: who, needs: [String(f.get('type') || '')], message: String(f.get('msg') || ''), via: 'portfolio', sid }), keepalive: true }).catch(() => {});
       const body = 'Hi Abishek,\n\nName: ' + name + '\nReply to: ' + who + '\nProject: ' + f.get('type') + '\n\n' + (f.get('msg') || '');
       location.href = 'mailto:abishek.mk.01@gmail.com?subject=' + encodeURIComponent('Project: ' + f.get('type')) + '&body=' + encodeURIComponent(body);
       termPush('<span class="ok">✓</span> brief ready · your mail app opened · exit 0');

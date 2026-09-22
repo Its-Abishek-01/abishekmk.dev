@@ -61,6 +61,14 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 - [x] Bot created, secrets set + access granted, `15486a1` live
 - [x] Live test 2026-09-22: `{"ok":true,"saved":true,"alerted":true}`: saved to Firestore and sent to Telegram
 
+## Phase 3b: Live visits + chat (D-025)
+- [x] Code: `lib/server/{db,tg,rate,live}.ts`, `/api/live/{start,event,poll,say}`, `/api/telegram/{webhook,setup}`, `components/live/LiveWidget.tsx`, `app/live.css`; events wired in both pages
+- [x] Typecheck + production build pass
+- [ ] Abishek: set secret `telegram-webhook-secret` (value given in chat), THEN push dev + main
+- [ ] Abishek: open `/api/telegram/setup?key=<secret>` once after deploy (registers the webhook)
+- [ ] Abishek: open the site once with `?me=1` on his own phone/PC so his visits are ignored
+- [ ] Test: visit from another phone → Telegram buzz → reply → card appears → chat
+
 ## Phase 4: Home page
 - [ ] Hero + search (index builder + scorer + combobox a11y)
 - [ ] Proof strip
@@ -88,6 +96,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Session log
 | Date | What happened |
 |---|---|
+| 2026-09-22 | Built live visits + Telegram chat (D-025); build green; waiting on the webhook secret + push. |
 | 2026-09-22 | Domain search: Abishek wants a catchy new brand name (~₹200). Shortlist in docs/10-handoff.md §7. Added docs/10-handoff.md so any agent can continue without local memory. |
 | 2026-09-22 | Telegram enquiry alerts live and verified (saved + alerted). Two TEST enquiries in Firestore are safe to delete. |
 | 2026-09-22 | SITE LIVE on App Hosting (asia-southeast1). Enquiry → Firestore verified. Domain not bought yet. |

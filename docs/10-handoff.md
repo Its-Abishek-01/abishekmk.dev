@@ -42,7 +42,8 @@ Read order: `CLAUDE.md` → **this file** → `docs/06-progress.md` (live state)
 | Live URL | https://abishekmk--abishekmk-dev.asia-southeast1.hosted.app |
 | Firestore | `(default)`, asia-south1, production mode, rules = deny all client access (deployed) |
 | Enquiries | `/api/enquiry` → Firestore `enquiries` → Telegram alert to Abishek's phone (verified working) |
-| Secrets | App Hosting secrets `telegram-bot-token`, `telegram-chat-id` (values never in git, never seen by Claude) |
+| Secrets | App Hosting secrets `telegram-bot-token`, `telegram-chat-id`, `telegram-webhook-secret` (values never in git) |
+| Live visits + chat | Every visit → one self-updating Telegram message (Firestore `live_sessions`, `live_tgmap`). Abishek replies in Telegram → card on the visitor's page (`/api/live/poll`), visitor replies → `/api/live/say` → Telegram. `/live` in the bot lists who is online. Webhook registered via `/api/telegram/setup?key=<webhook secret>`. Abishek's own devices opt out with `?me=1` (undo `?me=0`) |
 | Domain | **not bought yet**. The code still says `abishekmk.dev` (layout.tsx, sitemap.ts, robots.ts, JSON-LD, footer text). Change all of them when a domain is chosen |
 
 ### Access quirks (important)

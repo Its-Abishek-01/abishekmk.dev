@@ -20,3 +20,9 @@ env:
     secret: telegram-chat-id
     availability:
       - RUNTIME
+  # Lets Telegram deliver Abishek's replies to /api/telegram/webhook (checked on every call).
+  #   firebase apphosting:secrets:set telegram-webhook-secret --project abishekmk-dev
+  - variable: TELEGRAM_WEBHOOK_SECRET
+    secret: telegram-webhook-secret
+    availability:
+      - RUNTIME

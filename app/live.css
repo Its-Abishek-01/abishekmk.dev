@@ -1,0 +1,42 @@
+/* "Abishek says hi" card + chat. Dark glass so it sits well on both the light landing page and the dark portfolio. */
+.lc{--lc-bg:rgba(20,21,19,.92);--lc-line:rgba(255,255,255,.12);--lc-ink:#F5F5F2;--lc-muted:#A9AAA4;--lc-acc:#F2A93B;--lc-ok:#5BD08A;
+  position:fixed;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:300;
+  font-family:var(--font-geist),ui-sans-serif,system-ui,sans-serif;color:var(--lc-ink);letter-spacing:-.01em}
+body:has(.pf) .lc{bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+@media (min-width:1024px){ body:has(.pf) .lc{left:268px;bottom:136px} }
+.lc *{box-sizing:border-box}
+.lc-card,.lc-chat{width:min(360px,calc(100vw - 32px));background:var(--lc-bg);border:1px solid var(--lc-line);border-radius:22px;
+  box-shadow:0 24px 60px rgba(0,0,0,.35);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);
+  animation:lc-in .5s cubic-bezier(.16,1,.3,1)}
+.lc-card{padding:16px 16px 14px;touch-action:pan-y;cursor:grab;user-select:none}
+.lc-card:active{cursor:grabbing}
+@keyframes lc-in{from{transform:translateY(24px) scale(.97);opacity:0}to{transform:none;opacity:1}}
+.lc-head{display:flex;align-items:center;gap:10px}
+.lc-head div{flex:1;min-width:0;display:grid}
+.lc-head b{font-size:.95rem;font-weight:600}
+.lc-head small{font-size:.75rem;color:var(--lc-muted);display:flex;align-items:center;gap:6px}
+.lc-dot{width:7px;height:7px;border-radius:50%;background:var(--lc-ok);display:inline-block;box-shadow:0 0 0 3px rgba(91,208,138,.2)}
+.lc-av{width:36px;height:36px;border-radius:50%;background:var(--lc-acc);color:#141412;display:grid;place-items:center;font-weight:700;font-size:.8rem;flex:none}
+.lc-x{width:32px;height:32px;border-radius:50%;border:0;background:rgba(255,255,255,.08);color:var(--lc-ink);font-size:1.2rem;line-height:1;cursor:pointer}
+.lc-x:hover{background:rgba(255,255,255,.16)}
+.lc-text{margin:12px 2px 14px;font-size:1rem;line-height:1.45;white-space:pre-wrap;word-break:break-word}
+.lc-actions{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.lc-reply{min-height:40px;padding:0 18px;border-radius:999px;border:0;background:var(--lc-acc);color:#141412;font:600 .9rem inherit;cursor:pointer}
+.lc-hint{font-size:.72rem;color:var(--lc-muted)}
+.lc-pill{display:flex;align-items:center;gap:10px;min-height:48px;padding:6px 16px 6px 6px;border-radius:999px;border:1px solid var(--lc-line);background:var(--lc-bg);color:var(--lc-ink);font:600 .9rem inherit;cursor:pointer;box-shadow:0 14px 34px rgba(0,0,0,.3);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.lc-pill .lc-av{width:36px;height:36px}
+.lc-badge{min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#E5484D;color:#fff;font-size:.72rem;display:grid;place-items:center}
+.lc-chat{padding:14px;display:grid;gap:10px}
+.lc-thread{max-height:min(46vh,340px);overflow-y:auto;display:grid;gap:8px;padding:4px 2px;overscroll-behavior:contain}
+.lc-msg{max-width:85%;padding:9px 12px;border-radius:16px;font-size:.92rem;line-height:1.4;white-space:pre-wrap;word-break:break-word}
+.lc-msg.him{justify-self:start;background:rgba(255,255,255,.09);border-top-left-radius:6px}
+.lc-msg.me{justify-self:end;background:var(--lc-acc);color:#141412;border-top-right-radius:6px}
+.lc-form{display:flex;gap:8px}
+.lc-form input{flex:1;min-width:0;height:44px;padding:0 14px;border-radius:999px;border:1px solid var(--lc-line);background:rgba(255,255,255,.06);color:var(--lc-ink);font:500 16px inherit;outline:none}
+.lc-form input:focus{border-color:var(--lc-acc)}
+.lc-form button{width:44px;height:44px;border-radius:50%;border:0;background:var(--lc-acc);color:#141412;font-size:1rem;cursor:pointer}
+.lc-form button:disabled{opacity:.4;cursor:default}
+.lc-note{margin:0;font-size:.72rem;color:var(--lc-muted)}
+.lc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.lc :focus-visible{outline:2px solid var(--lc-acc);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){ .lc-card,.lc-chat{animation:none} }
