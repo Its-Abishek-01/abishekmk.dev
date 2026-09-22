@@ -47,8 +47,8 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 - [x] `/api/enquiry` → Firestore (zod validation, per-IP rate limit)
 - [x] Typecheck passes (`npm run typecheck`)
 - [x] First production build passes (`npm run build`): `/`, `/portfolio`, sitemap, robots all static; `/api/enquiry` dynamic
-- [ ] Abishek signs in: `gh auth login` as Its-Abishek-01, `firebase login:add` as abishek.mk.01@gmail.com
-- [ ] Create GitHub repo (Its-Abishek-01) + push `main`/`dev`
+- [x] Abishek signed in: gh as Its-Abishek-01 (in his own Command Prompt), `firebase login:add` abishek.mk.01@gmail.com
+- [x] GitHub repo created (private): https://github.com/Its-Abishek-01/abishekmk.dev, `dev` + `main` pushed
 - [ ] Create Firebase project (Blaze) + App Hosting backend (auto-rollout from `main`) + Firestore + rules
 - [ ] Connect abishekmk.dev (DNS) + HTTPS
 - [ ] Enquiry notifications to Abishek (email or push)
@@ -80,6 +80,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Session log
 | Date | What happened |
 |---|---|
+| 2026-09-22 | Repo Its-Abishek-01/abishekmk.dev created (private), dev + main pushed. Repo-local git credential helper = `gh auth git-credential`. |
 | 2026-09-22 | Phase 3 started: Next.js app scaffolded, both locked designs ported, SEO + enquiry API added, typecheck green (D-021, D-022). |
 | 2026-09-22 | Landing v0.2 LOCKED, WhatsApp number confirmed (D-020). Starting Phase 3. |
 | 2026-09-22 | Landing v0.2: Apple-like product page, VandiZone + Massclick as past projects (D-019). |
