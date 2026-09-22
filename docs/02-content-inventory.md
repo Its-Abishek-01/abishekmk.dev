@@ -31,10 +31,10 @@ Sources: `MC` = `D:\dev_abishek\massclick` (git + tracker docs) · `APP` = `mass
 ## Other projects (from résumé; which employer, if any: ask)
 | Project | Stack | What | Status |
 |---|---|---|---|
-| VandiZone | Flutter, Firebase | Two apps, Customer Booking + Captain/Owner. Real-time bookings (Realtime DB + Firestore), Google Maps live tracking and trip history, phone/email auth, FCM trip alerts | verified (resume) |
+| VandiZone | Flutter, Firebase | **His own freelance project with a direct client (confirmed 2026-09-22), featured.** Two apps, Customer Booking + Captain/Owner. Real-time bookings (Realtime DB + Firestore), Google Maps live tracking and trip history, phone/email auth, FCM trip alerts | verified (resume) |
 | Veezzo | Flutter, AWS | Food delivery: browse restaurants, order, live tracking. API Gateway + Lambda + S3, geolocation, payment gateway | verified (resume) |
 | Vmark | React, Express, Node | Multi-user e-commerce: sellers register and manage products, auth, CRUD, REST | verified (resume) |
-| COS OD | Flutter, Laravel | Class-wise attendance app, REST APIs | verified (resume) |
+| COS OD | Flutter, Laravel | His own project (confirmed 2026-09-22). Class-wise attendance app, REST APIs | verified |
 
 ## Massclick — scale & ownership
 | Claim | Number | Source | Status |
