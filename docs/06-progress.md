@@ -46,7 +46,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 - [x] SEO basics: metadata, canonical, JSON-LD (ProfessionalService + FAQPage, Person), sitemap.xml, robots.txt
 - [x] `/api/enquiry` → Firestore (zod validation, per-IP rate limit)
 - [x] Typecheck passes (`npm run typecheck`)
-- [ ] First production build (`npm run build`), needs Abishek's OK
+- [x] First production build passes (`npm run build`): `/`, `/portfolio`, sitemap, robots all static; `/api/enquiry` dynamic
 - [ ] Abishek signs in: `gh auth login` as Its-Abishek-01, `firebase login:add` as abishek.mk.01@gmail.com
 - [ ] Create GitHub repo (Its-Abishek-01) + push `main`/`dev`
 - [ ] Create Firebase project (Blaze) + App Hosting backend (auto-rollout from `main`) + Firestore + rules

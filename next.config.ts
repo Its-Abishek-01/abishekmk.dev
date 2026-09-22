@@ -2,6 +2,8 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  // A stray package-lock.json lives one folder up (D:\dev_abishek); pin the project root.
+  turbopack: { root: process.cwd() },
   poweredByHeader: false,
   async headers() {
     return [{
