@@ -49,7 +49,12 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 - [x] First production build passes (`npm run build`): `/`, `/portfolio`, sitemap, robots all static; `/api/enquiry` dynamic
 - [x] Abishek signed in: gh as Its-Abishek-01 (in his own Command Prompt), `firebase login:add` abishek.mk.01@gmail.com
 - [x] GitHub repo created (private): https://github.com/Its-Abishek-01/abishekmk.dev, `dev` + `main` pushed
-- [ ] Create Firebase project (Blaze) + App Hosting backend (auto-rollout from `main`) + Firestore + rules
+- [x] Firebase project created: `abishekmk-dev` (owner abishek.mk.01@gmail.com)
+- [x] Firebase config in repo: `.firebaserc`, `firebase.json`, `firestore.rules` (deny all client access), indexes
+- [ ] Abishek: enable Blaze billing on abishekmk-dev (console)
+- [ ] Abishek: create Firestore database (asia-south1, production mode). CLI create blocked until the Firestore API is enabled
+- [ ] Abishek: App Hosting backend → connect GitHub repo Its-Abishek-01/abishekmk.dev, branch `main`, auto-rollout
+- [ ] Deploy Firestore rules (`firebase deploy --only firestore:rules`), needs OK
 - [ ] Connect abishekmk.dev (DNS) + HTTPS
 - [ ] Enquiry notifications to Abishek (email or push)
 
@@ -80,6 +85,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Session log
 | Date | What happened |
 |---|---|
+| 2026-09-22 | Firebase project abishekmk-dev created; Firestore creation waits on the API being enabled in the console. Config files committed. |
 | 2026-09-22 | Repo Its-Abishek-01/abishekmk.dev created (private), dev + main pushed. Repo-local git credential helper = `gh auth git-credential`. |
 | 2026-09-22 | Phase 3 started: Next.js app scaffolded, both locked designs ported, SEO + enquiry API added, typecheck green (D-021, D-022). |
 | 2026-09-22 | Landing v0.2 LOCKED, WhatsApp number confirmed (D-020). Starting Phase 3. |

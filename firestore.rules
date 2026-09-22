@@ -1,0 +1,10 @@
+rules_version = '2';
+// abishekmk.dev: browsers never read or write Firestore directly.
+// Enquiries are written only by the server (/api/enquiry) with the Admin SDK, which bypasses these rules.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
