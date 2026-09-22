@@ -18,7 +18,7 @@ export async function sendEnquiryAlert(e: EnquiryAlert, replyTo?: number): Promi
   const source = e.via === 'portfolio' ? 'portfolio · contact.sh' : e.via === 'mail' ? 'landing · sent by email' : 'landing · sent on WhatsApp';
   const wa = whatsappLink(e.phone);
   const lines = [
-    '📨 <b>New enquiry</b> · abishekmk.dev',
+    '📨 <b>New enquiry</b> · abishek.wiozen.in',
     '',
     '<b>' + esc(e.name) + '</b>',
     '📞 ' + esc(e.phone),

@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next';
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [{ userAgent: '*', allow: '/', disallow: ['/api/'] }],
-    sitemap: 'https://abishekmk.dev/sitemap.xml',
-    host: 'https://abishekmk.dev',
+    sitemap: 'https://abishek.wiozen.in/sitemap.xml',
+    host: 'https://abishek.wiozen.in',
   };
 }

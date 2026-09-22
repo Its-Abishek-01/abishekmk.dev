@@ -14,14 +14,14 @@ export const metadata: Metadata = {
 const html = PORTFOLIO_SHELL
   .replace('<ul class="tree" id="tree"></ul>', '<ul class="tree" id="tree">' + renderTree() + '</ul>')
   .replace('<main id="main"></main>', '<main id="main">' + renderMain() + '</main>')
-  .replace('<b>● open to work</b>', '<b>● open to work</b><br><a href="/" style="color:#F2A93B">← abishekmk.dev</a>');
+  .replace('<b>● open to work</b>', '<b>● open to work</b><br><a href="/" style="color:#F2A93B">← abishek.wiozen.in</a>');
 
 const personLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Abishek M K',
   jobTitle: 'Software Engineer',
-  url: 'https://abishekmk.dev/portfolio',
+  url: 'https://abishek.wiozen.in/portfolio',
   address: { '@type': 'PostalAddress', addressLocality: 'Tiruchirappalli', addressRegion: 'Tamil Nadu', addressCountry: 'IN' },
   knowsAbout: ['Flutter', 'Node.js', 'MongoDB', 'React', 'Firebase', 'AWS'],
   sameAs: ['https://www.linkedin.com/in/its-abishek-mk', 'https://github.com/Its-Abishek-01'],

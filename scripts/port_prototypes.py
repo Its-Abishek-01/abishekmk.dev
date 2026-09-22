@@ -122,7 +122,7 @@ style, markup, ld, _ = extract('prototype/landing-v02.html')
 write('app/landing.css', '/* GENERATED from prototype/landing-v02.html (locked) · scoped to .lp */\n' + scope_css(style, '.lp', 'lp-'))
 PORTFOLIO_ART = 'https://claude.ai/artifact/HMPJkuYxGdeJu3R7C16TCb'
 markup = markup.replace(f'href="{PORTFOLIO_ART}" target="_blank" rel="noopener"', 'href="/portfolio"')
-markup = markup.replace('Landing prototype v0.2', 'abishekmk.dev')
+markup = markup.replace('Landing prototype v0.2', 'abishek.wiozen.in')
 # WhatsApp links work without JavaScript
 WA = '919345161419'
 def wa_href(m):

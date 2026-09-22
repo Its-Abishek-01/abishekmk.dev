@@ -56,7 +56,8 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 - [x] App Hosting backend `abishekmk` (asia-southeast1), auto-rollout from `main`: **LIVE** https://abishekmk--abishekmk-dev.asia-southeast1.hosted.app
 - [x] Live checks 2026-09-22: `/`, `/portfolio`, sitemap, robots = 200; `/api/enquiry` saves to Firestore (one labelled TEST doc, safe to delete)
 - [x] Firestore rules deployed 2026-09-22 (deny all client access); public REST read of `enquiries` returns 403
-- [ ] Buy abishekmk.dev (Abishek; RDAP 404 on 2026-09-22 = looked unregistered) → add custom domain in App Hosting → DNS records → HTTPS
+- [x] Interim domain `abishek.wiozen.in` wired into code (D-026); Google Search Console verification meta tag added
+- [ ] Buy a real domain (RDAP 404 on 2026-09-22 = looked unregistered for shortlist) → add custom domain in App Hosting → DNS records → HTTPS → swap domain refs back off `abishek.wiozen.in`
 - [x] Enquiry alerts to Abishek's phone via Telegram bot (`lib/server/telegram.ts`, secrets `telegram-bot-token` / `telegram-chat-id` in apphosting.yaml)
 - [x] Bot created, secrets set + access granted, `15486a1` live
 - [x] Live test 2026-09-22: `{"ok":true,"saved":true,"alerted":true}`: saved to Firestore and sent to Telegram
@@ -96,6 +97,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 ## Session log
 | Date | What happened |
 |---|---|
+| 2026-09-22 | Interim domain `abishek.wiozen.in` swapped in everywhere `abishekmk.dev` was hardcoded (D-026); Google Search Console verification meta tag added to `app/layout.tsx`. Couldn't run typecheck (`node_modules` not installed locally) — changes are simple string literals, low risk. |
 | 2026-09-22 | Live visits + chat deployed; Telegram webhook registered (`{"ok":true}`). Next: `?me=1` on own devices, then end-to-end chat test. |
 | 2026-09-22 | Built live visits + Telegram chat (D-025); build green; waiting on the webhook secret + push. |
 | 2026-09-22 | Domain search: Abishek wants a catchy new brand name (~₹200). Shortlist in docs/10-handoff.md §7. Added docs/10-handoff.md so any agent can continue without local memory. |

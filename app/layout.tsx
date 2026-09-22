@@ -9,7 +9,7 @@ const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono'
 const anek = Anek_Latin({ subsets: ['latin'], axes: ['wdth'], variable: '--font-anek', display: 'swap' });
 const anekTamil = Anek_Tamil({ subsets: ['tamil'], variable: '--font-anek-tamil', display: 'swap' });
 
-const SITE_URL = 'https://abishekmk.dev';
+const SITE_URL = 'https://abishek.wiozen.in';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   openGraph: { type: 'website', locale: 'en_IN', siteName: 'Abishek M K', url: SITE_URL },
   twitter: { card: 'summary_large_image' },
   robots: { index: true, follow: true },
+  verification: { google: '3P0hT-OqKAlAoIEsVhsawqCsPdwEZqB0sQpQ0aBAhSY' },
 };
 
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover' };
