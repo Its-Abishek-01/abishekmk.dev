@@ -87,6 +87,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 - [ ] Accessibility audit (keyboard, screen reader, contrast)
 - [ ] Performance budget met (Lighthouse CI)
 - [x] Résumé PDF v1 (D-028): `resume/abishek-mk-resume.html` → `resume/Abishek-MK-Resume.pdf`, one A4 page
+- [x] Résumé colour edition (D-029): `resume/abishek-mk-resume-color.html` → `resume/Abishek-MK-Resume-Color.pdf`, one A4 page
 - [ ] OG images, favicon/kolam mark
 
 ## Phase 7: Launch
@@ -99,6 +100,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 | Date | What happened |
 |---|---|
 | 2026-09-22 | Interim domain `abishek.wiozen.in` swapped in everywhere `abishekmk.dev` was hardcoded (D-026); Google Search Console verification meta tag added to `app/layout.tsx`. Couldn't run typecheck (`node_modules` not installed locally) — changes are simple string literals, low risk. |
+| 2026-09-23 | Résumé colour edition built (D-029), `color.print` tokens added. Note: `dev` is pushed but `main` is still at bb9018f, so the portfolio years-only fix is not live yet. |
 | 2026-09-23 | Résumé v1 built (D-028): one-page A4, ATS-safe, PDF verified with headless Edge. Degrees = Computer Science (confirmed); job dates years-only because months are unconfirmed ; the portfolio's `experience.log` (content.ts + locked prototype v05) switched to years only too. |
 | 2026-09-23 | Massclick OTP/SMS-pumping defence added to the portfolio as `work/otp-abuse.js` (D-027); inventory row added; typecheck green. Not pushed. |
 | 2026-09-22 | Live visits + chat deployed; Telegram webhook registered (`{"ok":true}`). Next: `?me=1` on own devices, then end-to-end chat test. |

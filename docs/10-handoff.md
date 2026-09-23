@@ -73,7 +73,7 @@ Read order: `CLAUDE.md` → **this file** → `docs/06-progress.md` (live state)
 - Interactions: `components/landing/LandingBehaviors.tsx`, `components/portfolio/PortfolioBehaviors.tsx` (GSAP + ScrollTrigger + Lenis from npm).
 - Portfolio content is typed in `lib/portfolio/content.ts`.
 - Checks: `npm run typecheck` (free to run); `npm run build` (ask first).
-- **Résumé** (D-028): edit `resume/abishek-mk-resume.html` (claims from the inventory only), then re-render the PDF with headless Edge using a throwaway `--user-data-dir` (Edge ignores `--print-to-pdf` if it's already open without one): `msedge --headless=new --no-pdf-header-footer --virtual-time-budget=8000 --print-to-pdf=resume/Abishek-MK-Resume.pdf file:///…/resume/abishek-mk-resume.html`. Check it's 1 page (pypdf) and that the on-page fit bar (`--dump-dom`, `#fit`) says it fits. Abishek approved headless Edge for this only; it's not a screenshot/preview tool.
+- **Résumé** (D-028 plain/ATS, D-029 colour): two editions share the same facts, so change both. Colour edition = `resume/abishek-mk-resume-color.html` (its fit bar also stores column bottoms in `#fit[data-cols]`, main/side, keep them level). Edit `resume/abishek-mk-resume.html` (claims from the inventory only), then re-render the PDF with headless Edge using a throwaway `--user-data-dir` (Edge ignores `--print-to-pdf` if it's already open without one): `msedge --headless=new --no-pdf-header-footer --virtual-time-budget=8000 --print-to-pdf=resume/Abishek-MK-Resume.pdf file:///…/resume/abishek-mk-resume.html`. Check it's 1 page (pypdf) and that the on-page fit bar (`--dump-dom`, `#fit`) says it fits. Abishek approved headless Edge for this only; it's not a screenshot/preview tool.
 
 ## 7. Open threads
 
