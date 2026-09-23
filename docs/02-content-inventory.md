@@ -16,17 +16,17 @@ Sources: `MC` = `D:\dev_abishek\massclick` (git + tracker docs) · `APP` = `mass
 | Location | Tiruchirappalli, Tamil Nadu | verified |
 | Current role | Software Engineer, Massclick | confirmed (chat 2026-09-22) — exact title/start month: ask |
 | Languages | Profile README: "I know Japanese". Level? JLPT? | ask |
-| Education | M.Sc — Bishop Heber College (2025, 8.6) · B.Sc — National College (2023, 8.4) | verified (resume) |
+| Education | M.Sc Computer Science — Bishop Heber College (2025, 8.6) · B.Sc Computer Science — National College (2023, 8.4) | verified (resume); subject Computer Science for both confirmed 2026-09-23 |
 
-## Career timeline (corrected by Abishek 2026-09-22; months set by us, order confirmed)
+## Career timeline (corrected by Abishek 2026-09-22; order confirmed. Months unconfirmed → years only everywhere public, 2026-09-23)
 | When | What | Status |
 |---|---|---|
 | 2018 / 2020 | SSLC (8.2) / HSC (7.6), Lakshmi Matric HSS, Manapparai; Student of the Year 2020 | verified (resume) |
 | 2020 – 2023 | B.Sc, National College of Arts and Science, Tiruchirappalli (8.4); organised Naco Tech 2022 | verified (resume) |
 | 2023 – 2025 | M.Sc, Bishop Heber College, Tiruchirappalli (8.6); 2nd prize, aptitude test | verified (resume) |
-| Jan – Jun 2024 | **Intern, Syuap Tech Solution** (during the M.Sc), ~6 months: 3 months Flutter mobile, 3 months React. Agile sprints, shipped enhancements to deployed apps | confirmed (chat); months assumed |
-| Apr 2025 – Mar 2026 | **Head of Mobile App Development, Digihope Technologies** (1 year). Led Flutter Android + iOS apps, architecture + state management, Play Console / App Store / TestFlight releases and compliance, crash-rate + performance work, worked with PHP/Express backend teams, mentored junior developers | confirmed (chat) + resume; months assumed |
-| Apr 2026 – now | **Software Engineer, Massclick** | confirmed |
+| 2024 | **Intern, Syuap Tech Solution** (during the M.Sc), ~6 months: 3 months Flutter mobile, 3 months React. Agile sprints, shipped enhancements to deployed apps | confirmed (chat); months NOT confirmed (2026-09-23), so years only on the résumé and portfolio |
+| 2025 – 2026 | **Head of Mobile App Development, Digihope Technologies** (1 year). Led Flutter Android + iOS apps, architecture + state management, Play Console / App Store / TestFlight releases and compliance, crash-rate + performance work, worked with PHP/Express backend teams, mentored junior developers | confirmed (chat) + resume; months NOT confirmed (2026-09-23), so years only on the résumé and portfolio |
+| 2026 – now | **Software Engineer, Massclick** (first commit 2026-04-01) | confirmed; shown as a year for consistency |
 
 ## Other projects (ownership confirmed 2026-09-22)
 | Project | Stack | What | Status |

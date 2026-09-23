@@ -17,16 +17,16 @@ Read order: `CLAUDE.md` → **this file** → `docs/06-progress.md` (live state)
   - `/portfolio` = **developer portfolio** ("the portfolio is a repository", files that hot-reload). Design LOCKED = `prototype/v05-repo.html` (tag `v0.5-portfolio-locked`).
 - Locked means: content fixes only, unless Abishek explicitly reopens the design.
 
-## 2. Career facts (confirmed by Abishek; months were set by us, order is confirmed)
+## 2. Career facts (confirmed by Abishek; order confirmed. Months are NOT confirmed, so everything public shows years only, 2026-09-23)
 
 | When | What |
 |---|---|
 | 2018 / 2020 | SSLC / HSC, Lakshmi Matric HSS, Manapparai; Student of the Year 2020 |
-| 2020–2023 | B.Sc, National College of Arts and Science, Trichy (GPA 8.4) |
-| 2023–2025 | M.Sc, Bishop Heber College, Trichy (GPA 8.6) |
-| Jan–Jun 2024 | Intern, **Syuap Tech Solution**, 6 months during M.Sc: 3 months Flutter mobile, 3 months React. Built **Vmark** there |
-| Apr 2025–Mar 2026 | **Head of Mobile App Development, Digihope Technologies** (1 year). Built **Veezzo** there |
-| Apr 2026–now | **Software Engineer, Massclick** (first app commit 2026-04-01) |
+| 2020–2023 | B.Sc Computer Science, National College of Arts and Science, Trichy (GPA 8.4) |
+| 2023–2025 | M.Sc Computer Science, Bishop Heber College, Trichy (GPA 8.6) |
+| 2024 | Intern, **Syuap Tech Solution**, 6 months during M.Sc: 3 months Flutter mobile, 3 months React. Built **Vmark** there |
+| 2025–2026 | **Head of Mobile App Development, Digihope Technologies** (1 year). Built **Veezzo** there |
+| 2026–now | **Software Engineer, Massclick** (first app commit 2026-04-01; shown as a year for consistency) |
 | ongoing | **VandiZone**: his OWN freelance project with a direct client. Feature it prominently |
 | — | **COS OD**: his own project (Flutter + Laravel attendance app) |
 
@@ -73,6 +73,7 @@ Read order: `CLAUDE.md` → **this file** → `docs/06-progress.md` (live state)
 - Interactions: `components/landing/LandingBehaviors.tsx`, `components/portfolio/PortfolioBehaviors.tsx` (GSAP + ScrollTrigger + Lenis from npm).
 - Portfolio content is typed in `lib/portfolio/content.ts`.
 - Checks: `npm run typecheck` (free to run); `npm run build` (ask first).
+- **Résumé** (D-028): edit `resume/abishek-mk-resume.html` (claims from the inventory only), then re-render the PDF with headless Edge using a throwaway `--user-data-dir` (Edge ignores `--print-to-pdf` if it's already open without one): `msedge --headless=new --no-pdf-header-footer --virtual-time-budget=8000 --print-to-pdf=resume/Abishek-MK-Resume.pdf file:///…/resume/abishek-mk-resume.html`. Check it's 1 page (pypdf) and that the on-page fit bar (`--dump-dom`, `#fit`) says it fits. Abishek approved headless Edge for this only; it's not a screenshot/preview tool.
 
 ## 7. Open threads
 
