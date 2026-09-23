@@ -170,6 +170,22 @@ if (isJunkPath(req.path)) {
     view: () => proj({ meta: 'Massclick · Ops', title: 'The Crawl Trap', sum: 'Googlebot was generating ever-longer junk URLs from one bad link, and the database CPU alert kept firing. I found the generator and closed it.', points: ['Fixed the URL generator and escaped every regex built from a path', 'Junk and unknown-category URLs now return 410 Gone', 'Rewrote the Grafana error-rate rule, which had a logic bug hiding real errors'], mv: '6–7% → ~0.1%', ml: 'non-410 client error rate', chips: ['Express', 'Grafana', 'Search Console'] }),
   },
   {
+    id: 'otp', path: 'work/otp-abuse.js', ext: 'js', dir: 'work', cmd: 'node work/otp-abuse.js --report', tags: ['security', 'otp', 'abuse', 'fraud', 'sms', 'incident', 'rate limit', 'honeypot', 'nginx', 'backend'], ds: 'An SMS pump, stopped',
+    src: `// SMS pumping · Massclick sign-in
+
+// 1. stop the bleeding at the edge (backup first, rollback ready)
+// 2. know who is really calling
+const ip = clientIp(req);          // proxy-aware, right to left
+
+// 3. caps per number and per day, plus a verify lockout
+if (await abuseGuard.blocks(ip, mobile)) {
+  return decoy(res);               // looks sent. nothing sent.
+}
+
+await sendOtp(mobile);             // real people only`,
+    view: () => proj({ meta: 'Massclick · Security', title: 'The SMS Pump', sum: 'Someone was firing sign-in codes at our login endpoint to farm the SMS payout, and every message was billed to us. I cut it off, then rebuilt the defence so the attack pays nothing.', points: ['Blocked at the edge within minutes of detection, with the config backed up and the rollback ready', 'Rebuilt the defence: true client IP behind the proxy, caps per number and per day, a lockout after repeated failures, and the old unused routes retired', 'Attack traffic now meets a decoy that answers like success and sends no SMS; real sign-ins were back on the same day', 'Reconciled the provider’s full export against the bill to get the real figures, correcting a first count that read six times too high'], mv: '₹1,882 → ₹0', ml: 'what the attack costs us now', chips: ['nginx', 'Node.js', 'Express', 'Rate limiting', 'Incident response'] }),
+  },
+  {
     id: 'experience', path: 'experience.log', ext: 'log', cmd: 'git log --oneline --decorate', tags: ['experience', 'career', 'job', 'digihope', 'syuap', 'massclick', 'education', 'veezzo', 'vmark', 'cosod', 'lead', 'intern'], ds: 'Career, newest first',
     src: `* (HEAD -> massclick) Software Engineer · Apr 2026 – now
 * (freelance/vandizone) my own client · ongoing

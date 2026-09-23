@@ -98,6 +98,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done · `[-]` dropped
 | Date | What happened |
 |---|---|
 | 2026-09-22 | Interim domain `abishek.wiozen.in` swapped in everywhere `abishekmk.dev` was hardcoded (D-026); Google Search Console verification meta tag added to `app/layout.tsx`. Couldn't run typecheck (`node_modules` not installed locally) — changes are simple string literals, low risk. |
+| 2026-09-23 | Massclick OTP/SMS-pumping defence added to the portfolio as `work/otp-abuse.js` (D-027); inventory row added; typecheck green. Not pushed. |
 | 2026-09-22 | Live visits + chat deployed; Telegram webhook registered (`{"ok":true}`). Next: `?me=1` on own devices, then end-to-end chat test. |
 | 2026-09-22 | Built live visits + Telegram chat (D-025); build green; waiting on the webhook secret + push. |
 | 2026-09-22 | Domain search: Abishek wants a catchy new brand name (~₹200). Shortlist in docs/10-handoff.md §7. Added docs/10-handoff.md so any agent can continue without local memory. |
