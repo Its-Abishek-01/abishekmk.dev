@@ -363,11 +363,11 @@ if (isJunkPath(req.path)) {
    view: () => proj({meta:'Massclick · Ops', title:'The Crawl Trap', sum:'Googlebot was generating ever-longer junk URLs from one bad link, and the database CPU alert kept firing. I found the generator and closed it.', points:['Fixed the URL generator and escaped every regex built from a path','Junk and unknown-category URLs now return 410 Gone','Rewrote the Grafana error-rate rule, which had a logic bug hiding real errors'], mv:'6–7% → ~0.1%', ml:'non-410 client error rate', chips:['Express','Grafana','Search Console']})},
 
   {id:'experience', path:'experience.log', ext:'log', cmd:'git log --oneline --decorate', tags:['experience','career','job','digihope','syuap','massclick','education','veezzo','vmark','cosod','lead','intern'], ds:'Career, newest first',
-   src:`* (HEAD -> massclick) Software Engineer · Apr 2026 – now
+   src:`* (HEAD -> massclick) Software Engineer · 2026 – now
 * (freelance/vandizone) my own client · ongoing
-* (digihope) Head of Mobile · Apr 2025 – Mar 2026
+* (digihope) Head of Mobile · 2025 – 2026
 |   shipped: Veezzo
-* (syuap) Intern, Flutter then React · Jan – Jun 2024
+* (syuap) Intern, Flutter then React · 2024
 |   shipped: Vmark
 * (msc) M.Sc, Bishop Heber College · 2023 – 2025
 * (bsc) B.Sc, National College · 2020 – 2023
@@ -413,10 +413,10 @@ function proj(o){
 }
 function logView(){
   const L = [
-    {c:'head', br:'HEAD → massclick', w:'Apr 2026 – now', t:'Massclick', r:'Software Engineer', p:'A local-search platform for Tamil Nadu. The Flutter app, the Node and MongoDB API, the React web and its SEO, and the servers underneath.', s:[]},
+    {c:'head', br:'HEAD → massclick', w:'2026 – now', t:'Massclick', r:'Software Engineer', p:'A local-search platform for Tamil Nadu. The Flutter app, the Node and MongoDB API, the React web and its SEO, and the servers underneath.', s:[]},
     {c:'fl', br:'freelance/vandizone', w:'ongoing', t:'VandiZone', r:'Freelance · my own client', p:'Customer and captain apps in Flutter and Firebase, built directly with the client.', s:[]},
-    {c:'', br:'digihope', w:'Apr 2025 – Mar 2026', t:'Digihope Technologies', r:'Head of Mobile App Development · 1 year', p:'Led the Flutter apps for Android and iOS: architecture, state management, every Play Console, App Store and TestFlight release. Cut crash rates and mentored junior developers.', s:[['Veezzo','food delivery on AWS Lambda + S3']]},
-    {c:'', br:'syuap', w:'Jan – Jun 2024', t:'Syuap Tech Solution', r:'Intern · 6 months, during my M.Sc', p:'Three months building Flutter mobile apps, then three months on React, in Agile sprints on live apps.', s:[['Vmark','multi-seller e-commerce, React + Express']]},
+    {c:'', br:'digihope', w:'2025 – 2026', t:'Digihope Technologies', r:'Head of Mobile App Development · 1 year', p:'Led the Flutter apps for Android and iOS: architecture, state management, every Play Console, App Store and TestFlight release. Cut crash rates and mentored junior developers.', s:[['Veezzo','food delivery on AWS Lambda + S3']]},
+    {c:'', br:'syuap', w:'2024', t:'Syuap Tech Solution', r:'Intern · 6 months, during my M.Sc', p:'Three months building Flutter mobile apps, then three months on React, in Agile sprints on live apps.', s:[['Vmark','multi-seller e-commerce, React + Express']]},
     {c:'', br:'msc', w:'2023 – 2025', t:'M.Sc, Bishop Heber College', r:'Tiruchirappalli · GPA 8.6', p:'Second prize in an aptitude test competition.', s:[]},
     {c:'', br:'bsc', w:'2020 – 2023', t:'B.Sc, National College', r:'Tiruchirappalli · GPA 8.4', p:'Organised Naco Tech 2022 and coordinated its Python quiz.', s:[['COS OD','my own attendance app, Flutter + Laravel']]}
   ];
