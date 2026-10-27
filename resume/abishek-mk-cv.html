@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The <title> becomes the default file name in "Save as PDF". -->
+<title>M.K. Abishek - CV</title>
+<meta name="author" content="M.K. Abishek">
+<meta name="description" content="M.K. Abishek, Software Engineer (Flutter, Node.js, MongoDB, React, Firebase, AWS), Tiruchirappalli. Full curriculum vitae.">
+<!--
+  Full-length CV (D-032). The one-page résumé is `abishek-mk-resume.html`; this is the long form that
+  keeps everything the page limit cut. Source of every claim: docs/02-content-inventory.md.
+  Colors map to design/tokens.json (light theme); the page is paper, so it has no dark theme.
+  Multi-page on purpose: @page carries the margins so every page is padded, not just the first.
+  Print: Ctrl+P → Destination "Save as PDF", Paper A4, Margins "Default", Scale 100%, Background graphics on.
+-->
+<style>
+  /* Geist + Geist Mono (SIL OFL), self-hosted from resume/fonts so the PDF never depends on the network */
+  @font-face { font-family: 'Geist'; font-weight: 100 900; font-display: block; src: url('fonts/geist-latin-ext.woff2') format('woff2'); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Geist'; font-weight: 100 900; font-display: block; src: url('fonts/geist-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Geist Mono'; font-weight: 100 900; font-display: block; src: url('fonts/geist-mono-latin-ext.woff2') format('woff2'); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Geist Mono'; font-weight: 100 900; font-display: block; src: url('fonts/geist-mono-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+  :root {
+    --paper: #FFFFFF;      /* color.light.raised */
+    --desk: #ECEEE7;       /* color.light.bg (screen only) */
+    --ink: #141712;        /* color.light.text */
+    --muted: #51564B;      /* color.light.muted */
+    --line: #D3D7CB;       /* color.light.line */
+    --accent: #8F5304;     /* color.light.accent, deep marigold */
+    --sans: 'Geist', ui-sans-serif, system-ui, 'Segoe UI', sans-serif;  /* font.text */
+    --mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', monospace;     /* font.mono */
+  }
+
+  @page { size: A4; margin: 13mm 15mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: var(--desk); color: var(--ink); font-family: var(--sans); font-size: 9.2pt; line-height: 1.4; font-feature-settings: 'tnum' 1; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- screen chrome (never printed) ---------- */
+  .bar { position: sticky; top: 0; z-index: 2; display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 10px 16px; background: var(--desk); border-bottom: 1px solid var(--line); font-size: 13px; }
+  .bar button { font: 600 13px var(--sans); color: var(--paper); background: var(--ink); border: 0; border-radius: 999px; padding: 8px 18px; cursor: pointer; }
+  .bar button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .fit { color: var(--muted); }
+
+  /* ---------- the sheet: on screen it mimics A4 with the @page margins ---------- */
+  .sheet { width: 210mm; margin: 24px auto; padding: 13mm 15mm; background: var(--paper); box-shadow: 0 1px 2px rgba(20,23,18,.06), 0 12px 40px rgba(20,23,18,.10); }
+
+  header { padding-bottom: 3.2mm; border-bottom: 1.5pt solid var(--ink); }
+  h1 { font-size: 23pt; font-weight: 700; letter-spacing: -0.025em; line-height: 1; }
+  .role { margin-top: 1.6mm; font-size: 10.5pt; font-weight: 500; color: var(--accent); }
+  .contact + .contact { margin-top: .5mm; }
+  .contact { margin-top: 2mm; display: flex; flex-wrap: wrap; column-gap: 0; row-gap: .6mm; font-size: 8.4pt; color: var(--muted); }
+  .contact li { list-style: none; }
+  .contact li + li::before { content: '·'; margin: 0 2mm; color: var(--line); font-weight: 700; }
+  .contact a:hover { color: var(--accent); }
+
+  section { margin-top: 5mm; }
+  h2 { display: flex; align-items: center; gap: 2.5mm; margin-bottom: 2.4mm; font: 600 7.6pt var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); break-after: avoid; }
+  h2::after { content: ''; flex: 1; height: .6pt; background: var(--line); }
+
+  .summary { color: var(--ink); }
+
+  .job + .job { margin-top: 4mm; }
+  .job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; break-after: avoid; }
+  h3 { font-size: 10pt; font-weight: 600; letter-spacing: -0.005em; }
+  h3 .org { font-weight: 600; }
+  h3 .sep { color: var(--muted); font-weight: 400; }
+  h3 .note { font-weight: 400; color: var(--muted); }
+  .when { flex: none; font: 500 8.2pt var(--mono); color: var(--muted); }
+  .where { margin-top: .4mm; font-size: 8.4pt; color: var(--muted); }
+
+  /* native markers on purpose: absolutely positioned bullets paint in a later layer and scramble the PDF text order that ATS parsers read */
+  ul.points { margin-top: 1.4mm; padding-left: 3.4mm; list-style: disc outside; }
+  ul.points li { padding-left: .6mm; break-inside: avoid; }
+  ul.points li + li { margin-top: 1mm; }
+  ul.points li::marker { color: var(--accent); font-size: .95em; }
+  ul.points b { font-weight: 600; }
+
+  .proj { break-inside: avoid; }
+  .proj + .proj { margin-top: 2.6mm; }
+  .proj h3 { font-size: 9.4pt; }
+  .proj p { margin-top: .3mm; }
+  .proj .stack { font: 500 8pt var(--mono); color: var(--muted); }
+
+  .skills { display: grid; grid-template-columns: 27mm 1fr; row-gap: 1mm; }
+  .skills dt { font-weight: 600; }
+  .skills dd { color: var(--ink); }
+
+  .edu .job-head + .job-head { margin-top: 2mm; }
+  .edu .where { margin-bottom: 1mm; }
+
+  ul.rec { margin-top: .4mm; padding-left: 3.4mm; list-style: disc outside; }
+  ul.rec li + li { margin-top: .8mm; }
+  ul.rec li::marker { color: var(--accent); font-size: .95em; }
+  ul.rec span { color: var(--muted); }
+
+  @media print {
+    body { background: var(--paper); }
+    .bar { display: none; }
+    .sheet { width: auto; margin: 0; padding: 0; box-shadow: none; }
+  }
+  @media screen and (max-width: 840px) {
+    .sheet { margin: 16px; } /* phones scroll sideways: the sheet stays true A4 so the page estimate stays honest */
+  }
+</style>
+</head>
+<body>
+
+<div class="bar" role="toolbar" aria-label="CV tools">
+  <button type="button" onclick="window.print()">Save as PDF</button>
+  <span class="fit" id="fit">Counting pages…</span>
+</div>
+
+<main class="sheet" id="sheet">
+
+  <header>
+    <h1>M.K. Abishek</h1>
+    <p class="role">Software Engineer · Mobile, Backend &amp; Cloud</p>
+    <ul class="contact">
+      <li>Tiruchirappalli, Tamil Nadu, India</li>
+      <li><a href="tel:+919345161419">+91 93451 61419</a></li>
+      <li><a href="mailto:abishek.mk.01@gmail.com">abishek.mk.01@gmail.com</a></li>
+    </ul>
+    <ul class="contact">
+      <li><a href="https://abishek.wiozen.in/portfolio">abishek.wiozen.in/portfolio</a></li>
+      <li><a href="https://www.linkedin.com/in/its-abishek-mk">linkedin.com/in/its-abishek-mk</a></li>
+      <li><a href="https://github.com/Its-Abishek-01">github.com/Its-Abishek-01</a></li>
+    </ul>
+  </header>
+
+  <section aria-labelledby="h-profile">
+    <h2 id="h-profile">Profile</h2>
+    <p class="summary">Software engineer who builds the app, the API and the server it runs on. At Massclick I built the Flutter app from its first commit and work across the Node and MongoDB API, the React web platform and the Linux servers underneath, from search and geo ranking to incident response. Alongside it I build <b>VandiZone</b>, a machine-and-truck hire marketplace, entirely on my own: two Flutter apps, the office console the business is run from, and the public website, on Firebase with Cloud Functions. Before Massclick I led mobile development at Digihope Technologies for a year, shipping Flutter apps to the Play Store and App Store.</p>
+  </section>
+
+  <section aria-labelledby="h-exp">
+    <h2 id="h-exp">Experience</h2>
+
+    <article class="job">
+      <div class="job-head">
+        <h3>Software Engineer<span class="sep"> — </span><span class="org">Massclick</span></h3>
+        <span class="when">2026 – Present</span>
+      </div>
+      <p class="where">Tiruchirappalli · Local-search platform for Tamil Nadu · 1,557 commits across the web platform and the mobile app (1,294 of 1,926 on the platform, 263 of 264 on the app)</p>
+      <ul class="points">
+        <li><b>Mobile:</b> built the Flutter app from its very first commit to v2.1.1 (build 20) on Android and iOS, in English and Tamil — Riverpod state, go_router navigation, cached feeds that refresh in the background, a map with a draggable results sheet, a leads dashboard and the Spotlight feed, with OTP auto-fill, App Links and an FCM lead channel.</li>
+        <li><b>Web to mobile parity:</b> audited 20 web features against the app, wrote a P0/P1/P2 gap report and shipped roughly 25 items from it, including chat, events, the feed, the knowledge hub and marketing materials.</li>
+        <li><b>Search and geo:</b> built the search engine behind every query — category intent detection, MongoDB <span class="stack">$text</span> scoring and distance ranking over ~18,300 master locations and ~11,000 businesses, with nearby-pincode and district fallbacks so a query never dead-ends. Trichy coordinate coverage: localities 7.8% → 89.3%, wards 12.8% → 71.6%, zones 33% → 100%.</li>
+        <li><b>Security — SMS pumping:</b> an attacker hit the OTP endpoint for 9,907 fraudulent messages (₹1,882) across 155 numbers in four waves, with 48 fixed targets taking 98% of the traffic. Blocked at the edge within minutes of detection, then rebuilt the defence: proxy-aware true client IP, per-number and global daily caps, verify lockout, legacy routes retired behind 410s, a decoy honeypot that answers like success and sends nothing, and an admin control page. Sign-in was restored the same day; the attacker is still active and now costs ₹0. Reconciled the provider's full export against the bill to establish the real figures, correcting an earlier log-line miscount that read six times too high.</li>
+        <li><b>Database:</b> moved every production MongoDB database to a dedicated server with roughly 90 seconds of cutover downtime, then added nightly backups, a pull-based off-box copy verified by SHA-256, and repointed Prometheus and Grafana monitoring.</li>
+        <li><b>Storage:</b> re-keyed 36,187 S3 objects (1.77 GB) to an owner-based layout — 33,096 of 33,096 copied, 0 failed, nothing deleted — with plan, verify, resume and rollback tooling and a lint gate over 51 migrated call sites.</li>
+        <li><b>Performance and SEO:</b> cut the business-detail bundle from 173 KB to 92 KB (brotli) and server-rendered the hero so mobile LCP paints before JavaScript; closed a crawl trap of roughly 120–198k junk Googlebot requests a day that was pinning database CPU, fixing the generator and returning 410s, which took non-410 4xx responses from 6–7% to about 0.1% across a 24,000+ URL sitemap.</li>
+        <li><b>Payments:</b> integrated the PhonePe gateway and Pay2All BBPS bill fetch and recharge, and built server-rendered certificates with QR verification, issued automatically on payment.</li>
+        <li><b>Lead pipeline:</b> save-first lead capture with WhatsApp, FCM and WebSocket alerts decoupled from the write path, and premium-first dispatch.</li>
+        <li><b>Data quality:</b> found 41 true duplicates among ~11,400 listings using name, category and fuzzy address matching.</li>
+        <li><b>Infrastructure and incidents:</b> handled a provider routing outage by moving the application server to a new IP and updating DNS, SPF, CI and firewall rules, with a full written incident log; separately diagnosed four root causes behind deploy downtime and designed a rolling-restart and symlink-swap release.</li>
+        <li><b>Tooling:</b> cut APK image weight by 58.5% with WebP, and wrote python-pptx generators for two summit decks (34 and 25 slides) with automated layout, contrast and copy checks.</li>
+      </ul>
+    </article>
+
+    <article class="job">
+      <div class="job-head">
+        <h3>Freelance Full-Stack Engineer<span class="sep"> — </span><span class="org">VandiZone<span class="note"> (direct client)</span></h3>
+        <span class="when">Ongoing</span>
+      </div>
+      <p class="where">A marketplace for hiring JCBs, cranes and goods trucks · sole developer of all four surfaces: the customer app, the captain and fleet-owner app, the office console and the public website, on Firebase with Cloud Functions</p>
+      <ul class="points">
+        <li><b>Dispatch engine:</b> a job is offered only to captains who are on duty, verified, driving the right model, within range of the site, and whose machine genuinely fits the load — payload in tons, body type, hazardous certification, trailer length, and a crane's lift weight at the height asked. Immediate bookings search at once, scheduled ones begin shortly before the start time, and an unaccepted booking times out at no charge. Office staff can hand-pick a captain, with the booking held while they choose.</li>
+        <li><b>Proof of work:</b> every job runs as gated stages that must be proved before the next opens — GPS arrival, 4-digit codes that appear only in the customer's app and never on the captain's phone, and compulsory completion photos. Truck jobs add loaded weight, a weighbridge slip, an e-way bill photo and number, a platform-issued seal number, and a separate code from the receiver at delivery.</li>
+        <li><b>Pricing, hourly:</b> a rate card with a one-hour minimum then quarter-hour blocks, flat charges for bringing a machine and taking it home, distance beyond the covered round trip, a full-day discount, and per-model minimum floors. The customer sees an estimate at booking; the final bill is recomputed from the real time worked and the machine's real journey.</li>
+        <li><b>Pricing, reverse auction:</b> for trucks the customer names the unit and the rate against a suggested market figure with a hard floor, and captains either accept or counter. Counter-offers are blind to each other and presented cheapest-first; the customer can raise their rate, which re-notifies everyone holding the offer.</li>
+        <li><b>Settlement:</b> halt charges the customer accepts or rejects, shortage deductions the captain or owner can dispute, and mid-job cash advances netted off the bill — with the bill locked while any of them is undecided, and a queue in the console for the ones needing a human decision.</li>
+        <li><b>Money and tax:</b> Razorpay payments verified server-side before a booking reads as paid, a customer wallet, cash collection, payment links for customers without the app, refunds credited to the wallet, commission and GST taken from each fare, owner payouts with negative-balance recovery on cash jobs, and reviewed bank withdrawals. Tax invoices are issued per booking with CGST and SGST split in-state or a single IGST line otherwise, and are immutable — a wrong invoice is cancelled and reissued.</li>
+        <li><b>Policy as data:</b> cancellation tiers are computed on the pre-tax price and frozen onto each booking at confirmation, so changing the rate card later can never rewrite what an old booking agreed to.</li>
+        <li><b>Supply side:</b> verification queues for captains, owners and machines with reasons the applicant sees, edit-with-notification, and type changes that keep a machine's verification; expiring insurance or fitness quietly removes a machine from dispatch after reminders. Owners register machines with capability figures, invite captains, set a duty chart of who may drive what, and watch a live fleet board of who is on a job, idle or off duty.</li>
+        <li><b>Live operations:</b> captain location that keeps reporting through a closed app and a locked screen, a "no signal" flag when it stops, an office live map with route replay, shareable public tracking links stripped of phone numbers and amounts, and in-app chat and calling scoped to the job and read-only afterwards.</li>
+        <li><b>Reliability on the driver's phone:</b> job offers ring on the alarm channel so Silent and Vibrate cannot mute them, and a built-in diagnostic fires a test offer and then audits alarm volume, Do Not Disturb, the notification channel, battery saver, background restriction, location permission and the push connection, each with a one-tap fix.</li>
+        <li><b>Office console and website:</b> around twenty modules — bookings with settlement, work pipeline, photos, route trail and chat; phone bookings with a live bill preview; customers, verification, refunds, withdrawals, invoices, GST and revenue reports, pricing and notifications — plus a public site with instant quotes, captain sign-up, a load board with an approval queue, and a public page for checking that a vehicle, captain or booking code is genuine. Categories, rates, dispatch tuning, forced updates and maintenance mode all change from the console with no app release.</li>
+      </ul>
+    </article>
+
+    <article class="job">
+      <div class="job-head">
+        <h3>Head of Mobile App Development<span class="sep"> — </span><span class="org">Digihope Technologies</span></h3>
+        <span class="when">2025 – 2026</span>
+      </div>
+      <p class="where">Tiruchirappalli · One year leading the mobile team</p>
+      <ul class="points">
+        <li>Led cross-platform Flutter apps for Android and iOS: architecture, state management and API integration, working alongside the PHP and Express.js backend teams.</li>
+        <li>Owned every release on Play Console, App Store and TestFlight, from testing tracks through to production and policy compliance.</li>
+        <li>Reduced crash rates through continuous monitoring and performance work, and mentored junior developers.</li>
+        <li>Built <b>Veezzo</b>, a food-delivery app with restaurant browsing, ordering, live order tracking and payments, on AWS API Gateway, Lambda and S3 with geolocation and a payment gateway.</li>
+      </ul>
+    </article>
+
+    <article class="job">
+      <div class="job-head">
+        <h3>Intern, Flutter &amp; React<span class="sep"> — </span><span class="org">Syuap Tech Solution</span></h3>
+        <span class="when">2024</span>
+      </div>
+      <p class="where">Tiruchirappalli · Six months during the M.Sc</p>
+      <ul class="points">
+        <li>Three months building Flutter mobile apps, then three months on React, working in Agile sprints on live, deployed applications.</li>
+        <li>Built <b>Vmark</b>, a multi-seller e-commerce platform in React, Express and Node.js: seller registration and product management, authentication, and CRUD over REST.</li>
+      </ul>
+    </article>
+  </section>
+
+  <section aria-labelledby="h-proj">
+    <h2 id="h-proj">Selected projects</h2>
+
+    <div class="proj">
+      <div class="job-head">
+        <h3>VandiZone<span class="sep"> — </span><span class="org">machine and truck hire marketplace</span></h3>
+        <span class="when">Ongoing</span>
+      </div>
+      <p class="stack">Flutter · Firebase · Cloud Functions · Firestore · Google Maps · Razorpay</p>
+      <p>My own client project, described in full under Experience: two Android apps, an office console and the public website, built and maintained alone.</p>
+    </div>
+
+    <div class="proj">
+      <div class="job-head">
+        <h3>COS OD<span class="sep"> — </span><span class="org">class attendance system</span></h3>
+      </div>
+      <p class="stack">Flutter · Laravel · REST</p>
+      <p>My own project: a class-wise attendance application with a Laravel REST backend.</p>
+    </div>
+
+    <div class="proj">
+      <div class="job-head">
+        <h3>Daybook<span class="sep"> — </span><span class="org">agency reporting tool</span></h3>
+      </div>
+      <p class="stack">Next.js 16 · Firebase App Hosting · Firestore</p>
+      <p>Internal reports application with role-based access, a test suite and CI.</p>
+    </div>
+
+    <div class="proj">
+      <div class="job-head">
+        <h3>Sound Detective<span class="sep"> — </span><span class="org">Android diagnostics app</span></h3>
+      </div>
+      <p class="stack">Flutter · native background collectors</p>
+      <p>Explains unidentified phone sounds by collecting background signals and reporting a likely cause with a confidence score.</p>
+    </div>
+
+    <div class="proj">
+      <div class="job-head">
+        <h3>Watch teardown<span class="sep"> — </span><span class="org">3D scroll experiment</span></h3>
+      </div>
+      <p class="stack">Three.js</p>
+      <p>A scroll-scrubbed exploded view of a mechanical watch movement.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-skills">
+    <h2 id="h-skills">Technical skills</h2>
+    <dl class="skills">
+      <dt>Mobile</dt><dd>Flutter, Dart, Riverpod, go_router, Firebase (Auth, Firestore, Realtime Database, Cloud Functions, FCM), Google Maps, Play Console, App Store, TestFlight</dd>
+      <dt>Backend</dt><dd>Node.js, Express, MongoDB, Redis, Socket.IO, REST APIs, WebSockets, webhooks, Laravel / PHP</dd>
+      <dt>Web</dt><dd>React, Next.js, JavaScript, TypeScript, HTML, CSS, server-side rendering, Core Web Vitals, technical SEO</dd>
+      <dt>Cloud &amp; ops</dt><dd>AWS (S3, EC2, Lambda, API Gateway), Firebase App Hosting, Docker, nginx, Linux, GitHub Actions, Prometheus, Grafana</dd>
+      <dt>Payments</dt><dd>Razorpay, PhonePe, Pay2All BBPS, GST invoicing (CGST / SGST / IGST)</dd>
+      <dt>Languages</dt><dd>Dart, JavaScript, TypeScript, Python, PHP, Java, C++</dd>
+    </dl>
+  </section>
+
+  <section class="edu" aria-labelledby="h-edu">
+    <h2 id="h-edu">Education</h2>
+    <div class="job-head">
+      <h3>M.Sc Computer Science<span class="sep"> — </span><span class="org">Bishop Heber College, Tiruchirappalli</span></h3>
+      <span class="when">2023 – 2025</span>
+    </div>
+    <p class="where">GPA 8.6 · Second prize, aptitude test competition</p>
+    <div class="job-head">
+      <h3>B.Sc Computer Science<span class="sep"> — </span><span class="org">National College of Arts and Science, Tiruchirappalli</span></h3>
+      <span class="when">2020 – 2023</span>
+    </div>
+    <p class="where">GPA 8.4 · Organised Naco Tech 2022 and coordinated its Python quiz</p>
+    <div class="job-head">
+      <h3>HSC and SSLC<span class="sep"> — </span><span class="org">Lakshmi Matric Higher Secondary School, Manapparai</span></h3>
+      <span class="when">2018 / 2020</span>
+    </div>
+    <p class="where">SSLC 8.2 (2018) · HSC 7.6 (2020) · Student of the Year 2020</p>
+  </section>
+
+  <section aria-labelledby="h-rec">
+    <h2 id="h-rec">Recognition</h2>
+    <ul class="rec">
+      <li>Student of the Year 2020 <span>· Lakshmi Matric Higher Secondary School, Manapparai</span></li>
+      <li>Second prize, aptitude test competition <span>· Bishop Heber College</span></li>
+      <li>Organiser, Naco Tech 2022, and coordinator of its Python quiz <span>· National College of Arts and Science</span></li>
+    </ul>
+  </section>
+
+</main>
+
+<script>
+  // Tells you on screen roughly how many A4 pages this prints to (the bar is never printed).
+  (function () {
+    var out = document.getElementById('fit');
+    function check() {
+      var sheet = document.getElementById('sheet');
+      var pageH = (297 - 26) * 96 / 25.4;            // A4 minus the 13mm @page margins
+      var used = sheet.getBoundingClientRect().height - (26 * 96 / 25.4); // screen padding mirrors them
+      var pages = Math.ceil(used / pageH);
+      var lastFill = Math.round(((used % pageH) || pageH) / pageH * 100);
+      out.textContent = pages + ' A4 page' + (pages === 1 ? '' : 's') + ' · last page about ' + lastFill + '% full';
+    }
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(check);
+    addEventListener('resize', check);
+  })();
+</script>
+</body>
+</html>
