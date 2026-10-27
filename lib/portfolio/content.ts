@@ -37,7 +37,7 @@ function proj(o: ProjOpts): string {
 function logView(): string {
   const L = [
     { c: 'head', br: 'HEAD → massclick', w: '2026 – now', t: 'Massclick', r: 'Software Engineer', p: 'A local-search platform for Tamil Nadu. The Flutter app, the Node and MongoDB API, the React web and its SEO, and the servers underneath.', s: [] as string[][] },
-    { c: 'fl', br: 'freelance/vandizone', w: 'ongoing', t: 'VandiZone', r: 'Freelance · my own client', p: 'Customer and captain apps in Flutter and Firebase, built directly with the client.', s: [] },
+    { c: 'fl', br: 'freelance/vandizone', w: 'ongoing', t: 'VandiZone', r: 'Freelance · my own client', p: 'A marketplace for hiring JCBs, cranes and goods trucks. Two Flutter apps, the office console and the public website — the whole platform is mine.', s: [] },
     { c: '', br: 'digihope', w: '2025 – 2026', t: 'Digihope Technologies', r: 'Head of Mobile App Development · 1 year', p: 'Led the Flutter apps for Android and iOS: architecture, state management, every Play Console, App Store and TestFlight release. Cut crash rates and mentored junior developers.', s: [['Veezzo', 'food delivery on AWS Lambda + S3']] },
     { c: '', br: 'syuap', w: '2024', t: 'Syuap Tech Solution', r: 'Intern · 6 months, during my M.Sc', p: 'Three months building Flutter mobile apps, then three months on React, in Agile sprints on live apps.', s: [['Vmark', 'multi-seller e-commerce, React + Express']] },
     { c: '', br: 'msc', w: '2023 – 2025', t: 'M.Sc, Bishop Heber College', r: 'Tiruchirappalli · GPA 8.6', p: 'Second prize in an aptitude test competition.', s: [] },
@@ -78,22 +78,26 @@ I build the **app**, the **API**, and the **server** it runs on.
 - Flutter · Node.js · MongoDB · React · AWS
 - Syuap → Digihope → Massclick, plus VandiZone
 - open to work: full-time or freelance`,
-    view: () => `<div class="readme"><p class="hello rv">// hello, world</p><h1 class="rv">M.K. <em>Abishek</em></h1><p class="tag rv">I build the <b>app</b>, the <b>API</b>, and the <b>server</b> it runs on.</p><p class="who rv">Software engineer in Tiruchirappalli. I interned at Syuap, led mobile at Digihope for a year, build VandiZone for my own client, and since April 2026 work on every layer of Massclick.</p><div class="shields rv"><span class="shield"><span>commits</span><b>1,557</b></span><span class="shield" style="--c:#F2A93B"><span>s3 re-key</span><b>33,096 / 33,096</b></span><span class="shield" style="--c:#7FB8FF"><span>db cutover</span><b>~90 s</b></span><span class="shield" style="--c:#B39DFF"><span>app</span><b>v2.1.1</b></span><span class="shield"><span>geo coverage</span><b>89.3%</b></span></div><div class="ctas rv"><a class="cta pri" href="#f-vandizone" data-go="vandizone">See the work ↓</a><button class="cta" type="button" data-pal>Go to file ⌘K</button><a class="cta" href="#f-contact" data-go="contact">Contact</a><a class="cta" href="/">Hire me for a project →</a></div><p class="avail rv"><i></i>Open to work · full-time or freelance</p></div>`,
+    view: () => `<div class="readme"><p class="hello rv">// hello, world</p><h1 class="rv">M.K. <em>Abishek</em></h1><p class="tag rv">I build the <b>app</b>, the <b>API</b>, and the <b>server</b> it runs on.</p><p class="who rv">Software engineer in Tiruchirappalli. I interned at Syuap, led mobile at Digihope for a year, build the whole VandiZone marketplace for my own client, and since April 2026 work on every layer of Massclick.</p><div class="shields rv"><span class="shield"><span>commits</span><b>1,557</b></span><span class="shield" style="--c:#F2A93B"><span>s3 re-key</span><b>33,096 / 33,096</b></span><span class="shield" style="--c:#7FB8FF"><span>db cutover</span><b>~90 s</b></span><span class="shield" style="--c:#B39DFF"><span>app</span><b>v2.1.1</b></span><span class="shield"><span>geo coverage</span><b>89.3%</b></span></div><div class="ctas rv"><a class="cta pri" href="#f-vandizone" data-go="vandizone">See the work ↓</a><button class="cta" type="button" data-pal>Go to file ⌘K</button><a class="cta" href="#f-contact" data-go="contact">Contact</a><a class="cta" href="/">Hire me for a project →</a></div><p class="avail rv"><i></i>Open to work · full-time or freelance</p></div>`,
   },
   {
-    id: 'vandizone', path: 'work/vandizone.dart', ext: 'dart', dir: 'work', star: true, cmd: 'flutter run work/vandizone.dart', tags: ['vandizone', 'freelance', 'client', 'flutter', 'firebase', 'maps', 'mobile', 'realtime'], ds: 'My own client project · Flutter + Firebase',
-    src: `// VandiZone · my own client · Flutter + Firebase
+    id: 'vandizone', path: 'work/vandizone.dart', ext: 'dart', dir: 'work', star: true, cmd: 'flutter run work/vandizone.dart', tags: ['vandizone', 'freelance', 'client', 'flutter', 'firebase', 'maps', 'mobile', 'realtime', 'marketplace', 'dispatch', 'payments', 'razorpay', 'gst', 'console', 'logistics', 'jcb', 'crane', 'truck'], ds: 'A whole marketplace, built solo · Flutter + Firebase',
+    src: `// VandiZone · my own client · Flutter + Firebase + Cloud Functions
 // (a sketch of the idea, not production code)
 
-final trip = FirebaseFirestore.instance
-    .collection('bookings').doc(bookingId);
+// a job is only ever offered to a captain who can really do it
+final shortlist = (await captains
+        .where('onDuty', isEqualTo: true)
+        .where('verified', isEqualTo: true)
+        .where('model', isEqualTo: booking.model)
+        .get())
+    .where((c) => c.within(booking.site, radiusKm))
+    .where((c) => c.machine.fits(booking.load)) // tons · body · ft · lift
+    .where((c) => c.papersValid(today));        // insurance · fitness
 
-// the customer app and the captain app share one live doc
-trip.snapshots().listen((t) {
-  map.animateCamera(t.captainLocation); // live tracking
-  notify(t.status);                     // FCM on every change
-});`,
-    view: () => proj({ feat: true, meta: 'Freelance · Flutter + Firebase', badge: 'My own client project', title: 'VandiZone', sum: 'Two apps I build directly with my client: a Customer Booking app and a Captain/Owner app, kept in sync in real time.', points: ['Real-time bookings with Firebase Realtime Database and Firestore', 'Google Maps live vehicle tracking, route navigation and trip history', 'Phone/email login, and push notifications for every trip update'], mv: '2 apps', ml: 'one live booking system', chips: ['Flutter', 'Firebase', 'Firestore', 'Google Maps', 'FCM'] }),
+// then it rings on the alarm channel, and work only starts
+// when the customer reads out a 4-digit code the captain never sees.`,
+    view: () => proj({ feat: true, meta: 'Freelance · Flutter + Firebase + Cloud Functions', badge: 'My own client project', title: 'VandiZone', sum: 'A marketplace for hiring JCBs, cranes and goods trucks. I build the whole thing on my own: the customer app, the captain and owner app, the office console the business is run from, and the public website.', points: ['A dispatch engine that offers a job only to drivers who are on duty, verified and in range, and whose machine actually fits the load — payload, body type, trailer length, crane lift and height', 'Work proved rather than trusted: gated stages unlocked by GPS, 4-digit codes only the customer can see, completion photos, weighbridge slips and e-way bills', 'Two pricing engines — hourly billing recomputed from the real worked time, and a blind counter-offer auction where the customer names a rate and drivers bid against it', 'Razorpay, wallets, commission and owner payouts, GST invoicing split CGST/SGST or IGST, and cancellation terms frozen onto each booking so a later rate change can never rewrite an old one', 'An office console of around twenty modules that opens categories, retunes dispatch and forces app updates without shipping a release'], mv: '4 surfaces', ml: 'two apps, a console and the website — all mine', chips: ['Flutter', 'Firebase', 'Cloud Functions', 'Firestore', 'Google Maps', 'Razorpay'] }),
   },
   {
     id: 'mobile', path: 'work/massclick_app.dart', ext: 'dart', dir: 'work', cmd: 'flutter run work/massclick_app.dart', tags: ['massclick', 'mobile', 'flutter', 'riverpod', 'android', 'ios', 'app'], ds: 'Massclick app · built from the first commit',

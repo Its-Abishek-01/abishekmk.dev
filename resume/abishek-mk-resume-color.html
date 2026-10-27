@@ -33,7 +33,7 @@
   @page { size: A4; margin: 0; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  body { background: var(--desk); color: var(--ink); font-family: var(--sans); font-size: 8.8pt; line-height: 1.5; font-feature-settings: 'tnum' 1; -webkit-font-smoothing: antialiased; }
+  body { background: var(--desk); color: var(--ink); font-family: var(--sans); font-size: 8.8pt; line-height: 1.4; font-feature-settings: 'tnum' 1; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
 
   /* ---------- screen chrome (never printed) ---------- */
@@ -45,18 +45,18 @@
 
   /* ---------- the sheet: sidebar | main (main comes first in the DOM so it reads first) ---------- */
   .sheet { width: 210mm; min-height: 297mm; margin: 24px auto; display: grid; grid-template-columns: 58mm 1fr; grid-template-areas: "side main"; background: var(--paper); box-shadow: 0 1px 2px rgba(20,23,18,.06), 0 12px 40px rgba(20,23,18,.10); }
-  .main { grid-area: main; padding: 15mm 12mm 10mm 8mm; }
+  .main { grid-area: main; padding: 13.5mm 12mm 9mm 8mm; }
   .side { grid-area: side; padding: 16.2mm 6mm 10mm 10mm; background: var(--tint); }
 
   h2 { margin-bottom: 2.4mm; padding-bottom: 1.1mm; border-bottom: .8pt solid var(--rule); font-size: 8pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); }
-  section + section { margin-top: 7.4mm; }
+  section + section { margin-top: 5.8mm; }
 
   /* main */
-  .head { padding-bottom: 4.6mm; margin-bottom: 6.4mm; border-bottom: 1.4pt solid var(--navy); }
+  .head { padding-bottom: 4mm; margin-bottom: 5.2mm; border-bottom: 1.4pt solid var(--navy); }
   h1 { font-size: 25pt; font-weight: 700; line-height: 1; letter-spacing: -0.025em; color: var(--navy); }
   .title { margin-top: 2mm; font-size: 10.5pt; font-weight: 500; color: var(--muted); }
 
-  .job + .job { margin-top: 4.8mm; }
+  .job + .job { margin-top: 3.8mm; }
   .job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
   h3 { font-size: 9.8pt; font-weight: 600; }
   .when { flex: none; font-size: 8.2pt; font-weight: 500; color: var(--muted); }
@@ -66,18 +66,18 @@
   /* native markers on purpose: positioned bullets paint in a later layer and scramble the PDF text order */
   ul.points { margin-top: 1.4mm; padding-left: 3.4mm; list-style: disc outside; }
   ul.points li { padding-left: .6mm; }
-  ul.points li + li { margin-top: 1.2mm; }
+  ul.points li + li { margin-top: .9mm; }
   ul.points li::marker { color: var(--navy); }
   ul.points b { font-weight: 600; }
 
   /* sidebar */
-  .side { font-size: 8.2pt; line-height: 1.4; }
+  .side { font-size: 8.2pt; line-height: 1.5; }
   .contact { list-style: none; }
-  .contact li + li { margin-top: 1.3mm; }
+  .contact li + li { margin-top: 1.7mm; }
   .contact li { overflow-wrap: anywhere; }
-  .group + .group { margin-top: 3mm; }
+  .group + .group { margin-top: 3.8mm; }
   .group h3, .edu h3 { font-size: 8.4pt; font-weight: 600; color: var(--navy); }
-  .edu + .edu { margin-top: 2.6mm; }
+  .edu + .edu { margin-top: 3.2mm; }
   .edu p { color: var(--ink); }
   .edu .meta { color: var(--muted); }
   .rec { padding-left: 3.2mm; list-style: disc outside; }
@@ -112,7 +112,7 @@
 
     <section aria-labelledby="h-profile">
       <h2 id="h-profile">Profile</h2>
-      <p>Software engineer who builds the app, the API and the server it runs on: Flutter, Node.js, MongoDB, React and AWS. Built the Massclick mobile app from its first commit and works across its API, web and production servers. Previously led mobile development at Digihope Technologies, shipping Flutter apps to the Play Store and App Store.</p>
+      <p>Software engineer who builds the app, the API and the server it runs on: Flutter, Node.js, MongoDB, React and AWS. Built the Massclick mobile app from its first commit and works across its API, web and production servers. Builds VandiZone, a vehicle-hire marketplace, end to end on my own. Previously led mobile development at Digihope Technologies, shipping Flutter apps to the Play Store and App Store.</p>
     </section>
 
     <section aria-labelledby="h-exp">
@@ -125,19 +125,18 @@
           <li><b>Mobile:</b> built the Flutter app from the first commit to v2.1.1 for Android + iOS, in English + Tamil (263 of 264 commits); shipped ~25 items from a 20-feature web-parity audit.</li>
           <li><b>Search:</b> built the search engine: category intent, then MongoDB text and distance ranking over ~18,300 locations and ~11,000 businesses; Trichy locality coordinates 7.8% → 89.3%.</li>
           <li><b>Security:</b> stopped an SMS-pumping attack on the OTP endpoint (9,907 fraudulent SMS, ₹1,882): blocked at the edge in minutes, then shipped true client IP, per-number and daily caps, verify lockout and a decoy honeypot. It now costs ₹0.</li>
-          <li><b>Database:</b> moved production MongoDB to its own server with ~90 s of cutover downtime; nightly backups, a SHA-256-verified off-box copy, monitoring repointed.</li>
-          <li><b>Storage:</b> re-keyed 36,187 S3 objects (1.77 GB) to an owner-based layout: 33,096 of 33,096 copied, 0 failed, nothing deleted, with plan, verify, resume and rollback tooling.</li>
-          <li><b>Performance:</b> business-page JS 173 → 92 KB, a server-rendered hero so mobile LCP paints before JS; closed a crawl trap of ~120–198k junk Googlebot hits/day.</li>
-          <li><b>Payments:</b> PhonePe gateway, Pay2All BBPS bill fetch and recharge, and QR-verified certificates issued on payment.</li>
+          <li><b>Infrastructure:</b> moved production MongoDB to its own server with ~90 s of cutover downtime (SHA-256-verified off-box backups, monitoring repointed), and re-keyed 36,187 S3 objects (33,096 of 33,096, 0 failed) behind verify, resume and rollback tooling.</li>
+          <li><b>Web:</b> business-page JS 173 → 92 KB and a server-rendered hero so mobile LCP paints before JS; closed a crawl trap of ~120–198k junk Googlebot hits/day; shipped PhonePe and Pay2All BBPS.</li>
         </ul>
       </article>
 
       <article class="job">
-        <div class="job-head"><h3>Freelance Mobile Developer</h3><span class="when">Ongoing</span></div>
-        <p class="org"><b>VandiZone</b> · direct client</p>
+        <div class="job-head"><h3>Freelance Full-Stack Engineer</h3><span class="when">Ongoing</span></div>
+        <p class="org"><b>VandiZone</b> · direct client · marketplace for hiring JCBs, cranes and goods trucks · sole developer: two Flutter apps, the office console and the website, on Firebase and Cloud Functions</p>
         <ul class="points">
-          <li>Built Customer Booking and Captain/Owner apps in Flutter and Firebase, synced live.</li>
-          <li>Google Maps live vehicle tracking, route navigation and trip history; phone/email login and FCM trip alerts.</li>
+          <li><b>Dispatch and proof of work:</b> a job is offered only to on-duty, verified drivers in range whose machine fits the load (payload, body type, trailer length, crane lift), then runs as gated stages proved by GPS, 4-digit customer codes, photos, weighbridge slips and e-way bills.</li>
+          <li><b>Money:</b> two pricing engines — hourly billing recomputed from real worked time, and a blind counter-offer auction for trucks — with Razorpay, wallets, commission payouts, GST invoicing (CGST/SGST or IGST) and cancellation terms frozen onto each booking.</li>
+          <li><b>Live operations:</b> tracking that keeps reporting through a locked screen, share links stripped of personal data, in-app chat, a public load board, and a ~20-module office console that changes rates and forces app updates with no release.</li>
         </ul>
       </article>
 

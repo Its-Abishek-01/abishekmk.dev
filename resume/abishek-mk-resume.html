@@ -33,7 +33,7 @@
   @page { size: A4; margin: 0; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  body { background: var(--desk); color: var(--ink); font-family: var(--sans); font-size: 9pt; line-height: 1.42; font-feature-settings: 'tnum' 1; -webkit-font-smoothing: antialiased; }
+  body { background: var(--desk); color: var(--ink); font-family: var(--sans); font-size: 9pt; line-height: 1.33; font-feature-settings: 'tnum' 1; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
 
   /* ---------- screen chrome (never printed) ---------- */
@@ -44,7 +44,7 @@
   .fit.bad { color: #AE2F1C; font-weight: 600; } /* color.light.signal */
 
   /* ---------- the sheet ---------- */
-  .sheet { width: 210mm; min-height: 297mm; margin: 24px auto; padding: 12mm 15mm 11mm; background: var(--paper); box-shadow: 0 1px 2px rgba(20,23,18,.06), 0 12px 40px rgba(20,23,18,.10); }
+  .sheet { width: 210mm; min-height: 297mm; margin: 24px auto; padding: 11.5mm 15mm 9mm; background: var(--paper); box-shadow: 0 1px 2px rgba(20,23,18,.06), 0 12px 40px rgba(20,23,18,.10); }
 
   header { padding-bottom: 3.2mm; border-bottom: 1.5pt solid var(--ink); }
   h1 { font-size: 23pt; font-weight: 700; letter-spacing: -0.025em; line-height: 1; }
@@ -55,13 +55,13 @@
   .contact li + li::before { content: '·'; margin: 0 2mm; color: var(--line); font-weight: 700; }
   .contact a:hover { color: var(--accent); }
 
-  section { margin-top: 5mm; }
-  h2 { display: flex; align-items: center; gap: 2.5mm; margin-bottom: 2.2mm; font: 600 7.6pt var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+  section { margin-top: 4.1mm; }
+  h2 { display: flex; align-items: center; gap: 2.5mm; margin-bottom: 1.9mm; font: 600 7.6pt var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
   h2::after { content: ''; flex: 1; height: .6pt; background: var(--line); }
 
   .summary { color: var(--ink); }
 
-  .job + .job { margin-top: 3.6mm; }
+  .job + .job { margin-top: 2.9mm; }
   .job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
   h3 { font-size: 10pt; font-weight: 600; letter-spacing: -0.005em; }
   h3 .org { font-weight: 600; }
@@ -73,11 +73,11 @@
   /* native markers on purpose: absolutely positioned bullets paint in a later layer and scramble the PDF text order that ATS parsers read */
   ul.points { margin-top: 1.2mm; padding-left: 3.4mm; list-style: disc outside; }
   ul.points li { padding-left: .6mm; }
-  ul.points li + li { margin-top: .9mm; }
+  ul.points li + li { margin-top: .75mm; }
   ul.points li::marker { color: var(--accent); font-size: .95em; }
   ul.points b { font-weight: 600; }
 
-  .skills { display: grid; grid-template-columns: 27mm 1fr; row-gap: .9mm; }
+  .skills { display: grid; grid-template-columns: 27mm 1fr; row-gap: .7mm; }
   .skills dt { font-weight: 600; }
   .skills dd { color: var(--ink); }
 
@@ -119,7 +119,7 @@
 
   <section aria-labelledby="h-summary">
     <h2 id="h-summary">Summary</h2>
-    <p class="summary">Software engineer who builds the app, the API and the server it runs on: Flutter, Node.js, MongoDB, React, AWS. Built the Massclick app from its first commit and works on its API, web and servers; previously led mobile at Digihope Technologies.</p>
+    <p class="summary">Software engineer who builds the app, the API and the server it runs on: Flutter, Node.js, MongoDB, React, Firebase, AWS. Built the Massclick app from its first commit and works across its API, web and servers, and builds VandiZone, a vehicle-hire marketplace, end to end on my own.</p>
   </section>
 
   <section aria-labelledby="h-exp">
@@ -133,23 +133,23 @@
       <p class="where">Tiruchirappalli · Local-search platform for Tamil Nadu · 1,557 commits across the web platform and the mobile app</p>
       <ul class="points">
         <li><b>Mobile:</b> built the Flutter app from the first commit to v2.1.1 on Android and iOS, in English and Tamil (263 of 264 commits; Riverpod, Socket.IO, FCM), and shipped ~25 items from a 20-feature web-parity audit.</li>
-        <li><b>Search:</b> built the search engine behind every query: category intent, MongoDB text and distance ranking over ~18,300 locations and ~11,000 businesses, with pincode and district fallbacks. Trichy locality geo coverage 7.8% → 89.3%.</li>
+        <li><b>Search:</b> the engine behind every query — category intent, MongoDB text and distance ranking over ~18,300 locations and ~11,000 businesses, with pincode and district fallbacks; Trichy geo coverage 7.8% → 89.3%.</li>
         <li><b>Security:</b> stopped an SMS-pumping attack on the OTP endpoint (9,907 fraudulent SMS, ₹1,882): blocked at the edge in minutes, then shipped true client IP, per-number and daily caps, verify lockout and a decoy honeypot. It now costs ₹0.</li>
-        <li><b>Database:</b> moved every production MongoDB database to a dedicated server with ~90 s of cutover downtime, with nightly backups, a SHA-256-verified off-box copy and Prometheus/Grafana monitoring.</li>
-        <li><b>Storage:</b> re-keyed 36,187 S3 objects (1.77 GB) to an owner-based layout: 33,096 of 33,096 copied, 0 failed, nothing deleted; plan, verify, resume and rollback tooling, and a lint gate over 51 migrated call sites.</li>
-        <li><b>Performance &amp; SEO:</b> cut the business-page bundle 173 → 92 KB and server-rendered the hero so mobile LCP paints before JS; closed a crawl trap of ~120–198k junk Googlebot requests a day (non-410 errors 6–7% → ~0.1%).</li>
-        <li><b>Payments:</b> PhonePe gateway, Pay2All BBPS bill fetch and recharge, and QR-verified certificates issued on payment.</li>
+        <li><b>Infrastructure:</b> moved every production MongoDB database to a dedicated server with ~90 s of cutover downtime, with SHA-256-verified off-box backups and Prometheus/Grafana; re-keyed 36,187 S3 objects (33,096 of 33,096, 0 failed) behind verify, resume and rollback tooling.</li>
+        <li><b>Web:</b> cut the business-page bundle 173 → 92 KB and server-rendered the hero so mobile LCP paints before JS; closed a crawl trap of ~120–198k junk Googlebot requests a day (non-410 errors 6–7% → ~0.1%); shipped PhonePe and Pay2All BBPS.</li>
       </ul>
     </article>
 
     <article class="job">
       <div class="job-head">
-        <h3>Freelance Mobile Developer<span class="sep"> — </span><span class="org">VandiZone<span class="note"> (direct client)</span></h3>
+        <h3>Freelance Full-Stack Engineer<span class="sep"> — </span><span class="org">VandiZone<span class="note"> (direct client)</span></h3>
         <span class="when">Ongoing</span>
       </div>
+      <p class="where">Marketplace for hiring JCBs, cranes and goods trucks · sole developer: two Flutter apps, the office console and the website, on Firebase and Cloud Functions</p>
       <ul class="points">
-        <li>Built two Flutter + Firebase apps, Customer Booking and Captain/Owner, synced live via Realtime Database and Firestore.</li>
-        <li>Google Maps live vehicle tracking, route navigation and trip history; phone and email sign-in; FCM trip alerts.</li>
+        <li><b>Dispatch and proof of work:</b> a job is offered only to on-duty, verified drivers in range whose machine fits the load (payload, body type, trailer length, crane lift), then runs as gated stages proved by GPS, 4-digit customer codes, photos, weighbridge slips and e-way bills.</li>
+        <li><b>Money:</b> two pricing engines — hourly billing recomputed from real worked time, and a blind counter-offer auction for trucks — with Razorpay, wallets, commission payouts, GST invoicing (CGST/SGST or IGST) and cancellation terms frozen onto each booking.</li>
+        <li><b>Live operations:</b> tracking that keeps reporting through a locked screen, share links stripped of personal data, in-app chat, a public load board, and a ~20-module office console that changes rates and forces app updates with no release.</li>
       </ul>
     </article>
 
@@ -159,8 +159,7 @@
         <span class="when">2025 – 2026</span>
       </div>
       <ul class="points">
-        <li>Led cross-platform Flutter apps for Android and iOS: architecture, state management and API integration, working with the PHP and Express.js backend teams.</li>
-        <li>Owned every release on Play Console, App Store and TestFlight, from testing tracks to production and policy compliance; reduced crash rates through continuous monitoring and mentored junior developers.</li>
+        <li>Led cross-platform Flutter apps for Android and iOS — architecture, state management and API integration with the PHP and Express.js backend teams — and owned every Play Console, App Store and TestFlight release through to policy compliance, cutting crash rates and mentoring junior developers.</li>
         <li>Built <b>Veezzo</b>, a food-delivery app with live order tracking and payments on AWS API Gateway, Lambda and S3.</li>
       </ul>
     </article>
@@ -172,7 +171,7 @@
       </div>
       <ul class="points">
         <li>Six months during the M.Sc: three on Flutter mobile apps, then three on React, in Agile sprints on deployed apps.</li>
-        <li>Built <b>Vmark</b>, multi-seller e-commerce in React, Express and Node.js: seller accounts, auth and product CRUD over REST.</li>
+        <li>Built <b>Vmark</b>, multi-seller e-commerce in React, Express and Node.js: seller accounts, auth and product CRUD.</li>
       </ul>
     </article>
   </section>

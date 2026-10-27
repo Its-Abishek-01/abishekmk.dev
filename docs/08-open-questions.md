@@ -21,6 +21,14 @@
 14. A real photo of you, or no photo (the kolam mark as the avatar)?
 15. Sellzy / MassBazaar: yours? Include?
 
+21. 🔴 **VandiZone build scope** (raised 2026-10-27 from the Caller Handbook v1.0). The handbook shows a four-surface platform: customer app, VZ Captain app, an office console of ~20 modules at `/admin`, and the public website (`/book`, `/captain`, `/verify`, `/loads`, `/loads/post`, `/t/...`). The resume credits you with only the two Flutter apps. Which of these did you build, and in what stack? Specifically:
+    - a. The office console — yours? Which framework?
+    - b. The public website and load board — yours?
+    - c. The backend: Cloud Functions, or a separate server? Who wired Razorpay, the GST invoicing and the payouts?
+    - d. Are you still the only developer on it, and is it live with real customers today?
+    - e. May the site name the client, or stay with "my own direct client"?
+    - f. Any public numbers you are happy to show (bookings, captains, districts)?
+
 ## 🟢 Later
 16. Custom domain? (e.g. `abishek.dev`, `abishekmk.in`)
 17. Contact notifications: email, or a push to your phone?
