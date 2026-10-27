@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The <title> becomes the default file name in "Save as PDF". -->
+<title>M.K. Abishek - Cover Letter (navy)</title>
+<meta name="author" content="M.K. Abishek">
+<meta name="description" content="Cover letter template for M.K. Abishek, Software Engineer, Tiruchirappalli.">
+<!--
+  Cover letter TEMPLATE, navy edition (D-033). Same letterhead as the navy résumé so the two read as a set.
+  Three slots to fill before sending, marked with .slot: the company, the role, and the "why you" paragraph.
+  Everything else is reusable as written. Source of every claim: docs/02-content-inventory.md.
+  Print: Ctrl+P → Destination "Save as PDF", Paper A4, Margins "Default", Scale 100%, Background graphics on.
+-->
+<style>
+  /* Geist + Geist Mono (SIL OFL), self-hosted from resume/fonts so the PDF never depends on the network */
+  @font-face { font-family: 'Geist'; font-weight: 100 900; font-display: block; src: url('fonts/geist-latin-ext.woff2') format('woff2'); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Geist'; font-weight: 100 900; font-display: block; src: url('fonts/geist-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: 'Geist Mono'; font-weight: 100 900; font-display: block; src: url('fonts/geist-mono-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+  :root {
+    --paper: #FFFFFF;      /* color.light.raised */
+    --desk: #ECEEE7;       /* color.light.bg (screen only) */
+    --ink: #141712;        /* color.light.text */
+    --muted: #51564B;      /* color.light.muted */
+    --line: #C6D1E0;       /* color.print.rule */
+    --accent: #1D3557;     /* color.print.navy — the one theme colour (D-030) */
+    --slot: #EEF2F7;       /* color.print.tint, so an unfilled slot is obvious */
+    --sans: 'Geist', ui-sans-serif, system-ui, 'Segoe UI', sans-serif;  /* font.text */
+    --mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', monospace;     /* font.mono */
+  }
+
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: var(--desk); color: var(--ink); font-family: var(--sans); font-size: 10pt; line-height: 1.55; font-feature-settings: 'tnum' 1; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- screen chrome (never printed) ---------- */
+  .bar { position: sticky; top: 0; z-index: 2; display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 10px 16px; background: var(--desk); border-bottom: 1px solid var(--line); font-size: 13px; }
+  .bar button { font: 600 13px var(--sans); color: var(--paper); background: var(--ink); border: 0; border-radius: 999px; padding: 8px 18px; cursor: pointer; }
+  .bar button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .fit { color: var(--muted); }
+  .fit.bad { color: #AE2F1C; font-weight: 600; } /* color.light.signal */
+  .howto { max-width: 210mm; margin: 18px auto -8px; padding: 0 4px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+  .howto b { color: var(--ink); }
+
+  /* ---------- the sheet ---------- */
+  .sheet { width: 210mm; min-height: 297mm; margin: 18px auto 24px; padding: 16mm 19mm 12mm; background: var(--paper); box-shadow: 0 1px 2px rgba(20,23,18,.06), 0 12px 40px rgba(20,23,18,.10); }
+
+  header { padding-bottom: 3.4mm; border-bottom: 1.4pt solid var(--accent); }
+  h1 { font-size: 20pt; font-weight: 700; letter-spacing: -0.025em; line-height: 1; color: var(--accent); }
+  .role { margin-top: 1.4mm; font-size: 10pt; font-weight: 500; color: var(--muted); }
+  .contact { margin-top: 2.4mm; display: flex; flex-wrap: wrap; column-gap: 0; row-gap: .6mm; font-size: 8.6pt; color: var(--muted); }
+  .contact li { list-style: none; }
+  .contact li + li::before { content: '·'; margin: 0 2mm; color: var(--line); font-weight: 700; }
+
+  .date { margin-top: 7mm; font: 500 9pt var(--mono); color: var(--muted); }
+  .to { margin-top: 5mm; line-height: 1.45; }
+  .to .co { font-weight: 600; color: var(--accent); }
+  .subject { margin-top: 5.5mm; font-weight: 600; }
+  .greet { margin-top: 5mm; }
+  p.body { margin-top: 3.4mm; text-align: left; }
+  .sign { margin-top: 6mm; }
+  .sign .name { margin-top: 7mm; font-weight: 600; }
+  .sign .encl { margin-top: 3mm; font-size: 8.8pt; color: var(--muted); }
+
+  /* the three things to change per application */
+  .slot { background: var(--slot); padding: 0 1.2mm; border-bottom: .8pt solid var(--accent); font-weight: 500; }
+
+  @media print {
+    body { background: var(--paper); }
+    .bar, .howto { display: none; }
+    .sheet { margin: 0; box-shadow: none; }
+  }
+  @media screen and (max-width: 840px) {
+    .sheet { margin: 16px; } /* phones scroll sideways: the sheet stays true A4 so the fit check stays honest */
+  }
+</style>
+</head>
+<body>
+
+<div class="bar" role="toolbar" aria-label="Cover letter tools">
+  <button type="button" onclick="window.print()">Save as PDF</button>
+  <span class="fit" id="fit">Checking page fit…</span>
+</div>
+
+<p class="howto">
+  <b>Before you send this:</b> replace the three highlighted slots — the <b>company</b>, the <b>role</b>, and the
+  <b>“why them”</b> paragraph. The highlight prints, so an unfilled slot is impossible to miss.
+  Everything else is reusable as written. This note never prints.
+</p>
+
+<main class="sheet" id="sheet">
+
+  <header>
+    <h1>M.K. Abishek</h1>
+    <p class="role">Software Engineer · Mobile, Backend &amp; Cloud</p>
+    <ul class="contact">
+      <li>Tiruchirappalli, Tamil Nadu, India</li>
+      <li><a href="tel:+919345161419">+91 93451 61419</a></li>
+      <li><a href="mailto:abishek.mk.01@gmail.com">abishek.mk.01@gmail.com</a></li>
+      <li><a href="https://www.linkedin.com/in/its-abishek-mk">linkedin.com/in/its-abishek-mk</a></li>
+      <li><a href="https://github.com/Its-Abishek-01">github.com/Its-Abishek-01</a></li>
+    </ul>
+  </header>
+
+  <p class="date"><span class="slot">[Date]</span></p>
+
+  <div class="to">
+    <p class="co"><span class="slot">[Hiring manager's name, if you know it]</span></p>
+    <p><span class="slot">[Company]</span></p>
+    <p><span class="slot">[City]</span></p>
+  </div>
+
+  <p class="subject">Application for the <span class="slot">[Role]</span> position</p>
+
+  <p class="greet">Dear <span class="slot">[Hiring manager / Hiring team]</span>,</p>
+
+  <p class="body">I build and run a marketplace on my own. VandiZone lets people hire JCBs, cranes and goods trucks, and I am the only developer on all four of its surfaces: the customer app, the app its drivers and fleet owners use, the office console the business is run from, and the public website. I am writing because I would like to bring that kind of ownership to the <span class="slot">[Role]</span> role at <span class="slot">[Company]</span>.</p>
+
+  <p class="body">VandiZone taught me what it costs to own a product rather than a ticket. The dispatch engine only offers a job to a driver who is on duty, verified, in range and whose machine actually fits the load. Work is proved on site rather than trusted, through staged codes, photos and weighbridge slips. There are two pricing engines, one hourly and one a blind auction where drivers bid, and money runs through Razorpay, wallets, commission and payouts, with GST invoicing and cancellation terms frozen onto each booking so a later price change cannot rewrite an old one. When drivers told me jobs were not ringing on their phones, I built a diagnostic that test-rings an offer and audits Do Not Disturb, battery saver and the push connection. Nobody filed that as a requirement; the problem was mine because the product was mine.</p>
+
+  <p class="body">My day job gives me the other half of that picture. At Massclick I built the Flutter app from its first commit to version 2.1.1 on Android and iOS, and I work across the Node and MongoDB API, the React platform and the Linux servers underneath. I built the search engine behind every query, ranking roughly 18,300 locations and 11,000 businesses, and moved every production database to a dedicated server with about ninety seconds of downtime. When an attacker began farming our OTP endpoint for SMS payouts, I cut it off at the edge within minutes and rebuilt the defence, so the same attack now costs us nothing. Before Massclick I led mobile development at Digihope Technologies for a year.</p>
+
+  <p class="body"><span class="slot">[Two or three sentences on why this company: what they build, which part of it you want to work on, and the specific thing in your experience that maps to it. This is the paragraph that gets you read — keep it concrete and do not reuse it between applications.]</span></p>
+
+  <p class="body">My résumé and a fuller CV are attached, and my work is written up at abishek.wiozen.in/portfolio. I would welcome the chance to talk about what you are building and where I would fit.</p>
+
+  <div class="sign">
+    <p>Yours sincerely,</p>
+    <p class="name">M.K. Abishek</p>
+    <p class="encl">Enclosed: résumé, curriculum vitae</p>
+  </div>
+
+</main>
+
+<script>
+  // Tells you on screen whether the letter still fits one A4 page (the bar is never printed).
+  (function () {
+    var out = document.getElementById('fit');
+    function check() {
+      var sheet = document.getElementById('sheet');
+      var last = sheet.lastElementChild;
+      var pageH = 297 * 96 / 25.4;
+      var used = last.getBoundingClientRect().bottom - sheet.getBoundingClientRect().top + parseFloat(getComputedStyle(sheet).paddingBottom);
+      var spare = Math.round((pageH - used) * 25.4 / 96);
+      if (used > pageH + 1) {
+        out.textContent = 'Overflows A4 by ' + (-spare) + ' mm, it would print on 2 pages';
+        out.className = 'fit bad';
+      } else {
+        out.textContent = 'Fits one A4 page · ' + spare + ' mm spare';
+        out.className = 'fit';
+      }
+    }
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(check);
+    addEventListener('resize', check);
+  })();
+</script>
+</body>
+</html>
