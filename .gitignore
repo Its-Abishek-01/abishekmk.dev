@@ -42,6 +42,7 @@ desktop.ini
 
 # local AI tool state
 .claude/settings.local.json
+.brud/
 
 # logs
 *.log
